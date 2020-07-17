@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useNavigation } from '@react-navigation/native';
+
 import { Icon } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 
@@ -35,20 +37,24 @@ export const ImageScrollView = () => (
   </ImageScrollViewContainer>
 );
 
-export const PublishInspect = () => (
-  <PublishInspectContainer>
-    <PublishInpectHeader>
-      <PIfirstElement>
-        <PublishInspectAvatar />
-        <PublishInpectName>{'Gabriel Henrique\nJaraguá do Sul - SC'}</PublishInpectName>
-      </PIfirstElement>
-      <PIsecondElement>
-        <Icon name="phone" type="material-community" color="#333" iconStyle={{ marginLeft: 5}} />
-        <Icon name="whatsapp" type="material-community" color="#333" iconStyle={{ marginLeft: 5}} />
-      </PIsecondElement>
-    </PublishInpectHeader>
-  </PublishInspectContainer>
-);
+export const PublishInspect = () => {
+  const navigation = useNavigation();
+  
+  return (
+    <PublishInspectContainer>
+      <PublishInpectHeader onPress={() => navigation.navigate('User', { owner: false })}>
+        <PIfirstElement>
+          <PublishInspectAvatar />
+          <PublishInpectName>{'Gabriel Henrique\nJaraguá do Sul - SC'}</PublishInpectName>
+        </PIfirstElement>
+        <PIsecondElement>
+          <Icon name="phone" type="material-community" color="#333" iconStyle={{ marginLeft: 5}} />
+          <Icon name="whatsapp" type="material-community" color="#333" iconStyle={{ marginLeft: 5}} />
+        </PIsecondElement>
+      </PublishInpectHeader>
+    </PublishInspectContainer>
+  );
+}
 
 export const BuyButton = ({ title, onPress }) => (
   <BuyButtonContainer onPress={onPress}>
@@ -62,16 +68,16 @@ export const Detail = () => (
   <DetailContainer>
     <Table>
       <Row>
-        <Value bg="#ddd"><Text>Categoria</Text></Value>
-        <Value bg="#ddd"><Text>Deed sads sadd</Text></Value>
+        <Value bg="#fafafa"><Text>Categoria</Text></Value>
+        <Value bg="#fafafa"><Text>Deed sads sadd</Text></Value>
       </Row>
       <Row>
         <Value bg="#f2f2f2"><Text>Subcategoria</Text></Value>
         <Value bg="#f2f2f2"><Text>Deed sads sadd</Text></Value>
       </Row>
       <Row>
-        <Value bg="#ddd"><Text>Categoria</Text></Value>
-        <Value bg="#ddd"><Text>Deed sads sadd</Text></Value>
+        <Value bg="#fafafa"><Text>Categoria</Text></Value>
+        <Value bg="#fafafa"><Text>Deed sads sadd</Text></Value>
       </Row>
       <Row>
         <Value bg="#f2f2f2"><Text>Subcategoria</Text></Value>
@@ -154,7 +160,7 @@ const OptionsButtonContainer = styled.TouchableOpacity`
 
 const RbSheetOptionContainer = styled.TouchableOpacity`
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: #fff;
   border-radius: 5px;
   margin: 0px 10px;
   flex-direction: row;
@@ -168,6 +174,7 @@ const RbSheetOptionText = styled.Text`
   font-family: Poppins Medium;
   font-size: 17px;
   margin-top: 6px;
+  margin-left: 5px;
 `;
 
 const PublishInspectContainer = styled.View``;

@@ -3,7 +3,7 @@ import { Andress, Avatar, Bio, BioDetails, Container, EditButton, Name, MyAnnoun
 
 import Update from './Update';
 
-export default function Profile() {
+export default function Profile({ route }) {
   const [isUpdatePerfilActive, setIsUpdatePerfilActive] = React.useState(false);
 
   return (
@@ -21,9 +21,17 @@ export default function Profile() {
         <BioDetails>
           <Name>Gabriel Henrique Cardoso</Name>
           <Andress>Jaraguá do Sul - SC</Andress>
-          <EditButton onPress={() => setIsUpdatePerfilActive(true)} >
-            <Name>Editar perfil</Name>
-          </EditButton>
+          {
+            route.params.owner ? (
+              <EditButton onPress={() => setIsUpdatePerfilActive(true)} >
+                <Name>Editar perfil</Name>
+              </EditButton>
+            ) : (
+              <EditButton onPress={() => {}} >
+                <Name>Mensagem</Name>
+              </EditButton>
+            )
+          }
         </BioDetails>
       </Bio>
 

@@ -2,8 +2,7 @@ import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 const UseAgreement = () => (
-  <ScrollView style={{ flex: 1, padding: 10 }}>
-    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Termos de Uso </Text>
+  <ScrollView style={{ flex: 1, padding: 10, backgroundColor: 'white' }}>
     <Text style={{ fontSize: 17, marginTop: 10 }}>Termos e condições gerais de uso</Text>
     <Text style={{ marginTop: 10 }}>
       IMPORTANTE: Aceitação do presente termo e suas condições são indispensáveis à utilização dos

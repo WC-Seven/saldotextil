@@ -6,7 +6,8 @@ import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
 
 import { MainContext } from '../../../App';
-import { Container, Footer, Spinner } from './styles';
+import { Container, Footer, Search, Bar, FlatListHeader } from './styles';
+import { Icon } from 'react-native-elements';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -45,8 +46,8 @@ export default function Feed({ navigation }) {
   }, [])
 
   // Animação da imagem de topo
-  const headerMaxHeight = 300;
-  const headerMinHeight = 100;
+  const headerMaxHeight = 200;
+  const headerMinHeight = 50;
   const scrollYAnimatedValue = new Animated.Value(0);
   const headerHeight = scrollYAnimatedValue.interpolate({
     inputRange: [0, (headerMaxHeight, headerMinHeight)],
@@ -149,29 +150,35 @@ export default function Feed({ navigation }) {
       />
 
       <SafeAreaView>
+        
         <AnimatedFlatList
           data={results.announcements}
           keyExtractor={item => item.uid}
-
+          stickyHeaderIndices={[0]}
           ListHeaderComponent={
             () => (
-              <Filters
-                data={[
-                  {
-                    title: 'Tipo de produto',
-                    action: () => setModal({ ...modal, product: true })
-                  },
-                  {
-                    title: 'Localização',
-                    action: () => setModal({ ...modal, localization: true })
-                  }
-                ]}
-              />
+              <FlatListHeader>
+                <Bar>
+                  <Search placeholder="Pesquise algo" />
+                </Bar>
+                <Filters
+                  data={[
+                    {
+                      title: 'Tipo de produto',
+                      action: () => setModal({ ...modal, product: true })
+                    },
+                    {
+                      title: 'Localização',
+                      action: () => setModal({ ...modal, localization: true })
+                    }
+                  ]}
+                />
+              </FlatListHeader>
             )
           }
           renderItem={() => <Product />}
           ListFooterComponent={() => <Footer />}
-          contentContainerStyle={{ paddingTop: headerMaxHeight }}
+          contentContainerStyle={{ paddingTop: headerMaxHeight-50 }}
           scrollEventThrottle={1}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { y: scrollYAnimatedValue } }}], { useNativeDriver: false }
@@ -190,18 +197,20 @@ export default function Feed({ navigation }) {
 
 const styles = StyleSheet.create({
   animatedHeaderContainer: {
+    alignItems: 'center',
     position: 'absolute',
+    flexDirection: 'row',
     backgroundColor: '#fff',
     top: (Platform.OS === 'ios') ? 20 : 0,
     left: 0,
     right: 0,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: 5,
   },
   image: {
     resizeMode: 'contain',
     width: '80%',
-    height: '40%',
-    marginTop: StatusBar.currentHeight
+    height: '100%',
   }
 })

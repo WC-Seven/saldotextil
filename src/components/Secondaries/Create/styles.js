@@ -10,14 +10,15 @@ export const Container = styled.ScrollView`
 
 export const PickImage = () => (
   <PickImageContainer>
-    <Icon name="plus" size={40} color="#ccc" type="material-community" />
+    <Icon name="plus" size={60} color="#ccc" type="material-community" />
   </PickImageContainer>
 );
 
 const PickImageContainer = styled.TouchableOpacity`
   align-items: center;
-  background-color: #ddd;
+  background-color: #fff;
   border-radius: 10px;
+  border: 1px dashed #ccc;
   height: 200px;
   justify-content: center;
 `;
@@ -25,7 +26,7 @@ const PickImageContainer = styled.TouchableOpacity`
 export const TextInput = styled.TextInput`
   height: 50px;
   border-radius: 4px;
-  background-color: #ddd;
+  background-color: #f2f2f2;
   padding: 0px 10px;
   font-size: 20px;
   font-family: Poppins Medium;
@@ -42,7 +43,7 @@ export const Label = styled.Text`
 export const Description = styled.TextInput.attrs({
   multiline: true
 })`
-  background-color: #ddd;
+  background-color: #f2f2f2;
   border-radius: 4px;
   font-size: 16px;
   height: 300px;

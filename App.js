@@ -1,10 +1,12 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+import { MenuProvider } from 'react-native-popup-menu';
+import { AppLoading } from 'expo';
 import { useFonts } from '@use-expo/font';
 
-import { AppLoading } from 'expo';
 import Routes from './src/routes';
 import BottomSheet from './src/components/BottomSheet'
+
 
 export const MainContext = React.createContext({
   bsRef: () => {},    // Referência ao BottomSheet Component
@@ -33,8 +35,10 @@ export default function App() {
         ) : (
           <MainContext.Provider value={{ bsRef: () => bottomSheetRef.current.toggle(), setNav, nav }}>
             <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-            <BottomSheet ref={bottomSheetRef} />
-            <Routes />
+            <MenuProvider>
+              <BottomSheet ref={bottomSheetRef} />
+              <Routes />
+            </MenuProvider>
           </MainContext.Provider>
         )
       }

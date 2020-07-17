@@ -28,12 +28,14 @@ export const Name = styled.Text`
   font-family: Poppins Medium;
   font-size: 17px;
   margin-top: 5px;
+  line-height: 19px;
 `;
 
 export const Andress = styled.Text`
+  color: #666;
   font-family: Poppins Medium;
   font-size: 15px;
-  margin-top: -10px;
+  margin-top: -6px;
 `;
 
 export const EditButton = styled.TouchableOpacity`
@@ -61,16 +63,15 @@ export const MyAds = () => (
 
 const MyAdsContainer = styled.TouchableOpacity`
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: #fff;
   border-radius: 10px;
   flex: 1 0 auto;
   margin: 5px;
-  padding: 10px;
   max-width: 45%;
 `;
 
 const MyAdsImage = styled.Image`
-  background-color: #ccc;
+  background-color: #f2f2f2;
   border-radius: 4px;
 
   height: 130px;

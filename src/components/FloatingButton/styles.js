@@ -6,7 +6,7 @@ export const Button = styled.TouchableOpacity`
   bottom: 20px;
   right: 20px;
 
-  background-color: #F2F2F2;
+  background-color: #FFF;
   border-radius: 30px;
   elevation: 10;
   height: 60px;

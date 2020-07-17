@@ -37,7 +37,7 @@ export const Container = styled.View`
   border-radius: 10px;
   elevation: 1;
   flex-direction: row;
-  min-height: 130px;
+  min-height: 140px;
   margin: 10px 10px 0px;
   padding: 10px;
 `;

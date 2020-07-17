@@ -104,8 +104,8 @@ export default function Routes () {
             <Stack.Screen name="Donations" component={Donations} options={({ navigation }) => optionsWithSearch(navigation, 'Doações')} />
             <Stack.Screen name="Jobs" component={Jobs} options={({ navigation }) => optionsWithSearch(navigation, 'Empregos')} />
 
-            <Stack.Screen name="Create" component={SecondaryCreate} options={({ navigation,route }) => options(navigation, `Criar anúncio - ${route.params.name}`)} />
-            <Stack.Screen name="Detail" component={SecondaryDetail} options={({ navigation }) => options(navigation, 'Detalhes')} />
+            <Stack.Screen name="Create" component={SecondaryCreate} options={({ navigation, route }) => options(navigation, `Criar anúncio - ${route.params.name}`)} />
+            <Stack.Screen name="Detail" component={SecondaryDetail} options={({ navigation, route }) => options(navigation, route.params.name)} />
             <Stack.Screen name="Publish" component={SecondaryPublish} options={({ navigation, route }) => options(navigation, `Publicar Currículo - ${route.params.name}`)} />
             <Stack.Screen name="Update" component={SecondaryUpdate} options={({ navigation }) => options(navigation, 'Editar')} />
             <Stack.Screen name="Search" component={SecondarySearch} options={({ navigation, route }) => options(navigation, `Pesquisar ${route.params.name}`)} />
@@ -122,6 +122,24 @@ export default function Routes () {
                   fontFamily: 'Poppins Medium',
                   marginTop: 5
                 },
+              })}
+            />
+            <Stack.Screen
+              name="User"
+              component={Profile}
+              options={({ navigation }) => ({
+                headerStyle: {
+                  elevation: 0,
+                },
+                headerTitle: '',
+                headerRight: () => (
+                  <TouchableOpacity onPress={() => navigation.navigate('Feedback')}>
+                    <Icon name="flag" type="material-community" />
+                  </TouchableOpacity>
+                ),
+                headerRightContainerStyle: {
+                  marginRight: 20,
+                }
               })}
             />
           </Stack.Navigator>
@@ -155,6 +173,7 @@ function ProfileStack () {
             marginRight: 20,
           }
         })}
+        initialParams={{ owner: true }}
       />
       <Stack.Screen name="Settings" component={Settings} options={({ navigation }) => options(navigation, 'Configurações')} />
     </Stack.Navigator>

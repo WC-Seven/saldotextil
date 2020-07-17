@@ -2,14 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'react-native-elements';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   background-color: #fff;
   flex: 1;
   padding: 20px;
 `;
 
-export const FlexView = styled.SafeAreaView`
+export const FlexView = styled.View`
   flex: 1;
+  justify-content: space-between;
 `;
 
 export const PickDocument = ({ iconName, title, onPress }) => (
@@ -47,8 +48,8 @@ const ButtonText = styled.Text`
 export const Description = styled.TextInput.attrs({
   multiline: true
 })`
-  background-color: #ddd;
-  border-radius: 4px;
+  background-color: #f2f2f2;
+  border-radius: 6px;
   font-size: 16px;
   height: 300px;
   text-align-vertical: top;

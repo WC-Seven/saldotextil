@@ -16,7 +16,7 @@ export const Title = styled.Text`
 export const Description = styled.TextInput.attrs({
   multiline: true
 })`
-  background-color: #ddd;
+  background-color: #eee;
   border-radius: 4px;
   font-size: 16px;
   height: 200px;

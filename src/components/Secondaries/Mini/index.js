@@ -1,8 +1,8 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Miniature } from './styles'
 
-export default function Mini() {
+export default function Mini({ item }) {
   return (
-    <View />
+    <Miniature info={item} />
   );
 }
