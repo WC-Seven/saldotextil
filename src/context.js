@@ -1,7 +1,7 @@
 import React from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { isJson } from '../utils';
+import { isJson } from './utils';
 
 const GeneralContext = React.createContext({
   nav: {},
