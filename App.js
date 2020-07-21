@@ -27,8 +27,8 @@ export default function App() {
         ) : (
           <MenuProvider>
             <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-            <BottomSheet/>
             <GeneralContextProvider>
+              <BottomSheet />
               <Routes />
             </GeneralContextProvider>
           </MenuProvider>

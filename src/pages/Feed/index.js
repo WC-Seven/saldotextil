@@ -29,7 +29,7 @@ export default function Feed({ navigation }) {
       results.adstype,
       results.type
     );
-  }, []);
+  }, [results.adstype, results.type, results.localization]);
 
 
   // Animação da imagem de topo
@@ -44,22 +44,7 @@ export default function Feed({ navigation }) {
 
   // Função scroll infinito
   const handleEndOfScroll = () => {
-    setTimeout(() => {
-      const response = [
-        { uid: Math.random() },
-        { uid: Math.random() },
-        { uid: Math.random() },
-        { uid: Math.random() },
-        { uid: Math.random() },
-      ];
-      
-      setResults({
-        ...results,
-        announcements: [ ...results.announcements, ...response ],
-        quantity: results.quantity + response.length,
-      });
-    }, 1000);
-    
+    // 
   }
 
   const [modal, setModal] = React.useState({
@@ -163,7 +148,7 @@ export default function Feed({ navigation }) {
               </FlatListHeader>
             )
           }
-          renderItem={item => <Product item={item} />}
+          renderItem={item => <Product item={item} adstype={results.adstype} type={results.type} />}
           ListFooterComponent={() => <Footer />}
           contentContainerStyle={{ paddingTop: headerMaxHeight-50 }}
           scrollEventThrottle={1}

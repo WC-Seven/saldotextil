@@ -1,10 +1,14 @@
 import React from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { StatusBar } from 'react-native';
+import { StatusBar, Alert } from 'react-native';
 
 import { BuyButton, Container, Detail, ImageScrollView, InsideContainer, OptionsButton, RbSheetOption, Quantity, Price, Cents, PublishInspect } from './styles';
 
+import GeneralContext from '../../../context';
+import { announcement } from '../../../database/functions';
+
 export default function FeedInspect({ navigation, route }) {
+  const { currentUser } = React.useContext(GeneralContext);
   React.useEffect(() => {
     navigation.setOptions({
       headerRightContainerStyle: {
@@ -14,17 +18,24 @@ export default function FeedInspect({ navigation, route }) {
         <OptionsButton onPress={() => rbRef.current.open()} />
       )
     });
-  }, []);
+
+  }, [rbRef]);
 
   const rbRef = React.createRef();
-  const { item } = route.params;
+  const { item, type, adstype } = route.params;
+
+
+  const price = item.price.substring(0, item.price.indexOf('/')-1).replace('.', ',');
+  const measure = item.price.substring(item.price.indexOf('/'), item.price.length);
+  const priceBig = price.substring(0, price.indexOf(','));
+  const priceSmall = price.substring(price.indexOf(','), price.length);
 
   return (
     <Container>
       <RBSheet
         ref={rbRef}
         animationType="slide"
-        height={400}
+        height={200}
         openDuration={250}
         closeDuration={100}
         closeOnDragDown
@@ -32,18 +43,50 @@ export default function FeedInspect({ navigation, route }) {
         closeOnPressBack
       >
         <StatusBar backgroundColor="#aaa" barStyle="light-content" />
-        {/* Opções para todos os usuários */}
-        <RbSheetOption iconName="flag" title="Reportar" onPress={() => {}} />
-        <RbSheetOption iconName="email" title="Mensagem para o vendendor" onPress={() => {}} />
-
-        {/* Opções para owner */}
-        <RbSheetOption iconName="pencil" title="Editar publicação" onPress={() => {}} />
-        <RbSheetOption iconName="card-bulleted-off" title="Desativar publicação" onPress={() => {}} />
-        <RbSheetOption iconName="delete" title="Excluir publicação" onPress={() => {}} />
+        {
+          item.user === currentUser.id ? (
+            <>
+              <RbSheetOption iconName="pencil" title="Editar publicação" onPress={() => {}} />
+              <RbSheetOption
+                iconName="delete"
+                title="Excluir publicação"
+                onPress={() => {
+                  Alert.alert(
+                    'Deseja excluir este anúncio?',
+                    'Esta é uma ação irreversível.',
+                    [
+                      { 
+                        text: 'Cancelar',
+                      },
+                      {
+                        text: 'Sim, excluir',
+                        onPress: () => {
+                          announcement.destroy(
+                            'primaryAnnouncements',
+                            adstype,
+                            type,
+                            item.images,
+                            item.uid,
+                            () => navigation.goBack(),
+                          )
+                        }
+                      }
+                    ]
+                  )
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <RbSheetOption iconName="flag" title="Reportar" onPress={() => {}} />
+              <RbSheetOption iconName="email" title="Mensagem para o vendendor" onPress={() => {}} />
+            </>
+          )
+        }
       </RBSheet>
       
 
-      <ImageScrollView arr={item.images} />
+      <ImageScrollView arr={item.images || []} />
       <InsideContainer>
         
 
@@ -51,8 +94,8 @@ export default function FeedInspect({ navigation, route }) {
 
         <Detail />
 
-        <Quantity>241 disponíveis</Quantity>
-        <Price>R$ 2.674<Cents>,80</Cents></Price>
+        <Quantity>{ item.quantity }</Quantity>
+        <Price>{ priceBig }<Cents>{ priceSmall }{ ' ' }{ measure }</Cents></Price>
 
         <BuyButton title="Entrar em contato" />
       </InsideContainer>

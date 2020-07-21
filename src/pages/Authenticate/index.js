@@ -22,7 +22,6 @@ export default function Authenticate() {
       } else {
         setIsLoading(false);
       }
-      setIsLoading(false);
     }
     verify();
   }, []);

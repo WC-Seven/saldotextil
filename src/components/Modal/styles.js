@@ -12,11 +12,11 @@ export const Window = ({ close, options }) => (
     {
       options.map(item => (
         <>
-          <OptionHead>{ item.title }</OptionHead>
+          <OptionHead key={item.title}>{ item.title }</OptionHead>
           <Options>
             {
               item.options?.map((n) => (
-                <Option title={n.name} active={n.active} action={n.action} />
+                <Option key={n.name} title={n.name} active={n.active} action={n.action} />
               ))
             }
           </Options>

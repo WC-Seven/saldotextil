@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Modal, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Icon } from 'react-native-elements';
 
 // Configurations
-export const Item = ({ navigation, data }) => {
+export const Item = ({ data, type, adstype }) => {
+  const navigation = useNavigation();
+  const [isImageModalActive, setIsImageModalActive] = React.useState(false);
+
   const noImage = 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fnoimageavailable.jpg?alt=media&token=1b7c718e-e6d6-49d0-a1c1-3eb7dae80c39';
   
   const price = data.price.substring(0, data.price.indexOf('/')-1).replace('.', ',');
@@ -10,8 +16,27 @@ export const Item = ({ navigation, data }) => {
 
   return (
   <Container>
-    <Touchable>
-      <Image source={{ uri: data.images[0] || noImage }} />
+    {
+      data.images ? (
+        <Modal visible={isImageModalActive} transparent animationType="fade">
+          <DarkContainer>
+            <CloseButtonHeader onPress={() => setIsImageModalActive(false)}>
+              <Icon name="close" type="material-community" color="#fff" />
+            </CloseButtonHeader>
+
+            <ImageScrollView>
+                {
+                  data.images.map(item => (
+                    <ImageBig source={{ uri: item }} />
+                  ))
+                }
+            </ImageScrollView>
+          </DarkContainer>
+        </Modal>
+      ) : <></>
+    }
+    <Touchable onPress={data.images ? () => setIsImageModalActive(true) : () => {}}>
+      <Image source={{ uri: data.images ? data.images[0] : noImage }} />
     </Touchable>
     <Details>
       <Top>
@@ -24,8 +49,8 @@ export const Item = ({ navigation, data }) => {
       </Top>
       <Bottom>
         <ProfileImage source={{ uri: data.userImage || noImage }} />
-        <Button>
-          <ButtonText onPress={() => navigation.navigate('FeedInspect', { name: data.title, item: data })}>
+        <Button onPress={() => navigation.navigate('FeedInspect', { name: data.title, item: data, type, adstype })}>
+          <ButtonText>
             Ver detalhes
           </ButtonText>
         </Button>
@@ -33,6 +58,32 @@ export const Item = ({ navigation, data }) => {
     </Details>
   </Container>
 )};
+
+const ImageScrollView = styled.ScrollView.attrs({
+  horizontal: true
+})``;
+
+const DarkContainer = styled.View`
+  background-color: rgba(0, 0, 0, 0.9);
+  flex: 1;
+`;
+
+const CloseButtonHeader = styled.TouchableOpacity`
+  align-items: center;
+  align-self: flex-end;
+  border-radius: 15px;
+  height: 30px;
+  justify-content: center;
+  margin: 10px 10px 0 0;
+  width: 30px;
+`;
+
+const ImageBig = styled.Image`
+  background-color: #ccc;
+  height: ${Dimensions.get('screen').width}px;
+  width: ${Dimensions.get('screen').width}px;
+  margin: auto;
+`;
 
 // Components
 export const Container = styled.View`

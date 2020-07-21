@@ -13,7 +13,7 @@ function BottomSheet(props) {
       icon: 'plus',
       name: 'Criar anúncio',
       action: () => {
-        // missing function
+        nav.navigate('CreateAnnouncement');
         bsRef.current.close();
       },
     },

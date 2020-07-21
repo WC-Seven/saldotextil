@@ -41,19 +41,19 @@ export const ImageScrollView = ({ arr }) => (
 
 export const PublishInspect = ({ uid, image }) => {
   const navigation = useNavigation();
+
   const { currentUser } = React.useContext(GeneralContext);
   const [inspectUser, setInspectUser] = React.useState(null);
 
   React.useEffect(() => {
-    const response = user.detail(uid);
-    setInspectUser(response);
+    user.detail(uid, (response) => setInspectUser(response));
   }, []);
   
   return (
     <PublishInspectContainer>
       <PublishInpectHeader
         onPress={inspectUser ?
-          () => navigation.navigate('User', { owner: currentUser.id === inspectUser.id, user: inspectUser })
+          () => navigation.navigate('User', { owner: currentUser.id === uid, user: inspectUser })
           : () => {}}>
         <PIfirstElement>
           <PublishInspectAvatar source={{ uri: image }} />

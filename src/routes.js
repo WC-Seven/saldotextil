@@ -16,12 +16,14 @@ import Profile from './pages/Profile';
 
 // Stack pages
 import Authenticate from './pages/Authenticate';
+import CreateAnnouncement from './pages/Feed/Create';
 
 import Agents from './pages/Agents';
 import Donations from './pages/Donations';
 import Jobs from './pages/Jobs';
 import Settings from './pages/Settings';
 import Feedback from './pages/Feedback';
+import UpdateProfile from './pages/Profile/Update';
 import UserAgreement from './pages/UserAgreement';
 import UpdatePassword from './pages/Settings/UpdatePassword';
 
@@ -103,6 +105,7 @@ export default function Routes () {
             <Stack.Screen name="Donations" component={Donations} options={({ navigation }) => optionsWithSearch(navigation, 'Doações')} />
             <Stack.Screen name="Jobs" component={Jobs} options={({ navigation }) => optionsWithSearch(navigation, 'Empregos')} />
 
+            <Stack.Screen name="CreateAnnouncement" component={CreateAnnouncement} options={({ navigation }) => options(navigation, 'Criar anúncio')} />
             <Stack.Screen name="Create" component={SecondaryCreate} options={({ navigation, route }) => options(navigation, `Criar anúncio - ${route.params.name}`)} />
             <Stack.Screen name="Detail" component={SecondaryDetail} options={({ navigation, route }) => options(navigation, route.params.name)} />
             <Stack.Screen name="Publish" component={SecondaryPublish} options={({ navigation, route }) => options(navigation, `Publicar Currículo - ${route.params.name}`)} />
@@ -111,6 +114,8 @@ export default function Routes () {
             <Stack.Screen name="Feedback" component={Feedback} options={({ navigation }) => options(navigation, 'Feedback')} />
             <Stack.Screen name="UserAgreement" component={UserAgreement} options={({ navigation }) => options(navigation, 'Termos de Uso')} />
             <Stack.Screen name="UpdatePassword" component={UpdatePassword} options={({ navigation }) => options(navigation, 'Mudar senha')} />
+            <Stack.Screen name="Settings" component={Settings} options={({ navigation }) => options(navigation, 'Configurações')} />
+            <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={({ navigation }) => options(navigation, 'Editar Perfil')} />
 
             <Stack.Screen
               name="FeedInspect"
@@ -174,7 +179,6 @@ function ProfileStack () {
         })}
         initialParams={{ owner: true }}
       />
-      <Stack.Screen name="Settings" component={Settings} options={({ navigation }) => options(navigation, 'Configurações')} />
     </Stack.Navigator>
   )
 }

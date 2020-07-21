@@ -1,6 +1,6 @@
 import firebase from '../../config';
 
-export function detailUser(id) {
+export function detailUser(id, action) {
   let response = {};
 
   firebase.database().ref(`users/${id}`)
@@ -9,7 +9,6 @@ export function detailUser(id) {
         response = {};
       }
       response = snapshot.val();
+      action(response);
     });
-
-  return response;
 }

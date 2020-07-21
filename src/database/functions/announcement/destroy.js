@@ -1,7 +1,7 @@
 import { Alert } from 'react-native';
 import firebase from '../../config';
 
-export function destroy(section, folder, subfolder, images, annid, action) {
+export function destroy(section, folder, subfolder, images = [], annid, action) {
   if (images) {
     images.map((donwloadurl) => {
       const imageRef = firebase.storage().refFromURL(donwloadurl).fullPath;
@@ -12,13 +12,13 @@ export function destroy(section, folder, subfolder, images, annid, action) {
 
   firebase.database().ref(`${section}/${folder}/${subfolder}/${annid}`).remove()
     .then(() => {
+      action();
       Alert.alert(
         'Sucesso',
         'Anúncio excluído',
         [
           {
             text: 'Ok',
-            onPress: action,
           },
         ],
       );
@@ -29,7 +29,6 @@ export function destroy(section, folder, subfolder, images, annid, action) {
         [
           {
             text: 'Ok',
-            onPress: action,
           },
         ],
       );

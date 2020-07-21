@@ -1,12 +1,9 @@
 import React from 'react';
 import { Item } from './styles';
 
-import { useNavigation } from '@react-navigation/native';
 
-export default function Product({ item }) {
-  const nav = useNavigation();
-
+export default function Product({ item, adstype, type }) {
   return (
-    <Item navigation={nav} data={item.item} />
+    <Item data={item.item} type={type} adstype={adstype} />
   )
 }
