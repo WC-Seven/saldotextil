@@ -2,34 +2,37 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Configurations
-const title = 'Camisas Femininas de Manga Curta';
-const subtitle = 'Gabriel Henrique Veiga Cardoso';
+export const Item = ({ navigation, data }) => {
+  const noImage = 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fnoimageavailable.jpg?alt=media&token=1b7c718e-e6d6-49d0-a1c1-3eb7dae80c39';
+  
+  const price = data.price.substring(0, data.price.indexOf('/')-1).replace('.', ',');
+  const measure = data.price.substring(data.price.indexOf('/'), data.price.length);
 
-export const Item = ({ navigation }) => (
+  return (
   <Container>
     <Touchable>
-      <Image />
+      <Image source={{ uri: data.images[0] || noImage }} />
     </Touchable>
     <Details>
       <Top>
-        <Title>{ title }</Title>
-        <Subtitle>{ subtitle }</Subtitle>
+        <Title>{ data.title }</Title>
+        <Subtitle>{ `${data.city} - ${data.state}` }</Subtitle>
 
         <Price>
-          R$ 13,60 <Measure>/ unidade</Measure>
+          { price } <Measure>{ measure }</Measure>
         </Price>
       </Top>
       <Bottom>
-        <ProfileImage />
+        <ProfileImage source={{ uri: data.userImage || noImage }} />
         <Button>
-          <ButtonText onPress={() => navigation.navigate('FeedInspect', { name: 'Camisas Femininas' })}>
+          <ButtonText onPress={() => navigation.navigate('FeedInspect', { name: data.title, item: data })}>
             Ver detalhes
           </ButtonText>
         </Button>
       </Bottom>
     </Details>
   </Container>
-);
+)};
 
 // Components
 export const Container = styled.View`

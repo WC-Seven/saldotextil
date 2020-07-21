@@ -1,12 +1,12 @@
 import React from 'react';
 import { Item } from './styles';
 
-import { MainContext } from '../../../App';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Product() {
-  const { nav } = React.useContext(MainContext);
+export default function Product({ item }) {
+  const nav = useNavigation();
 
   return (
-    <Item navigation={nav} />
+    <Item navigation={nav} data={item.item} />
   )
 }

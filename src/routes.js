@@ -2,11 +2,9 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import { MainContext } from '../App';
 
 // Useless center component
 import Others from './pages/Others';
@@ -33,6 +31,8 @@ import SecondaryDetail from './components/Secondaries/Detail';
 import SecondaryPublish from './components/Secondaries/Publish';
 import SecondaryUpdate from './components/Secondaries/Update';
 import SecondarySearch from './components/Secondaries/Search';
+
+import GeneralContext from './context';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -91,13 +91,12 @@ function optionsWithSearch(navigation, title) {
 }
 
 export default function Routes () {
-
-  const isUserAuthenticated = true;
+  const { isLogged } = React.useContext(GeneralContext);
 
   return (
     <NavigationContainer>
       {
-        isUserAuthenticated ? (
+        isLogged ? (
           <Stack.Navigator>
             <Stack.Screen name="Main" component={BottomTabs} options={{ headerShown: false }} />
             <Stack.Screen name="Agents" component={Agents} options={({ navigation }) => optionsWithSearch(navigation, 'Representantes')} />
@@ -181,7 +180,7 @@ function ProfileStack () {
 }
 
 function BottomTabs () {
-  const { bsRef } = React.useContext(MainContext);
+  const { bsRef } = React.useContext(GeneralContext);
 
   return (
     <Tabs.Navigator
@@ -222,7 +221,7 @@ function BottomTabs () {
         options={{
           tabBarButton: () => (
             <TouchableOpacity
-              onPress={bsRef}
+              onPress={() => bsRef.current.open()}
               style={{ flex: 1, justifyContent: 'center' }}
             >
               <Icon name="plus" type="material-community" size={40} color="#666" />

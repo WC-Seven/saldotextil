@@ -1,6 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 
+export const Loading = () => (
+  <LoadingContainer>
+    <Spinner />
+  </LoadingContainer>
+);
+
+export const Legend = styled.Text`
+  color: #666;
+  font-family: Poppins Medium;
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-left: 3px;
+`;
+
+const LoadingContainer = styled.View`
+  align-items: center;
+  background-color: #2B7ED7;
+  flex: 1;
+  justify-content: center;
+`;
+
+const Spinner = styled.ActivityIndicator.attrs({
+  size: 'large',
+  color: '#fff'
+})``;
+
 export const TopContainer = styled.View`
   align-items: center;
   background-color: #2B7ED7;

@@ -17,6 +17,7 @@ export default function FeedInspect({ navigation, route }) {
   }, []);
 
   const rbRef = React.createRef();
+  const { item } = route.params;
 
   return (
     <Container>
@@ -42,11 +43,11 @@ export default function FeedInspect({ navigation, route }) {
       </RBSheet>
       
 
-      <ImageScrollView />
+      <ImageScrollView arr={item.images} />
       <InsideContainer>
         
 
-        <PublishInspect />
+        <PublishInspect uid={item.user} image={item.userImage} />
 
         <Detail />
 

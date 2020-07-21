@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'react-native-elements';
+import { TextInputMask } from 'react-native-masked-text';
 
 export const Container = styled.ScrollView`
   background-color: #fff;
@@ -73,12 +74,18 @@ export const Horizontal = styled.View`
   margin: 0px -5px 10px;
 `;
 
-export const TextInput = ({ leftIcon, placeholder, vertical = false, filled = false }) => (
+export const TextInput = ({ leftIcon, placeholder, vertical = false, filled = false, value, onChangeText, type }) => (
   <TextInputContainer vertical={vertical} filled={filled}>
     <LeftContainer>
       <Icon name={ leftIcon ? leftIcon : 'home' } type="material-community" color="#bbb" />
     </LeftContainer>
-    <SimpleTextInput placeholder={ placeholder || 'Digite aqui' }/>
+    {
+      !type ? (
+        <SimpleTextInput value={value} onChangeText={onChangeText} placeholder={ placeholder || 'Digite aqui' } />
+      ) : (
+        <MaskedTextInput value={value} onChangeText={onChangeText} placeholder={ placeholder || 'Digite aqui' } type={type} />
+      )
+    }
   </TextInputContainer>
 );
 
@@ -101,6 +108,13 @@ const LeftContainer = styled.View`
 `;
 
 const SimpleTextInput = styled.TextInput`
+  flex: 1;
+  font-size: 18px;
+  font-family: Poppins Regular;
+  padding-top: 7px;
+`;
+
+const MaskedTextInput = styled(TextInputMask)`
   flex: 1;
   font-size: 18px;
   font-family: Poppins Regular;

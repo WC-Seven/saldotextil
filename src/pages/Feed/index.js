@@ -1,49 +1,36 @@
 import React from 'react';
-import { Animated, FlatList, Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import { Animated, FlatList, Platform, SafeAreaView, StyleSheet } from 'react-native';
 
 import Product from '../../components/Product';
 import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
 
-import { MainContext } from '../../../App';
+import GeneralContext from '../../context';
 import { Container, Footer, Search, Bar, FlatListHeader } from './styles';
-import { Icon } from 'react-native-elements';
+
+import { announcement } from '../../database/functions';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 export default function Feed({ navigation }) {
-  const { setNav } = React.useContext(MainContext);
+  // Inicializando Bottom Sheet
+  const { setNav } = React.useContext(GeneralContext);
   React.useEffect(() => setNav(navigation), []);
 
   // Função que carrega os primeiros anúncios
   const [results, setResults] = React.useState({
-    announcements: [],
-    quantity: 0,
-    type: 'confeccao',
-    adstype: 'selling',
-    localization: ''
+    announcements: [], quantity: 0, type: 'confeccao', adstype: 'selling', localization: ''
   });
-  React.useEffect(() => {
-    const getFromApi = () => {
-      // Falso assíncrono temporário
-      setTimeout(() => {
-        const response = [
-          { uid: Math.random() },
-          { uid: Math.random() },
-          { uid: Math.random() },
-          { uid: Math.random() },
-          { uid: Math.random() },
-        ];
 
-        setResults({
-          ...results,
-          announcements: response,
-          quantity: results.quantity + response.length,
-        });
-      }, 2000);
-    }
-    getFromApi();
-  }, [])
+  React.useEffect(() => {
+    announcement.read(
+      (response) => setResults({ ...results, announcements: response }),
+      'primaryAnnouncements',
+      results.adstype,
+      results.type
+    );
+  }, []);
+
 
   // Animação da imagem de topo
   const headerMaxHeight = 200;
@@ -176,7 +163,7 @@ export default function Feed({ navigation }) {
               </FlatListHeader>
             )
           }
-          renderItem={() => <Product />}
+          renderItem={item => <Product item={item} />}
           ListFooterComponent={() => <Footer />}
           contentContainerStyle={{ paddingTop: headerMaxHeight-50 }}
           scrollEventThrottle={1}

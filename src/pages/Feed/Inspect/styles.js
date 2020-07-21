@@ -6,6 +6,9 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 
+import GeneralContext from '../../../context';
+import { user } from '../../../database/functions';
+
 export const Container = styled.ScrollView`
   background-color: #fff;
   flex: 1;
@@ -26,26 +29,41 @@ export const RbSheetOption = ({ iconName, title, onPress }) => (
   </RbSheetOptionContainer>
 )
 
-export const ImageScrollView = () => (
+export const ImageScrollView = ({ arr }) => (
   <ImageScrollViewContainer>
-    <ImageScrollViewImage />
-    <ImageScrollViewImage />
-    <ImageScrollViewImage />
-    <ImageScrollViewImage />
-    <ImageScrollViewImage />
-    <ImageScrollViewImage />
+    {
+      arr.map(item => (
+        <ImageScrollViewImage key={item} source={{ uri: item }} />
+      ))
+    }
   </ImageScrollViewContainer>
 );
 
-export const PublishInspect = () => {
+export const PublishInspect = ({ uid, image }) => {
   const navigation = useNavigation();
+  const { currentUser } = React.useContext(GeneralContext);
+  const [inspectUser, setInspectUser] = React.useState(null);
+
+  React.useEffect(() => {
+    const response = user.detail(uid);
+    setInspectUser(response);
+  }, []);
   
   return (
     <PublishInspectContainer>
-      <PublishInpectHeader onPress={() => navigation.navigate('User', { owner: false })}>
+      <PublishInpectHeader
+        onPress={inspectUser ?
+          () => navigation.navigate('User', { owner: currentUser.id === inspectUser.id, user: inspectUser })
+          : () => {}}>
         <PIfirstElement>
-          <PublishInspectAvatar />
-          <PublishInpectName>{'Gabriel Henrique\nJaraguá do Sul - SC'}</PublishInpectName>
+          <PublishInspectAvatar source={{ uri: image }} />
+          {
+            !inspectUser ? (
+              <Spinner />
+            ) : (
+              <PublishInpectName>{`${inspectUser.name}\n${inspectUser.andress.city} - ${inspectUser.andress.state}`}</PublishInpectName>
+            )
+          }
         </PIfirstElement>
         <PIsecondElement>
           <Icon name="phone" type="material-community" color="#333" iconStyle={{ marginLeft: 5}} />
@@ -55,6 +73,12 @@ export const PublishInspect = () => {
     </PublishInspectContainer>
   );
 }
+
+const Spinner = styled.ActivityIndicator.attrs({
+  size: 'small', color: '#2B7ED7'
+})`
+  margin-left: 20px;
+`;
 
 export const BuyButton = ({ title, onPress }) => (
   <BuyButtonContainer onPress={onPress}>
@@ -95,7 +119,7 @@ export const ImageScrollViewContainer = styled.ScrollView.attrs({
 
 export const ImageScrollViewImage = styled.Image`
   background-color: #ddd;
-  border-radius: 10px;
+  border-radius: 0px;
   height: 300px;
   width: ${Dimensions.get('window').width}px;
 `;
