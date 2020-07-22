@@ -17,7 +17,7 @@ export default function Jobs({ navigation }) {
 
   React.useEffect(() => {
     setResults([]);
-    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'jobs', filters.adstype, 'state', filters.localization);
+    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'jobs', filters.adstype, 'state', filters.localization, 10000);
   }, [filters.adstype, filters.localization]);
 
   return (

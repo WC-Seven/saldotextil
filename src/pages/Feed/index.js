@@ -19,10 +19,11 @@ export default function Feed({ navigation }) {
 
   // Função que carrega os primeiros anúncios
   const [results, setResults] = React.useState({
-    announcements: [], quantity: 0, type: 'confeccao', adstype: 'selling', localization: ''
+    announcements: [], quantity: 5, type: 'confeccao', adstype: 'selling', localization: ''
   });
 
   React.useEffect(() => {
+    console.log('search')
     announcement.read(
       (response) => setResults({ ...results, announcements: response }),
       'primaryAnnouncements',
@@ -30,8 +31,9 @@ export default function Feed({ navigation }) {
       results.type,
       'state',
       results.localization,
+      results.quantity
     );
-  }, [results.adstype, results.type, results.localization]);
+  }, [results.adstype, results.type, results.localization, results.quantity]);
 
 
   // Animação da imagem de topo
@@ -46,7 +48,10 @@ export default function Feed({ navigation }) {
 
   // Função scroll infinito
   const handleEndOfScroll = () => {
-    // 
+    console.log('end')
+    setResults({
+      ...results, quantity: results.quantity + 5
+    })
   }
 
   const [modal, setModal] = React.useState({
@@ -65,17 +70,16 @@ export default function Feed({ navigation }) {
           {
             title: 'Tipo de anúncio',
             options: [
-              { name: 'Venda', action: () => setResults({ ...results, adstype: 'selling'}), active: results.adstype === 'selling' },
-              { name: 'Compra', action: () => setResults({ ...results, adstype: 'buying'}), active: results.adstype === 'buying' }
+              { name: 'Venda', action: () => setResults({ ...results, quantity: 10, adstype: 'selling'}), active: results.adstype === 'selling' },
+              { name: 'Compra', action: () => setResults({ ...results, quantity: 10, adstype: 'buying'}), active: results.adstype === 'buying' }
             ]
           },
           {
             title: 'Tipo de produto',
             options: [
-              { name: 'Confeçções', action: () => setResults({ ...results, type: 'confeccao'}), active: results.type === 'confeccao' },
-              { name: 'Malhas', action: () => setResults({ ...results, type: 'malha'}), active: results.type === 'malha' },
-              { name: 'Outros', action: () => setResults({ ...results, type: 'outros'}), active: results.type === 'outros' }
-
+              { name: 'Confeçções', action: () => setResults({ ...results, quantity: 10, type: 'confeccao'}), active: results.type === 'confeccao' },
+              { name: 'Malhas', action: () => setResults({ ...results, quantity: 10, type: 'malha'}), active: results.type === 'malha' },
+              { name: 'Outros', action: () => setResults({ ...results, quantity: 10, type: 'outros'}), active: results.type === 'outros' }
             ]
           }
         ]}
@@ -159,7 +163,7 @@ export default function Feed({ navigation }) {
           )}
 
           onEndReached={() => handleEndOfScroll()}
-          onEndReachedThreshold={0}
+          onEndReachedThreshold={0.2}
         />
         <Animated.View style={[ styles.animatedHeaderContainer, { height: headerHeight }]}>
             <Animated.Image source={require('../../../assets/images/logo.png')} style={styles.image} />
