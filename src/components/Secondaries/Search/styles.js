@@ -14,5 +14,13 @@ export const TextInput = styled.TextInput`
   font-family: Poppins Medium;
   height: 50px;
   padding: 0px 10px;
+`;
 
+export const Message = styled.Text`
+  align-self: center;
+  color: #ccc;
+  font-family: Poppins Regular;
+  margin-top: 100px;
+  max-width: 200px;
+  text-align: center;
 `;

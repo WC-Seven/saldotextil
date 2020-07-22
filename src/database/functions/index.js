@@ -2,6 +2,7 @@ import { read } from './announcement/read';
 import { create } from './announcement/create';
 import { update } from './announcement/update';
 import { destroy } from './announcement/destroy';
+import { find } from './announcement/search';
 
 import { destroyUser } from './user/destroy';
 import { detailUser } from './user/detail';
@@ -13,7 +14,7 @@ import { tryLogin } from './auth/login';
 import { tryRegister } from './auth/register';
 
 export const announcement = {
-  read, create, update, destroy,
+  read, create, update, destroy, find
 };
 
 export const user = {
