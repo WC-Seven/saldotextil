@@ -24,7 +24,6 @@ export default function FeedInspect({ navigation, route }) {
   const rbRef = React.createRef();
   const { item, type, adstype } = route.params;
 
-
   const price = item.price.substring(0, item.price.indexOf('/')-1).replace('.', ',');
   const measure = item.price.substring(item.price.indexOf('/'), item.price.length);
   const priceBig = price.substring(0, price.indexOf(','));
@@ -92,7 +91,7 @@ export default function FeedInspect({ navigation, route }) {
 
         <PublishInspect uid={item.user} image={item.userImage} />
 
-        <Detail />
+        <Detail type={type} item={item} />
 
         <Quantity>{ item.quantity }</Quantity>
         <Price>{ priceBig }<Cents>{ priceSmall }{ ' ' }{ measure }</Cents></Price>

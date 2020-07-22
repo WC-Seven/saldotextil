@@ -88,26 +88,128 @@ export const BuyButton = ({ title, onPress }) => (
   </BuyButtonContainer>
 );
 
-export const Detail = () => (
+export const Detail = ({ type, item }) => (
   <DetailContainer>
-    <Table>
-      <Row>
-        <Value bg="#fafafa"><Text>Categoria</Text></Value>
-        <Value bg="#fafafa"><Text>Deed sads sadd</Text></Value>
-      </Row>
-      <Row>
-        <Value bg="#f2f2f2"><Text>Subcategoria</Text></Value>
-        <Value bg="#f2f2f2"><Text>Deed sads sadd</Text></Value>
-      </Row>
-      <Row>
-        <Value bg="#fafafa"><Text>Categoria</Text></Value>
-        <Value bg="#fafafa"><Text>Deed sads sadd</Text></Value>
-      </Row>
-      <Row>
-        <Value bg="#f2f2f2"><Text>Subcategoria</Text></Value>
-        <Value bg="#f2f2f2"><Text>Deed sads sadd</Text></Value>
-      </Row>
-    </Table>
+    
+      {
+        type === 'outros' ? (
+          <Table>
+            {
+              item.description ? (
+                <Row>
+                  <Value bg="#fafafa"><Text>{ item.description }</Text></Value>
+                </Row>
+              ) : (
+                <Row>
+                  <Value bg="#fafafa"><Text>Sem descrição</Text></Value>
+                </Row>
+              )
+            }
+          </Table>
+        ) : type === 'confeccao' ? (
+          <Table>
+            {
+              item.category ? (
+                <Row>
+                  <Value bg="#f2f2f2"><Text>Categoria</Text></Value>
+                  <Value bg="#f2f2f2"><Text>{ item.category }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+            {
+              item.subcategory ? (
+                <Row>
+                  <Value bg="#fafafa"><Text>Subcategoria</Text></Value>
+                  <Value bg="#fafafa"><Text>{ item.subcategory.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+            {
+              item.colors ? (
+                <Row>
+                  <Value bg="#f2f2f2"><Text>Cores</Text></Value>
+                  <Value bg="#f2f2f2"><Text>{ item.colors.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+            {
+              item.sizes ? (
+                <Row>
+                  <Value bg="#fafafa"><Text>Cores</Text></Value>
+                  <Value bg="#fafafa"><Text>{ item.sizes.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+          </Table>
+        ) : (
+          <Table>
+            {
+              item.article ? (
+                <Row>
+                  <Value bg="#f2f2f2"><Text>Artigo</Text></Value>
+                  <Value bg="#f2f2f2"><Text>{ item.article }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+            {
+              item.articletype ? (
+                <Row>
+                  <Value bg="#fafafa"><Text>Tipo de artigo</Text></Value>
+                  <Value bg="#fafafa"><Text>{ item.articletype }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+            {
+              item.composition ? (
+                <Row>
+                  <Value bg="#f2f2f2"><Text>Composição</Text></Value>
+                  <Value bg="#f2f2f2"><Text>{ item.composition }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+            {
+              item.producttype ? (
+                <Row>
+                  <Value bg="#fafafa"><Text>Tipo de produto</Text></Value>
+                  <Value bg="#fafafa"><Text>{ item.producttype }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+            {
+              item.stitchtype ? (
+                <Row>
+                  <Value bg="#f2f2f2"><Text>Tipo de malha</Text></Value>
+                  <Value bg="#f2f2f2"><Text>{ item.stitchtype }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+            {
+              item.string ? (
+                <Row>
+                  <Value bg="#fafafa"><Text>Fio</Text></Value>
+                  <Value bg="#fafafa"><Text>{ item.string }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+            {
+              item.stringtype ? (
+                <Row>
+                  <Value bg="#f2f2f2"><Text>Tipo de fio</Text></Value>
+                  <Value bg="#f2f2f2"><Text>{ item.stringtype }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+            {
+              item.colors ? (
+                <Row>
+                  <Value bg="#fafafa"><Text>Cores</Text></Value>
+                  <Value bg="#fafafa"><Text>{ item.colors.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
+                </Row>
+              ) : <></>
+            }
+          </Table>
+        )
+      }
   </DetailContainer>
 );
 
