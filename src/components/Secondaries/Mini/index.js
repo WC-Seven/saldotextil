@@ -7,7 +7,7 @@ export default function Mini({ item, type = 'ads' }) {
   const [ annUser, setAnnUser ] = React.useState(null);
 
   React.useEffect(() => {
-    user.detail(item.enterprise, (obj) => setAnnUser(obj))
+    user.detail(item.enterprise, (obj) => setAnnUser(obj));
   }, []);
 
   return (
@@ -17,9 +17,9 @@ export default function Mini({ item, type = 'ads' }) {
           <>
             {
               type === 'ads' ? (
-                <Miniature info={{...item, enterprise: annUser.name, enterprisePhoto: annUser.image, enterprisePhone: annUser.phone }} />
+                <Miniature info={{...item, id: annUser.id, enterprise: annUser }} />
               ) : (
-                <CvMiniature info={{...item, user: annUser.name, userImage: annUser.image, userPhone: annUser.phone}} />
+                <CvMiniature info={{...item, user: annUser }} />
               )
             }
           </>

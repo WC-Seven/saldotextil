@@ -4,20 +4,22 @@ import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { Menu, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
+import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import { Linking } from 'react-native';
+
+import GeneralContext from '../../../context';
 
 export const CvMiniature = ({ info }) => {
   return (
     <Container>
       <OwnerDescription>
         <FlexView>
-          <Avatar source={{ uri: info.userImage }} />
+          <Avatar source={{ uri: info.user.image }} />
           <TouchableOpacity
             onPress={() => Linking.openURL(info.image)}
           >
             <CvName>
-              { `${info.user}\nBaixar currículo` }
+              { `${info.user.name}\nBaixar currículo` }
             </CvName>
           </TouchableOpacity>
         </FlexView>
@@ -31,17 +33,19 @@ export const CvMiniature = ({ info }) => {
 
 export const Miniature = ({ info }) => {
   const navigation = useNavigation();
+  const { currentUser } = React.useContext(GeneralContext);
+  
   return (
     <Container>
       <OwnerDescription>
         <FlexView>
           <TouchableOpacity
             style={{ alignItems: 'center', flexDirection: 'row' }}
-            onPress={() => navigation.navigate('User', { owner: false })}
+            onPress={() => navigation.navigate('User', { owner: currentUser.id === info.enterprise.id, user: info.enterprise })}
           >
-            <Avatar source={{ uri: info.enterprisePhoto }} />
+            <Avatar source={{ uri: info.enterprise.image }} />
             <CvName>
-              { `${info.enterprise}\n${info.city} - ${info.state}` }
+              { `${info.enterprise.name}\n${info.city} - ${info.state}` }
             </CvName>
           </TouchableOpacity>
         </FlexView>
@@ -59,16 +63,24 @@ export const Miniature = ({ info }) => {
           </MenuTrigger>
           <MenuOptions optionsContainerStyle={{ marginTop: 30 }}>
             <MenuOption style={{ padding: 10 }} text="Ver anúncio" onSelect={() => navigation.navigate('Detail', {
-                name: info.title,
-                image: info.image,
-                enterprise: info.enterprise,
-                description: info.description,
-                phone: info.enterprisePhone
-              })} />
-            <MenuOption style={{ padding: 10 }} text="Editar" onSelect={() => alert(info.title)} />
-            <MenuOption style={{ padding: 10 }} text="Desabilitar" onSelect={() => alert(info.title)} />
-            <MenuOption style={{ padding: 10 }} text="Excluir" onSelect={() => alert(info.title)} />
-            <MenuOption style={{ padding: 10 }} text="Reportar" onSelect={() => alert(info.title)} />
+              name: info.title,
+              image: info.image,
+              enterprise: info.enterprise,
+              description: info.description,
+              phone: info.enterprise.phone
+            })} />
+            {
+              info.id === currentUser.id ? (
+                <>
+                  <MenuOption style={{ padding: 10 }} text="Editar" onSelect={() => alert(info.title)} />
+                  <MenuOption style={{ padding: 10 }} text="Excluir" onSelect={() => alert(info.title)} />
+                </>
+              ) : (
+                <>
+                  <MenuOption style={{ padding: 10 }} text="Reportar" onSelect={() => alert(info.title)} />
+                </>
+              )
+            }
           </MenuOptions>
         </Menu>
       </OwnerDescription>
@@ -80,7 +92,7 @@ export const Miniature = ({ info }) => {
           image: info.image,
           enterprise: info.enterprise,
           description: info.description,
-          phone: info.enterprisePhone
+          phone: info.enterprise.phone
         })}
       >
         <Image source={{ uri: info.image }} />

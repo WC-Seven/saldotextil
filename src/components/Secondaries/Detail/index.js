@@ -10,7 +10,7 @@ export default function Detail({ route }) {
       <Image source={{ uri: image }} />
       <SubContainer>
         <Text medium size={22}>{ name }</Text>
-        <Text regular size={15}>{ enterprise }</Text>
+        <Text regular size={15}>{ enterprise.name }</Text>
 
         <Break size={30} />
         <Text regular size={14}>
