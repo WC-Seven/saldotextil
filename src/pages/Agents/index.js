@@ -107,6 +107,7 @@ export default function Agents({ navigation }) {
                       state: item.state
                     }}
                     type={filters.adstype}
+                    folder="agents"
                   />
                 ))
               }

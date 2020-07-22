@@ -83,6 +83,7 @@ export default function Donations({ navigation }) {
                       enterprise: item.user,
                       description: item.description,
                     }}
+                    folder="donations"
                   />
                 ))
               }

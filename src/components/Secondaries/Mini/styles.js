@@ -5,9 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
-import { Linking } from 'react-native';
+import { Linking, Alert } from 'react-native';
 
 import GeneralContext from '../../../context';
+import { announcement } from '../../../database/functions';
 
 export const CvMiniature = ({ info }) => {
   return (
@@ -73,7 +74,21 @@ export const Miniature = ({ info }) => {
               info.id === currentUser.id ? (
                 <>
                   <MenuOption style={{ padding: 10 }} text="Editar" onSelect={() => alert(info.title)} />
-                  <MenuOption style={{ padding: 10 }} text="Excluir" onSelect={() => alert(info.title)} />
+                  <MenuOption style={{ padding: 10 }} text="Excluir" onSelect={() => {
+                    Alert.alert(
+                      'Excluir anúncio',
+                      'Essa ação é irreversível',
+                      [
+                        {
+                          text: 'Cancelar',
+                        },
+                        {
+                          text: 'Ok',
+                          onPress: () => announcement.destroy('secondaryAnnouncements', info.folder, 'ads', [info.image], info.uid, () => {}),
+                        },
+                      ],
+                    );
+                  }} />
                 </>
               ) : (
                 <>
