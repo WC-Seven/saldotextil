@@ -2,7 +2,7 @@ import React from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { StatusBar, Alert } from 'react-native';
 
-import { BuyButton, Container, Detail, ImageScrollView, InsideContainer, OptionsButton, RbSheetOption, Quantity, Price, Cents, PublishInspect } from './styles';
+import { BuyButton, Container, Detail, ImageScrollView, InsideContainer, OptionsButton, RbSheetOption, Quantity, Price, Cents, PublishInspect, Title } from './styles';
 
 import GeneralContext from '../../../context';
 import { announcement } from '../../../database/functions';
@@ -87,8 +87,8 @@ export default function FeedInspect({ navigation, route }) {
 
       <ImageScrollView arr={item.images || []} />
       <InsideContainer>
+        <Title>{ route.params.name }</Title>
         
-
         <PublishInspect uid={item.user} image={item.userImage} />
 
         <Detail type={type} item={item} />
