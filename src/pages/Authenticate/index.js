@@ -10,7 +10,7 @@ export default function Authenticate({ navigation }) {
   const { setAuthUser } = React.useContext(GeneralContext);
 
   const [isLoading, setIsLoading] = React.useState(true);
-  const [login, setLogin] = React.useState({ email: 'gabrielhvcardoso@gmail.com', password: '12345678' });
+  const [login, setLogin] = React.useState({ email: '', password: '' });
 
   React.useEffect(() => {
     const verify = async () => {
