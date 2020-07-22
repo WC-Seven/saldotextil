@@ -15,7 +15,7 @@ export default function Donations({ navigation }) {
 
   React.useEffect(() => {
     setResults([]);
-    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'donations', 'ads', 'state', filters.localization);
+    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'donations', 'ads', 'state', filters.localization, 10000);
   }, [filters.localization]);
 
   return (
