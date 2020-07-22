@@ -96,7 +96,13 @@ export default function FeedInspect({ navigation, route }) {
         <Quantity>{ item.quantity }</Quantity>
         <Price>{ priceBig }<Cents>{ priceSmall }{ ' ' }{ measure }</Cents></Price>
 
-        <BuyButton title="Entrar em contato" />
+        {
+          item.user === currentUser.id ? (
+            <BuyButton title="Este anúncio é seu" disabled uid={item.user} />
+          ) : (
+            <BuyButton title="Entrar em contato" uid={item.user} />
+          )
+        }
       </InsideContainer>
     </Container>
   );

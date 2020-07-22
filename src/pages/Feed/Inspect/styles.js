@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 
 import { Icon } from 'react-native-elements';
-import { Dimensions } from 'react-native';
+import { Dimensions, Linking, Alert } from 'react-native';
 
 import GeneralContext from '../../../context';
 import { user } from '../../../database/functions';
@@ -80,13 +80,55 @@ const Spinner = styled.ActivityIndicator.attrs({
   margin-left: 20px;
 `;
 
-export const BuyButton = ({ title, onPress }) => (
-  <BuyButtonContainer onPress={onPress}>
-    <BuyButtonText>
-      { title }
-    </BuyButtonText>
-  </BuyButtonContainer>
-);
+export const BuyButton = ({ title, disabled = false, uid }) => {
+  const [inspectUser, setInspectUser] = React.useState(null);
+
+  React.useEffect(() => {
+    user.detail(uid, (response) => setInspectUser(response));
+  }, []);
+
+  return (
+    <BuyButtonContainer
+      disabled={disabled}
+      onPress={
+        inspectUser ? () => {
+          console.log('enabled');
+          if (inspectUser.phone !== '') {
+            let number = inspectUser.phone.replace('(', '').replace(')', '').replace(' ', '').replace('-', '').replace('+', '');
+            if (number.substring(0, 2) !== '55') {
+              number = `55${number}`;
+            }
+            
+            if (!disabled) {
+              Linking.openURL(`https://wa.me/${number}`);
+            }
+            } else {
+            Alert.alert(
+              'Erro',
+              'Parece que este usuário teve algum problema com seu número de telefone',
+              [
+                { text: 'Ah, que pena' }
+              ]
+            );
+            }
+        } : () => {}
+      }
+    >
+      {
+        inspectUser ? (
+          <BuyButtonText>
+            { title }
+          </BuyButtonText>
+        ) : (
+          <SpinnerWhite />
+        )
+      }
+      
+    </BuyButtonContainer>
+  )
+};
+
+const SpinnerWhite = styled.ActivityIndicator.attrs({ size: 'small', color: '#fff' })``;
 
 export const Detail = ({ type, item }) => (
   <DetailContainer>
@@ -331,7 +373,7 @@ const PublishInpectName = styled.Text`
 
 const BuyButtonContainer = styled.TouchableOpacity`
   align-items: center;
-  background-color: #2B7ED7;
+  background-color: ${props => props.disabled ? '#CCC' : '#2B7ED7' };
   border-radius: 10px;
   min-height: 60px;
   justify-content: center;
