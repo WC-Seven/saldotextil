@@ -6,7 +6,7 @@ import { BottomContainer, Button, ButtonReverse, Image, Loading, TextInput, TopC
 import GeneralContext from '../../context';
 import { auth } from '../../database/functions';
 
-export default function Authenticate() {
+export default function Authenticate({ navigation }) {
   const { setAuthUser } = React.useContext(GeneralContext);
 
   const [isLoading, setIsLoading] = React.useState(true);
@@ -62,7 +62,7 @@ export default function Authenticate() {
                     () => setIsLoading(false)
                   );
                 } } />
-              <ButtonReverse title="Não tem uma conta? Cadastre-se" onPress={() => {}} />
+              <ButtonReverse title="Não tem uma conta? Cadastre-se" onPress={() => navigation.navigate('Register')} />
             </BottomContainer>
           </>
         )
