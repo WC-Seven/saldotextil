@@ -128,3 +128,47 @@ const Description = styled.Text.attrs({
   font-family: Poppins Regular;
 
 `;
+
+
+export const Loading = () => (
+  <ExampleView>
+    <ExampleHeader>
+      <ExampleAvatar />
+      <ExampleName />
+    </ExampleHeader>
+    <ExampleImage />
+  </ExampleView>
+);
+
+const ExampleAvatar = styled.View`
+  background-color: #f2f2f2;
+  border-radius: 25px;
+  height: 50px;
+  width: 50px;
+`;
+
+const ExampleHeader = styled.View`
+  align-items: center;
+  flex-direction: row;
+`;
+
+const ExampleImage = styled.View`
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  height: 200px;
+  width: 100%;
+  margin-top: 10px;
+`;
+
+const ExampleName = styled.View`
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  height: 30px;
+  width: 200px;
+  margin-left: 10px;
+`;
+
+const ExampleView = styled.View`
+  margin-top: 15px;
+`;

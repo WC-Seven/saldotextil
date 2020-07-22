@@ -4,10 +4,19 @@ import { Container } from './styles';
 import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
 import FloatingButton from '../../components/FloatingButton';
+import Mini from '../../components/Secondaries/Mini';
+
+import { announcement } from '../../database/functions';
 
 export default function Donations({ navigation }) {
   const [modal, setModal] = React.useState({ localization: false });
   const [filters, setFilters] = React.useState({ localization: '' });
+  const [results, setResults] = React.useState(null);
+
+  React.useEffect(() => {
+    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'donations', 'ads');
+  }, []);
+
   return (
     <>
       <FloatingButton iconName="pencil" action={() => navigation.navigate('Create', { name: 'Doações' })} />
@@ -59,6 +68,26 @@ export default function Donations({ navigation }) {
             { title: 'Localização', action: () => setModal({ ...modal, localization: true })}
           ]}
         />
+
+        {
+          results ? (
+            <>
+              {
+                results.map(item => (
+                  <Mini
+                    key={`${item.title}-${item.user}`}
+                    item={{
+                      title: item.title,
+                      image: item.images[0],
+                      enterprise: item.user,
+                      description: item.description,
+                    }}
+                  />
+                ))
+              }
+            </>
+          ) : <></>
+        }   
       </Container>
     </>
   );

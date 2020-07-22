@@ -5,10 +5,20 @@ import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
 import FloatingButton from '../../components/FloatingButton';
 import MiniFloatingButton from '../../components/MiniFloatingButton';
+import Mini from '../../components/Secondaries/Mini';
+
+import { announcement } from '../../database/functions';
 
 export default function Agents({ navigation }) {
   const [modal, setModal] = React.useState({ adstype: false, localization: false });
   const [filters, setFilters] = React.useState({ adstype: 'ads', localization: '' });
+  const [results, setResults] = React.useState(null);
+
+  React.useEffect(() => {
+    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'agents', 'ads');
+  }, []);
+
+
   return (
     <>
       <FloatingButton iconName="pencil" action={() => navigation.navigate('Create', { name: 'Representantes' })} />
@@ -78,6 +88,26 @@ export default function Agents({ navigation }) {
             { title: 'Localização', action: () => setModal({ ...modal, localization: true })}
           ]}
         />
+
+        {
+          results ? (
+            <>
+              {
+                results.map(item => (
+                  <Mini
+                    key={`${item.title}-${item.user}`}
+                    item={{
+                      title: item.title,
+                      image: item.images[0],
+                      enterprise: item.user,
+                      description: item.description,
+                    }}
+                  />
+                ))
+              }
+            </>
+          ) : <></>
+        }
       </Container>
     </>
   );

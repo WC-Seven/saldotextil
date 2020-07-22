@@ -1,7 +1,7 @@
 import { Alert } from 'react-native';
 import firebase from '../../config';
 
-export function create(section, folder, subfolder, data, action) {
+export function create(section, folder, subfolder, data, action, onError = () => {}) {
   // Firebase Database Reference: section/folder/subfolder/ref
 
   const annid = `${data.user}${Date.now()}`;
@@ -12,7 +12,7 @@ export function create(section, folder, subfolder, data, action) {
       .then((file) => file.blob(), () => console.log('Error in blob()'))
       .then((blob) => firebase.storage()
         .ref(`images/${annid}${index}${item.uri.substring(item.uri.lastIndexOf('.'), item.uri.length)}`)
-        .put(blob), (e) => console.log(e))
+        .put(blob), (e) => onError())
       .then((snapshot) => snapshot.ref.getDownloadURL())
       .then((url) => imagesurl.push(url))
       .then(() => {
@@ -45,6 +45,7 @@ export function create(section, folder, subfolder, data, action) {
           ],
         );
       }, () => {
+        onError()
         Alert.alert(
           'Erro',
           'Obtivemos um erro ao tentar veicular seu anúncio ao Saldo Têxtil.',

@@ -18,7 +18,20 @@ export default function Detail({ route }) {
         </Text>
       </SubContainer>
 
-      <Button title="Aplicar" onPress={() => Linking.openURL(`https://wa.me/${phone}`)} />
+      <Button title="Aplicar" onPress={phone !== '' ? () => {
+                  let number = phone.replace('(', '').replace(')', '').replace(' ', '').replace('-', '').replace('+', '');
+                  if (number.substring(0, 2) !== '55') {
+                    number = `55${number}`;
+                  }
+                  
+                  Linking.openURL(`https://wa.me/${number}`);
+                } : () => {
+                  Alert.alert(
+                    'Impossível enviar mensagem',
+                    'Parece que esta pessoa não tem nenhum número vinculado a conta',
+                    [{ text: 'Ok' }]
+                  );
+                }} />
     </Container>
   );
 }
