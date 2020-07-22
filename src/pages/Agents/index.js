@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from './styles';
+import { Container, SpacedView } from './styles';
 
 import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
@@ -8,15 +8,17 @@ import MiniFloatingButton from '../../components/MiniFloatingButton';
 import Mini from '../../components/Secondaries/Mini';
 
 import { announcement } from '../../database/functions';
+import { Message } from '../Jobs/styles';
 
 export default function Agents({ navigation }) {
   const [modal, setModal] = React.useState({ adstype: false, localization: false });
   const [filters, setFilters] = React.useState({ adstype: 'ads', localization: '' });
-  const [results, setResults] = React.useState(null);
+  const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
-    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'agents', 'ads');
-  }, []);
+    setResults([]);
+    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'agents', filters.adstype, 'state', filters.localization);
+  }, [filters.adstype, filters.localization]);
 
 
   return (
@@ -90,24 +92,30 @@ export default function Agents({ navigation }) {
         />
 
         {
-          results ? (
+          results[0] ? (
             <>
               {
                 results.map(item => (
                   <Mini
-                    key={`${item.title}-${item.user}`}
+                    key={`${item.description}-${item.user}`}
                     item={{
                       title: item.title,
                       image: item.images[0],
                       enterprise: item.user,
                       description: item.description,
+                      city: item.city,
+                      state: item.state
                     }}
+                    type={filters.adstype}
                   />
                 ))
               }
             </>
-          ) : <></>
+          ) : (
+          <Message>Não há { filters.adstype === 'ads' ? 'anúncios' : 'currículos'}</Message>
+          )
         }
+        <SpacedView />
       </Container>
     </>
   );

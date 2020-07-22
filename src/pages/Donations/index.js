@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from './styles';
+import { Container, Message } from './styles';
 
 import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
@@ -11,11 +11,12 @@ import { announcement } from '../../database/functions';
 export default function Donations({ navigation }) {
   const [modal, setModal] = React.useState({ localization: false });
   const [filters, setFilters] = React.useState({ localization: '' });
-  const [results, setResults] = React.useState(null);
+  const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
-    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'donations', 'ads');
-  }, []);
+    setResults([]);
+    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'donations', 'ads', 'state', filters.localization);
+  }, [filters.localization]);
 
   return (
     <>
@@ -70,7 +71,7 @@ export default function Donations({ navigation }) {
         />
 
         {
-          results ? (
+          results[0] ? (
             <>
               {
                 results.map(item => (
@@ -86,7 +87,9 @@ export default function Donations({ navigation }) {
                 ))
               }
             </>
-          ) : <></>
+          ) : (
+            <Message>Não há items</Message>
+          )
         }   
       </Container>
     </>

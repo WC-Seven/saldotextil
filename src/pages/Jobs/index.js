@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, SpacedView, Loading } from './styles';
+import { Container, SpacedView, Loading, Message } from './styles';
 
 import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
@@ -10,14 +10,15 @@ import Mini from '../../components/Secondaries/Mini';
 import { announcement } from '../../database/functions';
 
 export default function Jobs({ navigation }) {
-  const [modal, setModal] = React.useState({ adstype: false, area: false, localization: false });
+  const [modal, setModal] = React.useState({ adstype: false, localization: false });
 
-  const [filters, setFilters] = React.useState({ adstype: 'ads', area: '', localization: '' });
-  const [results, setResults] = React.useState(null);
+  const [filters, setFilters] = React.useState({ adstype: 'ads', localization: '' });
+  const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
-    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'jobs', 'ads');
-  }, []);
+    setResults([]);
+    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'jobs', filters.adstype, 'state', filters.localization);
+  }, [filters.adstype, filters.localization]);
 
   return (
     <>
@@ -39,56 +40,6 @@ export default function Jobs({ navigation }) {
                 ],
               },
             ]}
-        />
-        <FiltersModal
-          status={{
-            value: modal.area,
-            set: (n) => setModal({ ...modal, area: n })
-          }}
-          options={[
-            {
-              title: 'Área de conhecimento',
-              options: [
-                { name: 'Nenhum', action: () => setFilters({ ...filters, area: '' }), active: filters.area === ''},
-                { name: 'Administração', action: () => setFilters({ ...filters, area: 'admnistracao' }), active: filters.area === 'admnistracao'},
-                { name: 'Agronomia', action: () => setFilters({ ...filters, area: 'agronomia' }), active: filters.area === 'agronomia'},
-                { name: 'Agropecuária', action: () => setFilters({ ...filters, area: 'agropecuaria' }), active: filters.area === 'agropecuaria'},
-                { name: 'Artes visuais', action: () => setFilters({ ...filters, area: 'artes visuais' }), active: filters.area === 'artes visuais'},
-                { name: 'Arquitetura', action: () => setFilters({ ...filters, area: 'arquitetura' }), active: filters.area === 'arquitetura'},
-                { name: 'Automação', action: () => setFilters({ ...filters, area: 'automacao' }), active: filters.area === 'automacao'},
-                { name: 'Biotecnologia', action: () => setFilters({ ...filters, area: 'biotecnologia' }), active: filters.area === 'biotecnologia'},
-                { name: 'Ciências biológicas', action: () => setFilters({ ...filters, area: 'ciencias biologicas' }), active: filters.area === 'ciencias biologicas'},
-                { name: 'Ciências contábeis', action: () => setFilters({ ...filters, area: 'ciencias contabeis' }), active: filters.area === 'ciencias contabeis'},
-                { name: 'Ciências econômicas', action: () => setFilters({ ...filters, area: 'ciencias economicas' }), active: filters.area === 'ciencias economicas'},
-                { name: 'Ciências sociais', action: () => setFilters({ ...filters, area: 'ciencias sociais' }), active: filters.area === 'ciencias sociais'},
-                { name: 'Comércio', action: () => setFilters({ ...filters, area: 'comercio' }), active: filters.area === 'comercio'},
-                { name: 'Design', action: () => setFilters({ ...filters, area: 'design' }), active: filters.area === 'design'},
-                { name: 'Engenharias', action: () => setFilters({ ...filters, area: 'engenharias' }), active: filters.area === 'engenharias'},
-                { name: 'Estatística', action: () => setFilters({ ...filters, area: 'estatisca' }), active: filters.area === 'estatisca'},
-                { name: 'Filosofia', action: () => setFilters({ ...filters, area: 'filosofia' }), active: filters.area === 'filosofia'},
-                { name: 'Gastronomia', action: () => setFilters({ ...filters, area: 'gastronomia' }), active: filters.area === 'gastronomia'},
-                { name: 'Gestões', action: () => setFilters({ ...filters, area: 'gestoes' }), active: filters.area === 'gestoes'},
-                { name: 'Intérprete', action: () => setFilters({ ...filters, area: 'interprete' }), active: filters.area === 'interprete'},
-                { name: 'Letras', action: () => setFilters({ ...filters, area: 'letras' }), active: filters.area === 'letras'},
-                { name: 'Logística', action: () => setFilters({ ...filters, area: 'logistica' }), active: filters.area === 'logistica'},
-                { name: 'Jornalismo', action: () => setFilters({ ...filters, area: 'jornalismo' }), active: filters.area === 'jornalismo'},
-                { name: 'Marketing', action: () => setFilters({ ...filters, area: 'marketing' }), active: filters.area === 'marketing'},
-                { name: 'Medicina', action: () => setFilters({ ...filters, area: 'medicina' }), active: filters.area === 'medicina'},
-                { name: 'Música', action: () => setFilters({ ...filters, area: 'musica' }), active: filters.area === 'musica'},
-                { name: 'Pedagogia', action: () => setFilters({ ...filters, area: 'pedagogia' }), active: filters.area === 'pedagogia'},
-                { name: 'Psicologia', action: () => setFilters({ ...filters, area: 'psicologia' }), active: filters.area === 'psicologia'},
-                { name: 'Publicidade', action: () => setFilters({ ...filters, area: 'publicidade' }), active: filters.area === 'publicidade'},
-                { name: 'Saúde', action: () => setFilters({ ...filters, area: 'saude' }), active: filters.area === 'saude'},
-                { name: 'Segurança', action: () => setFilters({ ...filters, area: 'seguranca' }), active: filters.area === 'seguranca'},
-                { name: 'Tecnologia da Informação', action: () => setFilters({ ...filters, area: 'tecnologia da informacao' }), active: filters.area === 'tecnologia da informacao'},
-                { name: 'Teologia', action: () => setFilters({ ...filters, area: 'teologia' }), active: filters.area === 'teologia'},
-                { name: 'Transporte', action: () => setFilters({ ...filters, area: 'transporte' }), active: filters.area === 'transporte'},
-                { name: 'Turísmo', action: () => setFilters({ ...filters, area: 'turismo' }), active: filters.area === 'turismo'},
-                { name: 'Veterinária e afins', action: () => setFilters({ ...filters, area: 'veterinaria e afins' }), active: filters.area === 'veterinaria e afins'},
-                { name: 'Outros', action: () => setFilters({ ...filters, area: 'outros' }), active: filters.area === 'outros'},
-              ]
-            }
-          ]}
         />
         <FiltersModal
           status={{
@@ -139,14 +90,9 @@ export default function Jobs({ navigation }) {
             { title: 'Localização', action: () => setModal({...modal, localization: true})}
           ]}
         />
-        <Filters
-          data={[
-            { title: filters.area !== '' ? 'Área de conhecimento' : 'Área de conhecimento (nenhum)', action: () => setModal({...modal, area: true})},
-          ]}
-        />
 
         {
-          results ? (
+          results[0] ? (
             <>
               {
                 results.map(item => (
@@ -157,12 +103,17 @@ export default function Jobs({ navigation }) {
                       image: item.images[0],
                       enterprise: item.user,
                       description: item.description,
+                      city: item.city,
+                      state: item.state
                     }}
+                    type={filters.adstype}
                   />
                 ))
               }
             </>
-          ) : <></>
+          ) : (
+            <Message>Não há {filters.adstype === 'ads' ? 'empregos' : 'currículos'}</Message>
+          )
         }
         
 

@@ -10,4 +10,8 @@ export const SpacedView = styled.View`
   height: 60px;
 `;
 
-
+export const Message = styled.Text`
+  align-self: center;
+  font-family: Poppins Regular;
+  margin-top: 100px;
+`;

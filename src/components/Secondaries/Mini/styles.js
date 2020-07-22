@@ -5,6 +5,29 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { Menu, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
+import { Linking } from 'react-native';
+
+export const CvMiniature = ({ info }) => {
+  return (
+    <Container>
+      <OwnerDescription>
+        <FlexView>
+          <Avatar source={{ uri: info.userImage }} />
+          <TouchableOpacity
+            onPress={() => Linking.openURL(info.image)}
+          >
+            <CvName>
+              { `${info.user}\nBaixar currículo` }
+            </CvName>
+          </TouchableOpacity>
+        </FlexView>
+      </OwnerDescription>
+      <Description>
+        { info.description }
+      </Description>
+    </Container>
+  )
+}
 
 export const Miniature = ({ info }) => {
   const navigation = useNavigation();
@@ -17,9 +40,9 @@ export const Miniature = ({ info }) => {
             onPress={() => navigation.navigate('User', { owner: false })}
           >
             <Avatar source={{ uri: info.enterprisePhoto }} />
-            <Name>
-              { info.enterprise }
-            </Name>
+            <CvName>
+              { `${info.enterprise}\n${info.city} - ${info.state}` }
+            </CvName>
           </TouchableOpacity>
         </FlexView>
 
@@ -92,9 +115,19 @@ const Avatar = styled.Image`
   width: 50px;
 `;
 
-const Name = styled.Text.attrs({
+const Name = styled.Text.attrs(props => ({
   numberOfLines: 1
-})`
+}))`
+  font-family: Poppins Medium;
+  font-size: 16px;
+  margin-top: 6px;
+  margin-left: 10px;
+  padding-right: 30px;
+`;
+
+const CvName = styled.Text.attrs(props => ({
+  numberOfLines: 2
+}))`
   font-family: Poppins Medium;
   font-size: 16px;
   margin-top: 6px;

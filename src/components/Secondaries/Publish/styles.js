@@ -2,6 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'react-native-elements';
 
+export const LoadingContainer = () => (
+  <CenteredView>
+    <Spinner />
+  </CenteredView>
+)
+
+const CenteredView = styled.View`
+  background-color: #fff;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Spinner = styled.ActivityIndicator.attrs({
+  size: 'small',
+  color: '2b7ed7',
+})``;
+
 export const Container = styled.ScrollView`
   background-color: #fff;
   flex: 1;
@@ -70,13 +88,14 @@ const PickDocumentButton = styled.TouchableOpacity`
   flex-direction: row;
   height: 50px;
   justify-content: center;
-  padding: 0px 10px;
+  padding: 10px 10px;
 `;
 
-const PickDocumentButtonText = styled.Text`
+const PickDocumentButtonText = styled.Text.attrs({
+  numberOfLines: 1
+})`
   color: #F0F6FC;
   font-family: Poppins Medium;
   font-size: 16px;
-  margin-left: 5px;
-  margin-top: 4px;
+  margin: 4px 8px 0px;
 `;
