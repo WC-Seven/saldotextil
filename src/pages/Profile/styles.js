@@ -1,5 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigation } from '@react-navigation/native';
+
+export const FilterBox = styled.View`
+  padding: 15px 15px 0px 15px;
+`;
 
 export const Container = styled.ScrollView`
   background-color: #fff;
@@ -54,12 +59,16 @@ export const MyAnnouncement = styled.View`
   flex-wrap: wrap;
 `;
 
-export const MyAds = () => (
-  <MyAdsContainer>
-    <MyAdsImage />
-    <MyAdsTitle>Camisas femininas sdfsdfs</MyAdsTitle>
-  </MyAdsContainer>
-);
+export const MyAds = ({ item, adstype, type }) => {
+  const noImage = 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fnoimageavailable.jpg?alt=media&token=1b7c718e-e6d6-49d0-a1c1-3eb7dae80c39';
+  const navigation = useNavigation();
+  return (
+    <MyAdsContainer onPress={() => navigation.navigate('FeedInspect', { name: item.title, item: item, type, adstype })}>
+      <MyAdsImage source={{ uri: item.images ? item.images[0] : noImage }}  />
+      <MyAdsTitle>{ item.title }</MyAdsTitle>
+    </MyAdsContainer>
+  );
+}
 
 const MyAdsContainer = styled.TouchableOpacity`
   align-items: center;
@@ -78,7 +87,9 @@ const MyAdsImage = styled.Image`
   width: 100%;
 `;
 
-const MyAdsTitle = styled.Text`
+const MyAdsTitle = styled.Text.attrs({
+  numberOfLines: 1
+})`
   color: #666;
   font-family: Poppins Medium;
   margin-top: 3px;
@@ -86,4 +97,13 @@ const MyAdsTitle = styled.Text`
 
 export const SpacedView = styled.View`
   height: 80px;
+`;
+
+export const Message = styled.Text`
+  color: #ccc;
+  font-family: Poppins Regular;
+  align-self: center;
+  margin-top: 100px;
+  text-align: center;
+  max-width: 300px;
 `;
