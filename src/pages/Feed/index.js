@@ -27,7 +27,9 @@ export default function Feed({ navigation }) {
       (response) => setResults({ ...results, announcements: response }),
       'primaryAnnouncements',
       results.adstype,
-      results.type
+      results.type,
+      'state',
+      results.localization,
     );
   }, [results.adstype, results.type, results.localization]);
 

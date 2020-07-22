@@ -17,9 +17,13 @@ export const Spinner = styled.ActivityIndicator.attrs({
   color: '#2B7ED7'
 })``;
 
+export const Text = styled.Text`
+  color: #ccc;
+`;
+
 export const Footer = () => (
   <CenteredView>
-    <Spinner />
+    <Text>•</Text>
   </CenteredView>
 );
 
