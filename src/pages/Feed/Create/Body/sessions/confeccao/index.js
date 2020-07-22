@@ -64,7 +64,6 @@ export default function Confeccao() {
         ) : (
           <Container>
             <KeyboardAvoidingView enabled behavior="position">
-              <Title title="Especificações" />
               <Select
                 selectedValue={body.gender}
                 onValueChange={value => {

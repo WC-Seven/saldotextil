@@ -3,7 +3,7 @@
 import React from 'react';
 import { View, Modal } from 'react-native';
 
-import { Container, HorizontalView, ModalButton, VerticalBreak, DarkContainer, Window, ListItem, Selected } from './styles';
+import { Container, HorizontalView, ModalButton, VerticalBreak, DarkContainer, Window, ListItem, Selected, Title, TextInput, Label } from './styles';
 import { ImagePickerContainer, Image, Imagepicker, ImageViewer, ImageLabel } from './imagepicker';
 import { pickImageFromCamera, pickImageFromLibrary } from '../../../../components/ImagePicker';
 
@@ -84,6 +84,11 @@ export default function Head() {
         <Selected>
           { `${head.adstype ? (head.adstype === 'selling' ? 'Venda' : 'Compra') : 'Selecione um tipo de anúncio'} - ${head.type === 'confeccao' ? 'Confecção' : head.type === 'malha' ? 'Malhas' : 'Outros'}` }
         </Selected>
+
+        <Title title="Especificações" />
+
+        <Label title="Título" />
+        <TextInput placeholder="Título de exibição" value={head.title} onChangeText={(s) => setHead({ ...head, title: s })} />
       </Container>
     </>
   );

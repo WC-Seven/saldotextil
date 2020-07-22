@@ -20,6 +20,7 @@ export const AnnouncementContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [modal, setModal] = React.useState({ typeModal: false, adsTypeModal: false });
   const [head, setHead] = React.useState({
+    title: '',
     type: 'confeccao',
     adstype: '',
     user: '',

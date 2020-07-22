@@ -15,8 +15,6 @@ export default function Malha() {
   const { body, setBody } = React.useContext(AnnouncementContext);
   return (
     <Container>
-      <Title title="Especificações" />
-
       <Select
         title="Artigo"
         selectedValue={body.article}

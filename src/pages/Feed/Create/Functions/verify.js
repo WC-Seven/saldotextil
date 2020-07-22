@@ -18,8 +18,9 @@ export async function verify(data, navigation, setIsLoading) {
   if (data.type === '') {
     showError('Selecione o tipo de produto');
     return true;
-  } if (data.measure === '') {
+  } if (!data.measure || data.measure === '') {
     showError('Selecione uma medida válida para a quantia inserida');
+    return true;
   }
 
   // Verificação de dados para confecção
@@ -28,8 +29,12 @@ export async function verify(data, navigation, setIsLoading) {
       showError('Selecione o tipo de anúncio.');
       return true;
     }
+    if (data.title === '') {
+      showError('Defina um título para seu anúncio.');
+      return true;
+    }
 
-    if (data.adstype === 'vendendo') {
+    if (data.adstype === 'selling') {
       if (!data.images[0]) {
         showError('Insira pelo menos uma imagem do seu produto.');
         return true;
@@ -76,7 +81,7 @@ export async function verify(data, navigation, setIsLoading) {
       return true;
     }
 
-    if (data.adstype === 'vendendo') {
+    if (data.adstype === 'selling') {
       if (!data.images[0]) {
         showError('Insira pelo menos uma imagem do seu produto.');
         return true;
@@ -104,17 +109,14 @@ export async function verify(data, navigation, setIsLoading) {
       }
     }
   } else if (data.type === 'outros') {
-    if (data.adstype === 'vendendo') {
+    if (data.adstype === 'selling') {
       if (!data.images[0]) {
         showError('Insira pelo menos uma imagem do seu produto.');
         return true;
       }
     }
 
-    if (!data.title || data.title === '') {
-      showError('Insira um título.');
-      return null;
-    } if (!data.quantity || isNaN(data.quantity) || data.quantity === '') {
+    if (!data.quantity || isNaN(data.quantity) || data.quantity === '') {
       showError('Insira uma quantidade válida.');
       return null;
     }

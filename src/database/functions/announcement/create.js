@@ -8,11 +8,11 @@ export function create(section, folder, subfolder, data, action) {
   const imagesurl = [];
 
   if (data.images.length > 0) {
-    data.images.map((item, index, array) => fetch(item.rui)
+    data.images.map((item, index, array) => fetch(item.uri)
       .then((file) => file.blob(), () => console.log('Error in blob()'))
       .then((blob) => firebase.storage()
         .ref(`images/${annid}${index}${item.uri.substring(item.uri.lastIndexOf('.'), item.uri.length)}`)
-        .put(blob), () => console.log('Error in firebase.storage()'))
+        .put(blob), (e) => console.log(e))
       .then((snapshot) => snapshot.ref.getDownloadURL())
       .then((url) => imagesurl.push(url))
       .then(() => {
@@ -32,15 +32,15 @@ export function create(section, folder, subfolder, data, action) {
   }
 
   function sendToDatabase(sec, fold, sfold, ann, id, act) {
-    firebase.database().ref(`${sec}/${fold}/${sfold}${id}`).set(ann)
+    firebase.database().ref(`${sec}/${fold}/${sfold}/${id}`).set(ann)
       .then(() => {
+        act();
         Alert.alert(
           'Sucesso',
           'Seu anúncio foi veiculado ao Saldo Têxtil.',
           [
             {
               text: 'Ok',
-              onPress: () => act,
             },
           ],
         );
