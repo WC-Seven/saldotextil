@@ -19,15 +19,16 @@ import Authenticate from './pages/Authenticate';
 import Register from './pages/Authenticate/Register';
 import ForgotPassword from './pages/Authenticate/ForgotPassword';
 
-import CreateAnnouncement from './pages/Feed/Create';
 import Agents from './pages/Agents';
+import CreateAnnouncement from './pages/Feed/Create';
 import Donations from './pages/Donations';
-import Jobs from './pages/Jobs';
-import Settings from './pages/Settings';
 import Feedback from './pages/Feedback';
+import Jobs from './pages/Jobs';
+import SearchAnnouncements from './pages/Feed/Search';
+import Settings from './pages/Settings';
 import UpdateProfile from './pages/Profile/Update';
-import UserAgreement from './pages/UserAgreement';
 import UpdatePassword from './pages/Settings/UpdatePassword';
+import UserAgreement from './pages/UserAgreement';
 
 // Secondaries
 import SecondaryCreate from './components/Secondaries/Create';
@@ -101,13 +102,14 @@ export default function Routes () {
     <NavigationContainer>
       {
         isLogged ? (
-          <Stack.Navigator>
+          <Stack.Navigator keyboardHandlingEnabled={false}>
             <Stack.Screen name="Main" component={BottomTabs} options={{ headerShown: false }} />
             <Stack.Screen name="Agents" component={Agents} options={({ navigation }) => optionsWithSearch(navigation, 'Representantes')} />
             <Stack.Screen name="Donations" component={Donations} options={({ navigation }) => optionsWithSearch(navigation, 'Doações')} />
             <Stack.Screen name="Jobs" component={Jobs} options={({ navigation }) => optionsWithSearch(navigation, 'Empregos')} />
 
             <Stack.Screen name="CreateAnnouncement" component={CreateAnnouncement} options={({ navigation, route }) => options(navigation, route.params?.announcement ? 'Editar anúncio' : 'Criar anúncio')} />
+            <Stack.Screen name="SearchAnnouncements" component={SearchAnnouncements} options={({ navigation }) => options(navigation, 'Pesquisar')} />
             <Stack.Screen name="Create" component={SecondaryCreate} options={({ navigation, route }) => options(navigation, `Criar anúncio - ${route.params.name}`)} />
             <Stack.Screen name="Detail" component={SecondaryDetail} options={({ navigation, route }) => options(navigation, route.params.name)} />
             <Stack.Screen name="Publish" component={SecondaryPublish} options={({ navigation, route }) => options(navigation, `Publicar Currículo - ${route.params.name}`)} />

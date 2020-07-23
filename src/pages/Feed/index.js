@@ -137,7 +137,7 @@ export default function Feed({ navigation }) {
             () => (
               <FlatListHeader>
                 <Bar>
-                  <Search placeholder="Pesquise algo" />
+                  <Search placeholder="Pesquise algo" onFocus={() => navigation.navigate('SearchAnnouncements')} />
                 </Bar>
                 <Filters
                   data={[
