@@ -77,7 +77,7 @@ export default function Feed({ navigation }) {
           {
             title: 'Tipo de produto',
             options: [
-              { name: 'Confeçções', action: () => setResults({ ...results, quantity: 10, type: 'confeccao'}), active: results.type === 'confeccao' },
+              { name: 'Confecções', action: () => setResults({ ...results, quantity: 10, type: 'confeccao'}), active: results.type === 'confeccao' },
               { name: 'Malhas', action: () => setResults({ ...results, quantity: 10, type: 'malha'}), active: results.type === 'malha' },
               { name: 'Outros', action: () => setResults({ ...results, quantity: 10, type: 'outros'}), active: results.type === 'outros' }
             ]
