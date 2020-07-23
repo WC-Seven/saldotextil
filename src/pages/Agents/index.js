@@ -104,7 +104,8 @@ export default function Agents({ navigation }) {
                       enterprise: item.user,
                       description: item.description,
                       city: item.city,
-                      state: item.state
+                      state: item.state,
+                      uid: item.uid
                     }}
                     type={filters.adstype}
                     folder="agents"

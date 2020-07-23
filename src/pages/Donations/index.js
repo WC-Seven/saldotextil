@@ -83,7 +83,8 @@ export default function Donations({ navigation }) {
                       enterprise: item.user,
                       description: item.description,
                       city: item.city,
-                      state: item.state
+                      state: item.state,
+                      uid: item.uid
                     }}
                     folder="donations"
                   />

@@ -96,7 +96,7 @@ export const Miniature = ({ info }) => {
               ) : (
                 <>
                   <MenuOption style={{ padding: 10 }} text="Reportar" onSelect={() => {
-                    navigation.navigate('Feedback', { announcement: { uid: info.uid, name: info.title, image: info.image } })
+                    navigation.navigate('Feedback', { announcement: { uid: info.uid, name: info.title, image: info.image || noImage } })
                   }} />
                 </>
               )
