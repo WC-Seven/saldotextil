@@ -48,3 +48,53 @@ const ButtonText = styled.Text`
   font-size: 16px;
   margin-top: 6px;
 `;
+
+export const AnnDetail = ({ ann }) => (
+  <BladeView>
+    <AnnAvatar source={{ uri: ann.image }} />
+    <Text>
+      { `Reportando "${ann.name}"` }
+      { '\n' }
+      { 'Agradecemos pela contribuição.' }
+    </Text>
+  </BladeView>
+);
+
+export const UserDetail = ({ user }) => (
+  <BladeView>
+    <Avatar source={{ uri: user.image }} />
+    <Text>
+      { `Reportando ${user.name}` }
+      { '\n' }
+      { 'Agradecemos pela contribuição.' }
+    </Text>
+  </BladeView>
+)
+
+const BladeView = styled.View`
+  align-items: center;
+  flex-direction: row;
+  height: 100px;
+  padding: 0px 10px;
+  width: 100%;
+`;
+
+const Avatar = styled.Image`
+  background-color: #eee;
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+`;
+
+const AnnAvatar = styled.Image`
+  background-color: #eee;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+`;
+
+const Text = styled.Text`
+  font-family: Poppins Regular;
+  margin-left: 10px;
+  flex: 1;
+`;

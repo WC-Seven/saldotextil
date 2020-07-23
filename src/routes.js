@@ -132,13 +132,13 @@ export default function Routes () {
             <Stack.Screen
               name="User"
               component={Profile}
-              options={({ navigation }) => ({
+              options={({ navigation, route }) => ({
                 headerStyle: {
                   elevation: 0,
                 },
                 headerTitle: '',
                 headerRight: () => (
-                  <TouchableOpacity onPress={() => navigation.navigate('Feedback')}>
+                  <TouchableOpacity onPress={() => navigation.navigate('Feedback', { user: route.params?.user.id })}>
                     <Icon name="flag" type="material-community" />
                   </TouchableOpacity>
                 ),

@@ -21,6 +21,8 @@ export default function FeedInspect({ navigation, route }) {
 
   }, [rbRef]);
 
+  const noImage = 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fnoimageavailable.jpg?alt=media&token=1b7c718e-e6d6-49d0-a1c1-3eb7dae80c39';
+
   const rbRef = React.createRef();
   const { item, type, adstype } = route.params;
 
@@ -84,7 +86,11 @@ export default function FeedInspect({ navigation, route }) {
             </>
           ) : (
             <>
-              <RbSheetOption iconName="flag" title="Reportar" onPress={() => {}} />
+              <RbSheetOption iconName="flag" title="Reportar" onPress={() => {
+                rbRef.current.close();
+                console.log(item);
+                navigation.navigate('Feedback', { announcement: { uid: item.uid, name: item.title, image: item.images ? item.images[0] : noImage  } });
+              }} />
               <RbSheetOption iconName="email" title="Mensagem para o vendendor" onPress={() => {}} />
             </>
           )
