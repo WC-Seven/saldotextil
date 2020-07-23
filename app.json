@@ -8,6 +8,15 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "primaryColor": "#2B7ED7",
+    "notification": {
+      "color": "#2B7ED7",
+      "icon": "./assets/shell_notification_icon.png",
+      "androidMode": "default"
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#2B7ED7"
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -20,7 +29,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "dmi.saldotextil",
+      "buildNumber": "1.0.0",
+      "icon": "./assets/icon.jpg"
+    },
+    "android": {
+      "package": "com.dmi.saldotextil",
+      "versionCode": 1,
+      "permissions": [],
+      "icon": "./assets/icon.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive_icon/foreground.png",
+        "backgroundColor": "#2B7ED7"
+      }
     }
   }
 }
