@@ -35,7 +35,8 @@ export const CvMiniature = ({ info }) => {
 export const Miniature = ({ info }) => {
   const navigation = useNavigation();
   const { currentUser } = React.useContext(GeneralContext);
-  
+  const noImage = 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fnoimageavailable.jpg?alt=media&token=1b7c718e-e6d6-49d0-a1c1-3eb7dae80c39';
+
   return (
     <Container>
       <OwnerDescription>
@@ -94,7 +95,9 @@ export const Miniature = ({ info }) => {
                 </>
               ) : (
                 <>
-                  <MenuOption style={{ padding: 10 }} text="Reportar" onSelect={() => alert(info.title)} />
+                  <MenuOption style={{ padding: 10 }} text="Reportar" onSelect={() => {
+                    navigation.navigate('Feedback', { announcement: { uid: info.uid, name: info.title, image: info.image } })
+                  }} />
                 </>
               )
             }
