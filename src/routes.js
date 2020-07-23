@@ -234,7 +234,7 @@ function BottomTabs () {
               onPress={() => bsRef.current.open()}
               style={{ flex: 1, justifyContent: 'center' }}
             >
-              <Icon name="plus" type="material-community" size={40} color="#666" />
+              <Icon name="dots-horizontal" type="material-community" size={40} color="#666" />
             </TouchableOpacity>
           ),
         }}
