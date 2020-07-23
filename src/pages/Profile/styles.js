@@ -1,6 +1,98 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
+import { Dimensions } from 'react-native';
+
+export const DarkBackground = styled.View`
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+`;
+
+export const WindowWithOptions = ({ options, close }) => (
+  <WindowContainer>
+    {
+      options.map(option => (
+        <Option onPress={option.action}>
+          <OptionText>
+            { option.title }
+          </OptionText>
+        </Option>
+      ))
+    }
+
+    <Option onPress={close}>
+      <OptionText>Fechar</OptionText>
+    </Option>
+  </WindowContainer>
+);
+
+export const CloseButton = styled.TouchableOpacity`
+  margin: 10px 10px 0px 0px;
+  align-self: flex-end;
+`;
+
+export const EditImageButton = styled.TouchableOpacity`
+  margin: 0px 10px 10px 0px;
+  align-self: flex-end;
+  border-radius: 20px;
+  background-color: #000;
+  padding: 2px 15px;
+`
+
+export const Window = styled.View`
+  background-color: #fff;
+  border-radius: 4px;
+  margin: auto 30px;
+`;
+
+export const ListItem = ({ title, last, onPress }) => (
+  <ListItemContainer last={last} onPress={onPress}>
+    <ListItemText>
+      { title }
+    </ListItemText>
+  </ListItemContainer>
+);
+
+const ListItemText = styled.Text`
+  font-family: Poppins Regular;
+`;
+
+const ListItemContainer = styled.TouchableOpacity`
+  min-height: 40px;
+  padding: 10px 20px;
+  ${props => (props.last ? '' : 'border-bottom-width: 0.3px;')}
+`;
+
+export const Image = styled.Image`
+  margin: auto;
+  height: ${Dimensions.get('window').width}px;
+  width: ${Dimensions.get('window').width}px;
+  resizeMode: contain;
+`;
+
+const WindowContainer = styled.View`
+  background-color: #fff;
+  margin: auto 20px;
+  padding: 10px;
+`;
+
+const Option = styled.TouchableOpacity`
+  align-items: center;
+  padding: 10px 10px;
+  flex-direction: row;
+`;
+
+export const EditImageText = styled.Text`
+  color: #fff;
+  font-family: Poppins Medium;
+  font-size: 16px;
+  padding-top: 3px;
+`;
+
+const OptionText = styled.Text`
+  color: #666;
+  font-family: Poppins Medium;
+`;
 
 export const FilterBox = styled.View`
   padding: 15px 15px 0px 15px;

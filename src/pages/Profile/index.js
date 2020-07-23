@@ -1,24 +1,35 @@
 import React from 'react';
-import { Andress, Avatar, Bio, BioDetails, Container, EditButton, Name, MyAnnouncement, MyAds, SpacedView, Message, FilterBox } from './styles';
-import { Alert, Linking } from 'react-native';
+import { Alert, Linking, Modal, TouchableOpacity } from 'react-native';
 
+import {
+  Andress, Avatar, Bio, BioDetails, Container, EditButton, Name, MyAnnouncement, MyAds, SpacedView, Message, FilterBox,
+  DarkBackground, WindowWithOptions, Image, CloseButton, EditImageText, EditImageButton, Window, ListItem
+} from './styles';
+
+import { pickImageFromCamera, pickImageFromLibrary } from '../../components/ImagePicker';
+import { user as userFunctions } from '../../database/functions';
 
 import FiltersModal from '../../components/Modal';
 import Filters from '../../components/Filters';
 import GeneralContext from '../../context';
 import { announcement } from '../../database/functions';
+import { Icon } from 'react-native-elements';
 
 export default function Profile({ navigation, route }) {
-  const { currentUser } = React.useContext(GeneralContext);
+  const { currentUser, currentEmail, setAuthUser } = React.useContext(GeneralContext);
+  const [userAnn, setUserAnn] = React.useState([]);
   const [modal, setModal] = React.useState(false);
   const [filters, setFilters] = React.useState({
     adstype: 'selling',
     type: 'confeccao',
-  })
-  const [userAnn, setUserAnn] = React.useState([]);
+  });
 
   const { user } = route.params;
   const noImage = 'http://html-color.org/pt/EDE9EA.jpg';
+
+  const [modalOptions, setModalOptions] = React.useState(false);
+  const [modalImage, setModalImage] = React.useState(false);
+  const [imagePickerStatus, setImagePickerStatus] = React.useState(false);
 
   React.useEffect(() => {
     setUserAnn([]);
@@ -26,8 +37,65 @@ export default function Profile({ navigation, route }) {
     console.log(userAnn);
   }, [filters.adstype, filters.type]);
 
+  async function getImage(type) {
+    if (type === 'camera') {
+      const response = await pickImageFromCamera();
+      setImagePickerStatus(false);
+      if (!response.cancelled) {
+        userFunctions.updateImage(currentUser, response.uri, setAuthUser);
+      }
+    } else if (type === 'library') {
+      const response = await pickImageFromLibrary();
+      setImagePickerStatus(false);
+      if (!response.cancelled) {
+        userFunctions.updateImage(currentUser, response.uri, setAuthUser, currentEmail);
+      }
+    }
+  }
+
   return (
     <Container>
+      <Modal animationType="fade" transparent visible={imagePickerStatus}>
+        <DarkBackground>
+          <Window>
+            <ListItem title="Tirar uma foto" onPress={() => getImage('camera')} />
+            <ListItem title="Importar da biblioteca" onPress={() => getImage('library')} />
+            <ListItem title="Cancelar" onPress={() => setImagePickerStatus(false)} last />
+          </Window>
+        </DarkBackground>
+      </Modal>
+
+      <Modal transparent visible={modalOptions} animationType="fade">
+        <DarkBackground>
+          <Window>
+           <ListItem title="Ver imagem" onPress={() => { setModalOptions(false); setModalImage(true); }} />
+           {
+             route.params.owner ? (
+              <ListItem title="Mudar imagem" onPress={() => { setModalOptions(false); setImagePickerStatus(true); }} />
+             ) : <></>
+           }
+           <ListItem title="Cancelar" onPress={() => setModalOptions(false)} last />
+          </Window>
+        </DarkBackground>
+      </Modal>
+
+      <Modal transparent visible={modalImage} animationType="fade">
+        <DarkBackground>
+          <CloseButton>
+            <Icon name="close" color="#fff" type="material-community" onPress={() => setModalImage(false)} />
+          </CloseButton>
+          <Image source={{ uri: route.params.owner ? currentUser.image || noImage : user.image || noImage }} />
+          {
+            route.params.owner ? (
+              <EditImageButton onPress={() => { setModalImage(false); setImagePickerStatus(true)}}>
+                <EditImageText>Editar imagem</EditImageText>
+              </EditImageButton>
+            ) : <></>
+          }
+        </DarkBackground>
+      </Modal>
+
+
       <FiltersModal
         status={{
           value: modal,
@@ -44,7 +112,7 @@ export default function Profile({ navigation, route }) {
           {
             title: 'Tipo de produto',
             options: [
-              { name: 'Confeçções', action: () => setFilters({ ...filters, type: 'confeccao'}), active: filters.type === 'confeccao' },
+              { name: 'Confecções', action: () => setFilters({ ...filters, type: 'confeccao'}), active: filters.type === 'confeccao' },
               { name: 'Malhas', action: () => setFilters({ ...filters, type: 'malha'}), active: filters.type === 'malha' },
               { name: 'Outros', action: () => setFilters({ ...filters, type: 'outros'}), active: filters.type === 'outros' }
 
@@ -54,7 +122,9 @@ export default function Profile({ navigation, route }) {
       />
 
       <Bio>
-        <Avatar source={{ uri: route.params.owner ? currentUser.image || noImage : user.image || noImage }} />
+        <TouchableOpacity onPress={() => setModalOptions(true)}>
+          <Avatar source={{ uri: route.params.owner ? currentUser.image || noImage : user.image || noImage }} />
+        </TouchableOpacity>
         <BioDetails>
           <Name>{ route.params.owner ? currentUser.name : user.name }</Name>
           <Andress>
