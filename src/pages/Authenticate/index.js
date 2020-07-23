@@ -63,6 +63,7 @@ export default function Authenticate({ navigation }) {
                   );
                 } } />
               <ButtonReverse title="Não tem uma conta? Cadastre-se" onPress={() => navigation.navigate('Register')} />
+              <ButtonReverse title="Esqueci minha senha" onPress={() => navigation.navigate('ForgotPassword')} />
             </BottomContainer>
           </>
         )

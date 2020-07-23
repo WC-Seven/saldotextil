@@ -12,6 +12,7 @@ import { updatePassword } from './user/updatePassword';
 
 import { tryLogin } from './auth/login';
 import { tryRegister } from './auth/register';
+import { sendResetEmail } from './auth/sendResetEmail';
 
 export const announcement = {
   read, create, update, destroy, find
@@ -27,5 +28,6 @@ export const user = {
 
 export const auth = {
   login: tryLogin,
-  register: tryRegister
+  register: tryRegister,
+  sendResetEmail
 };

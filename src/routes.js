@@ -17,8 +17,9 @@ import Profile from './pages/Profile';
 // Stack pages
 import Authenticate from './pages/Authenticate';
 import Register from './pages/Authenticate/Register';
-import CreateAnnouncement from './pages/Feed/Create';
+import ForgotPassword from './pages/Authenticate/ForgotPassword';
 
+import CreateAnnouncement from './pages/Feed/Create';
 import Agents from './pages/Agents';
 import Donations from './pages/Donations';
 import Jobs from './pages/Jobs';
@@ -152,6 +153,7 @@ export default function Routes () {
           <Stack.Navigator>
             <Stack.Screen name="Authenticate" component={Authenticate} options={{ headerShown: false }} />
             <Stack.Screen name="Register" component={Register} options={({ navigation }) => options(navigation, 'Registre-se')} />
+            <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={({ navigation }) => options(navigation, 'Redefinir senha')} />
           </Stack.Navigator>
         )
       }
