@@ -73,7 +73,9 @@ export const Miniature = ({ info }) => {
             {
               info.id === currentUser.id ? (
                 <>
-                  <MenuOption style={{ padding: 10 }} text="Editar" onSelect={() => alert(info.title)} />
+                  <MenuOption style={{ padding: 10 }} text="Editar" onSelect={() => {
+                    navigation.navigate('Update', { name: info.folder, item: info })
+                  }} />
                   <MenuOption style={{ padding: 10 }} text="Excluir" onSelect={() => {
                     Alert.alert(
                       'Excluir anúncio',

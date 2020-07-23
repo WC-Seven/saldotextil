@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Alert } from 'react-native';
 import { Picker } from '@react-native-community/picker';
-import { LoadingContainer, Button, Container, Description, FlexView, Label, PickImage, TextInput, DarkContainer, Window, ListItem, ImagePicked } from './styles';
+import { LoadingContainer, Button, Container, Description, FlexView, SpacedView, Label, PickImage, TextInput, DarkContainer, Window, ListItem, ImagePicked } from './styles';
 
 import { pickImageFromCamera, pickImageFromLibrary } from '../../ImagePicker';
 
@@ -78,7 +78,7 @@ export default function Create({ navigation, route }) {
                         'Tem certeza de que deseja fazer isso?',
                         [
                           { text: 'Não, cancelar' },
-                          { text: 'Sim', onPress: () => setAds({ ...ads, images: '' }) }
+                          { text: 'Sim', onPress: () => setAds({ ...ads, images: [{ uri: '' }] }) }
                         ]
                       );
                     }}
@@ -167,6 +167,7 @@ export default function Create({ navigation, route }) {
                 announcement.create(section, folder, 'ads', ads, () => navigation.goBack(), () => setIsLoading(false));
               }
             }} />
+            <SpacedView />
           </Container>
         )
       }

@@ -82,6 +82,8 @@ export default function Donations({ navigation }) {
                       image: item.images[0],
                       enterprise: item.user,
                       description: item.description,
+                      city: item.city,
+                      state: item.state
                     }}
                     folder="donations"
                   />

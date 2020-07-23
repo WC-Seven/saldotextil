@@ -17,7 +17,7 @@ export default function Agents({ navigation }) {
 
   React.useEffect(() => {
     setResults([]);
-    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'agents', filters.adstype, 'state', filters.localization);
+    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'agents', filters.adstype, 'state', filters.localization, 10000);
   }, [filters.adstype, filters.localization]);
 
 
