@@ -25,7 +25,7 @@ export const VerticalBreak = styled.View`
 
 const ButtonContainer = styled.TouchableOpacity`
   align-items: center;
-  background-color: #1f5da0;
+  background-color: #2b7ed7;
   border-radius: 5px;
   flex: 1;
   ${props => (props.left ? 'margin-left: 5px;' : '')}

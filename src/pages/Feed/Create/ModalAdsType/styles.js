@@ -25,7 +25,7 @@ export const Button = ({ title, onPress }) => (
 
 const ButtonContainer = styled.TouchableOpacity`
   align-items: center;
-  background-color: #1f5da0;
+  background-color: #2b7ed7;
   border-radius: 4px;
   height: 40px;
   justify-content: center;

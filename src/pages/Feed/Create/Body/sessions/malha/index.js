@@ -137,11 +137,11 @@ export default function Malha({ item }) {
           selectedItems => setBody({ ...body, colors: selectedItems })
         }
 
-        tagBorderColor="#1f5da0"
-        tagRemoveIconColor="#1f5da0"
-        tagTextColor="#1f5da0"
+        tagBorderColor="#2b7ed7"
+        tagRemoveIconColor="#2b7ed7"
+        tagTextColor="#2b7ed7"
 
-        submitButtonColor="#1f5da0"
+        submitButtonColor="#2b7ed7"
         submitButtonText="Ok"
       />
 
