@@ -16,19 +16,31 @@ import infantCategory from './settings/infantCategory';
 import colors from '../settings/colors';
 import sizes from '../settings/sizes';
 
-export default function Confeccao() {
+export default function Confeccao({ item }) {
   const [isLoading, setIsLoading] = React.useState(true);
   const { body, setBody } = React.useContext(AnnouncementContext);
 
   React.useEffect(() => {
-    setBody({
-      gender: 'feminino',
-      category: 'Blusas',
-      subcategory: '',
-      colors: [],
-      sizes: [],
-      quantity: '',
-    });
+    if (item) {
+      setBody({
+        gender: item.gender ? item.gender : 'feminino',
+        category: item.category ? item.category : 'Blusas',
+        subcategory: item.subcategory ? item.subcategory : '',
+        colors: item.colors ? item.colors : [],
+        sizes: item.sizes ? item.sizes : [],
+        quantity: item.quantity ? item.quantity.substring(0, item.quantity.indexOf(' ')) : '',
+        measure: item.quantity ? item.quantity.substring(item.quantity.indexOf(' ')+1, item.quantity.length).replace('s', '') : ''
+      });
+    } else {
+      setBody({
+        gender: 'feminino',
+        category: 'Blusas',
+        subcategory: '',
+        colors: [],
+        sizes: [],
+        quantity: '',
+      });
+    }
     setIsLoading(false);
   }, []);
 

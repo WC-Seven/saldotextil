@@ -4,8 +4,22 @@ import { Container, HorizontalContainer, Label, Select, Title, TextInput } from 
 
 import AnnouncementContext from '../../../context';
 
-export default function Outros() {
+export default function Outros({ item }) {
   const { body, setBody } = React.useContext(AnnouncementContext);
+
+  React.useEffect(() => {
+    if (item) {
+      setBody({
+        quantity: item.quantity ? item.quantity.substring(0, item.quantity.indexOf(' ')) : '',
+        measure: item.quantity ? item.quantity.substring(item.quantity.indexOf(' ')+1, item.quantity.length).replace('s', '') : '',
+      })
+    } else {
+      setBody({
+        quantity: '',
+        measure: ''
+      })
+    }
+  }, []);
 
   return (
     <Container>

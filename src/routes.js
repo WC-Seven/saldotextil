@@ -106,7 +106,7 @@ export default function Routes () {
             <Stack.Screen name="Donations" component={Donations} options={({ navigation }) => optionsWithSearch(navigation, 'Doações')} />
             <Stack.Screen name="Jobs" component={Jobs} options={({ navigation }) => optionsWithSearch(navigation, 'Empregos')} />
 
-            <Stack.Screen name="CreateAnnouncement" component={CreateAnnouncement} options={({ navigation }) => options(navigation, 'Criar anúncio')} />
+            <Stack.Screen name="CreateAnnouncement" component={CreateAnnouncement} options={({ navigation, route }) => options(navigation, route.params?.announcement ? 'Editar anúncio' : 'Criar anúncio')} />
             <Stack.Screen name="Create" component={SecondaryCreate} options={({ navigation, route }) => options(navigation, `Criar anúncio - ${route.params.name}`)} />
             <Stack.Screen name="Detail" component={SecondaryDetail} options={({ navigation, route }) => options(navigation, route.params.name)} />
             <Stack.Screen name="Publish" component={SecondaryPublish} options={({ navigation, route }) => options(navigation, `Publicar Currículo - ${route.params.name}`)} />

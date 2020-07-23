@@ -2,7 +2,7 @@
 import { Alert } from 'react-native';
 import { announcement } from '../../../../database/functions';
 
-export async function verify(data, navigation, setIsLoading) {
+export async function verify(data, navigation, setIsLoading, updateUid = "") {
   function showError(message) {
     return (
       Alert.alert(
@@ -145,7 +145,7 @@ export async function verify(data, navigation, setIsLoading) {
   };
 
   Alert.alert(
-    'Seu anúncio está pronto para ser publicado',
+    `Seu anúncio está pronto para ser ${updateUid === '' ? 'publicado' : 'atualizado'}`,
     'Tem certeza que deseja fazer isso?',
     [
       {
@@ -155,7 +155,11 @@ export async function verify(data, navigation, setIsLoading) {
         text: 'Sim, tenho certeza',
         onPress: async () => {
           setIsLoading(false);
-          announcement.create('primaryAnnouncements', data.adstype, data.type, ann, () => navigation.navigate('Feed'));
+          if (updateUid === '') {
+            announcement.create('primaryAnnouncements', data.adstype, data.type, ann, () => navigation.navigate('Feed'));
+          } else {
+            announcement.update('primaryAnnouncements', data.adstype, data.type, ann, () => navigation.navigate('Feed'), () => {}, updateUid);
+          }
         },
       },
     ],

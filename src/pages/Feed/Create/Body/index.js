@@ -7,17 +7,17 @@ import Outros from './sessions/outros';
 
 import AnnouncementContext from '../context';
 
-export default function Body() {
+export default function Body({ item }) {
   const { head } = React.useContext(AnnouncementContext);
 
   function switcher(type) {
     switch (type) {
       case 'confeccao':
-        return <Confeccao />;
+        return <Confeccao item={item ? item : null} />;
       case 'malha':
-        return <Malha />;
+        return <Malha item={item ? item : null} />;
       case 'outros':
-        return <Outros />;
+        return <Outros item={item ? item : null} />;
       default:
         break;
     }

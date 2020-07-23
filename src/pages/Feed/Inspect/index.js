@@ -33,7 +33,7 @@ export default function FeedInspect({ navigation, route }) {
     <Container>
       <RBSheet
         ref={rbRef}
-        animationType="slide"
+        animationType="fade"
         height={200}
         openDuration={250}
         closeDuration={100}
@@ -45,7 +45,14 @@ export default function FeedInspect({ navigation, route }) {
         {
           item.user === currentUser.id ? (
             <>
-              <RbSheetOption iconName="pencil" title="Editar publicação" onPress={() => {}} />
+              <RbSheetOption
+                iconName="pencil"
+                title="Editar publicação"
+                onPress={() => {
+                  rbRef.current.close();
+                  navigation.navigate('CreateAnnouncement', { announcement: { ...item, adstype, type } });
+                }}
+              />
               <RbSheetOption
                 iconName="delete"
                 title="Excluir publicação"

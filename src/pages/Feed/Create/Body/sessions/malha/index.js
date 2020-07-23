@@ -11,8 +11,43 @@ import composition from './settings/composition';
 
 import colors from '../settings/colors';
 
-export default function Malha() {
+export default function Malha({ item }) {
   const { body, setBody } = React.useContext(AnnouncementContext);
+
+  React.useEffect(() => {
+    if (item) {
+      setBody({
+        article: item.article ? item.article : '',
+        articletype: item.articletype ? item.articletype : '',
+        composition: item.composition ? item.composition : '',
+        string: item.string ? item.string : '',
+        stringtype: item.stringtype ? item.stringtype : '',
+        stitchtype: item.stitchtype ? item.stitchtype : '',
+        producttype: item.producttype ? item.producttype : '',
+        width: item.width ? item.width : '',
+        grammage: item.grammage ? item.grammage : '',
+        colors: item.colors ? item.colors : [],
+        quantity: item.quantity ? item.quantity.substring(0, item.quantity.indexOf(' ')) : '',
+        measure: item.quantity ? item.quantity.substring(item.quantity.indexOf(' ')+1, item.quantity.length).replace('s', '') : '',
+      });
+    } else {
+      setBody({
+        article: '',
+        articletype: '',
+        composition: '',
+        string: '',
+        stringtype,
+        stitchtype: '',
+        producttype: '',
+        width: '',
+        grammage: '',
+        colors: [],
+        quantity: '',
+        measure: '' 
+      });
+    }
+  }, []);
+
   return (
     <Container>
       <Select
@@ -121,7 +156,12 @@ export default function Malha() {
         <Select
           selectedValue={body.measure}
           onValueChange={value => setBody({ ...body, measure: value })}
-          items={[{ value: '', label: 'Selecione' }, { value: 'metro', label: 'Metros' }, { value: 'kg', label: 'Kg' }]}
+          items={[
+            { value: '', label: 'Selecione' },
+            { value: 'peça', label: 'Peça' },
+            { value: 'metro', label: 'Metros' },
+            { value: 'kg', label: 'Kg' },
+          ]}
         />
       </HorizontalContainer>
     </Container>

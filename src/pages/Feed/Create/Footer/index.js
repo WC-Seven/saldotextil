@@ -9,10 +9,10 @@ import AnnouncementContext from '../context';
 import GeneralContext from '../../../../context';
 import { verify } from '../Functions/verify';
 
-export default function Footer({ navigation }) {
+export default function Footer({ navigation, item }) {
   // eslint-disable-next-line object-curly-newline
   const { head, body, setIsLoading, setHead } = React.useContext(AnnouncementContext);
-  const [exibPrice, setExibPrice] = React.useState('R$ ');
+  const [exibPrice, setExibPrice] = React.useState(item ? `R$ ${item.price.replace('R$ ', '').substring(0, item.price.indexOf('/')-4)}` : `R$ `);
   const { currentUser } = React.useContext(GeneralContext);
 
   function handlePriceChange(value) {
@@ -50,8 +50,17 @@ export default function Footer({ navigation }) {
       </Text>
 
       <Button
-        title="Publicar"
-        onPress={() => {
+        title={ item ? "Editar" : "Publicar"}
+        onPress={item ? () => {
+          verify({
+            ...head,
+            ...body,
+            user: currentUser.id,
+            userImage: currentUser.image,
+            city: currentUser.andress.city,
+            state: currentUser.andress.state,
+          }, navigation, setIsLoading, item.uid);
+        } : () => {
           verify({
             ...head,
             ...body,

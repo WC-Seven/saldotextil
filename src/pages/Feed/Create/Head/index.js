@@ -11,11 +11,27 @@ import AnnouncementContext from '../context';
 import ModalAdsType from '../ModalAdsType';
 import ModalType from '../ModalType';
 
-export default function Head() {
+export default function Head({ item }) {
   const [imagePickerStatus, setImagePickerStatus] = React.useState(false);
   const {
     head, setHead, modal, setModal,
   } = React.useContext(AnnouncementContext);
+
+  React.useEffect(() => {
+    if (item) {
+      setHead({
+        title: item.title,
+        type: item.type,
+        adstype: item.adstype,
+        user: item.user,
+        images: item.images.map(uri => ({ uri })),
+        description: item.description,
+        status: true,
+        price: item.price.replace('R$ ', '').substring(0, item.price.indexOf('/')-3),
+        createdAt: item.createdAt,
+      });
+    }
+  }, []);
 
   async function getImage(type) {
     if (type === 'camera') {

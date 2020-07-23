@@ -25,8 +25,8 @@ export const Description = styled.TextInput.attrs({
   margin-top: 10px;
 `;
 
-export const Button = ({ onPress, title }) => (
-  <ButtonContainer onPress={onPress} >
+export const Button = ({ action, title }) => (
+  <ButtonContainer onPress={action} >
     <ButtonText>
       { title }
     </ButtonText>

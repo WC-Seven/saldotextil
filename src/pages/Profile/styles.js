@@ -76,7 +76,7 @@ const MyAdsContainer = styled.TouchableOpacity`
   border-radius: 10px;
   flex: 1 0 auto;
   margin: 5px;
-  max-width: 45%;
+  width: 45%;
 `;
 
 const MyAdsImage = styled.Image`
