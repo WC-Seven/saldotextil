@@ -52,7 +52,7 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
             document: {
               cnpj: data.document.cnpj,
             },
-            image: 'https://propus.science/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png',
+            image: 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fprofile.jpg?alt=media&token=5262d2cf-531b-4f9c-858f-ad27598c72ad',
             name: data.name,
             fantasy: data.fantasy,
             phone: data.phone,
@@ -69,7 +69,7 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
             document: {
               cpf: data.document.cpf,
             },
-            image: 'https://propus.science/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png',
+            image: 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fprofile.jpg?alt=media&token=5262d2cf-531b-4f9c-858f-ad27598c72ad',
             name: data.name,
             phone: data.phone,
             premium: false,

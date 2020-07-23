@@ -117,7 +117,7 @@ export default function Register() {
                 dddMask: '(99)',
               }}
               value={register.phone}
-              onChangetext={value => setRegister({ ...register, phone: value })}
+              onChangeText={value => setRegister({ ...register, phone: value })}
               placeholder="Telefone"
             />
 
