@@ -2,9 +2,12 @@
   "expo": {
     "name": "Saldo Têxtil",
     "slug": "saldo-textil",
+    "owner": "dinamicami",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "primaryColor": "#2B7ED7",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
