@@ -36,7 +36,7 @@ export default function Malha({ item }) {
         articletype: '',
         composition: '',
         string: '',
-        stringtype,
+        stringtype: '',
         stitchtype: '',
         producttype: '',
         width: '',
