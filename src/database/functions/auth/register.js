@@ -78,7 +78,7 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
           break;
       }
   
-      await firebase.database().ref(`users/${createdUser.id}`).set(newSignIn)
+      await firebase.database().ref(`users/${createdUser.id}`).set({ ...newSignIn, id: createdUser.id })
         .then(() => {
           setAuthenticatedUser({ ...newSignIn, id: createdUser.id }, data.email);
           Alert.alert(
