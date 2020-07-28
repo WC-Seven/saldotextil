@@ -21,6 +21,9 @@ export async function verify(data, navigation, setIsLoading, updateUid = "") {
   } if (!data.measure || data.measure === '') {
     showError('Selecione uma medida válida para a quantia inserida');
     return true;
+  } if (data.adstype === '' || !data.adstype) {
+    showError('Selecione um tipo de anúncio.');
+    return true;
   }
 
   // Verificação de dados para confecção

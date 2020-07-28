@@ -19,6 +19,7 @@ export default function ModalType() {
           selectedValue={head.type}
           onValueChange={value => setHead({ ...head, type: value })}
         >
+          <Picker.Item value="" label="Tipo de produto (selecione)" />
           <Picker.Item value="confeccao" label="Confecção" />
           <Picker.Item value="malha" label="Malhas" />
           <Picker.Item value="outros" label="Outros" />

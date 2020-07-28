@@ -93,15 +93,18 @@ export default function Head({ item }) {
 
       <Container>
         <HorizontalView>
-          <ModalButton title="Tipo de Produto" onPress={() => setModal({ ...modal, typeModal: true })} />
-          <ModalButton left title="Tipo de Anúncio" onPress={() => setModal({ ...modal, adsTypeModal: true })} />
+          <ModalButton
+            color={ head.adstype === '' ? '#aaa' : '#2b7ed7'}
+            title={ head.adstype === '' ? "Tipo de Anúncio" : head.adstype === 'selling' ? 'Vendendo' : 'Comprando'}
+            onPress={() => setModal({ ...modal, adsTypeModal: true })}
+          />
+          <ModalButton
+            left
+            color={ head.type === '' ? '#aaa' : '#2b7ed7'}
+            title={ head.type === '' ? "Tipo de Produto" : head.type === 'confeccao' ? 'Confecções' : head.type === 'malha' ? 'Malhas' : 'Outros'}
+            onPress={() => setModal({ ...modal, typeModal: true })}
+          />
         </HorizontalView>
-
-        <Selected>
-          { `${head.adstype ? (head.adstype === 'selling' ? 'Venda' : 'Compra') : 'Selecione um tipo de anúncio'} - ${head.type === 'confeccao' ? 'Confecção' : head.type === 'malha' ? 'Malhas' : 'Outros'}` }
-        </Selected>
-
-        <Title title="Especificações" />
 
         <Label title="Título" />
         <TextInput placeholder="Título de exibição" value={head.title} onChangeText={(s) => setHead({ ...head, title: s })} />

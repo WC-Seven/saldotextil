@@ -2,8 +2,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const ModalButton = ({ title, left, onPress }) => (
-  <ButtonContainer left={left} onPress={onPress}>
+export const ModalButton = ({ title, color, left, onPress }) => (
+  <ButtonContainer left={left} onPress={onPress} color={color ? color : '#2b7ed7'}>
     <ButtonText>
       { title }
     </ButtonText>
@@ -25,7 +25,7 @@ export const VerticalBreak = styled.View`
 
 const ButtonContainer = styled.TouchableOpacity`
   align-items: center;
-  background-color: #2b7ed7;
+  background-color: ${props => props.color};
   border-radius: 5px;
   flex: 1;
   ${props => (props.left ? 'margin-left: 5px;' : '')}
