@@ -37,7 +37,9 @@
     "android": {
       "package": "com.dmi.saldotextil",
       "versionCode": 1,
-      "permissions": [],
+      "permissions": [
+        "CAMERA", "VIBRATE"
+      ],
       "icon": "./assets/icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive_icon/foreground.png",
