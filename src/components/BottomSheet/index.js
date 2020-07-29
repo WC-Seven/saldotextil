@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements';
 
 import GeneralContext from '../../context';
 import { Container, ListContainer, ListItem, ListLabel } from './styles';
+import { StatusBar } from 'react-native';
 
 function BottomSheet(props) {
   const { nav, bsRef } = React.useContext(GeneralContext);
@@ -61,6 +62,7 @@ function BottomSheet(props) {
 
       ref={bsRef}
     >
+      <StatusBar barStyle="light-content" backgroundColor="rgba(0, 0, 0, 0.5)" />
       <Container>
         <ListContainer>
           {

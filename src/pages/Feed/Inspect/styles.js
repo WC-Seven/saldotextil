@@ -58,7 +58,7 @@ export const ImageScrollView = ({ arr }) => {
 
   return (
     <>
-      <Modal transparent animationType="fade" visible={!isImageModalActive}>
+      <Modal transparent animationType="fade" visible={isImageModalActive}>
         <DarkContainer>
           <StatusBar backgroundColor="rgba(0,0,0,0.9)" barStyle="light-content" />
           <CloseButton onPress={() => setIsImageModalActive(!isImageModalActive)}>

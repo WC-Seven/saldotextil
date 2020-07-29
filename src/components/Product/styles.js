@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Modal, Dimensions } from 'react-native';
+import { Modal, Dimensions, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 
@@ -27,6 +27,7 @@ export const Item = ({ data, type, adstype }) => {
       data.images ? (
         <Modal visible={isImageModalActive} transparent animationType="fade">
           <DarkContainer>
+            <StatusBar backgroundColor="rgba(0,0,0,0.9)" barStyle="light-content" />
             <CloseButtonHeader onPress={() => setIsImageModalActive(false)}>
               <Icon name="close" type="material-community" color="#fff" />
             </CloseButtonHeader>
@@ -86,13 +87,11 @@ const DarkContainer = styled.View`
 `;
 
 const CloseButtonHeader = styled.TouchableOpacity`
-  align-items: center;
-  align-self: flex-end;
-  border-radius: 15px;
-  height: 30px;
-  justify-content: center;
-  margin: 10px 10px 0 0;
-  width: 30px;
+  position: absolute;
+  right: 15px;
+  top: 0px;
+  padding: 5px;
+  z-index: 1;
 `;
 
 const ImageBig = styled.Image`

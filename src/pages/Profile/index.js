@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Linking, Modal, TouchableOpacity } from 'react-native';
+import { Alert, Linking, Modal, TouchableOpacity, StatusBar } from 'react-native';
 
 import {
   Andress, Avatar, Bio, BioDetails, Container, EditButton, Name, MyAnnouncement, MyAds, SpacedView, Message, FilterBox,
@@ -68,6 +68,7 @@ export default function Profile({ navigation, route }) {
       </Modal>
 
       <Modal transparent visible={modalOptions} animationType="fade">
+        <StatusBar backgroundColor="rgba(0,0,0,0.9)" barStyle="light-content" />
         <DarkBackground>
           <Window>
            <ListItem title="Ver imagem" onPress={() => { setModalOptions(false); setModalImage(true); }} />
@@ -83,6 +84,7 @@ export default function Profile({ navigation, route }) {
 
       <Modal transparent visible={modalImage} animationType="fade">
         <DarkBackground>
+          <StatusBar backgroundColor="rgba(0,0,0,0.9)" barStyle="light-content" />
           <CloseButton>
             <Icon name="close" color="#fff" type="material-community" onPress={() => setModalImage(false)} />
           </CloseButton>

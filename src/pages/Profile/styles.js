@@ -5,7 +5,7 @@ import { Dimensions } from 'react-native';
 
 export const DarkBackground = styled.View`
   flex: 1;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
 `;
 
 export const WindowWithOptions = ({ options, close }) => (
@@ -68,6 +68,7 @@ export const Image = styled.Image`
   height: ${Dimensions.get('window').width}px;
   width: ${Dimensions.get('window').width}px;
   resizeMode: contain;
+  borderRadius: 50px;
 `;
 
 const WindowContainer = styled.View`
