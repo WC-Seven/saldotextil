@@ -9,6 +9,7 @@ import { detailUser } from './user/detail';
 import { updateUser } from './user/update';
 import { updateImage } from './user/updateImage';
 import { updatePassword } from './user/updatePassword';
+import { updateEmail } from './user/updateEmail';
 
 import { tryLogin } from './auth/login';
 import { tryRegister } from './auth/register';
@@ -24,6 +25,7 @@ export const user = {
   update: updateUser,
   updateImage,
   updatePassword,
+  updateEmail
 };
 
 export const auth = {

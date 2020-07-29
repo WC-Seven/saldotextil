@@ -28,6 +28,7 @@ import SearchAnnouncements from './pages/Feed/Search';
 import Settings from './pages/Settings';
 import UpdateProfile from './pages/Profile/Update';
 import UpdatePassword from './pages/Settings/UpdatePassword';
+import UpdateEmail from './pages/Settings/UpdateEmail';
 import UserAgreement from './pages/UserAgreement';
 
 // Secondaries
@@ -118,9 +119,10 @@ export default function Routes () {
             <Stack.Screen name="Feedback" component={Feedback} options={({ navigation }) => options(navigation, 'Feedback')} />
             <Stack.Screen name="UserAgreement" component={UserAgreement} options={({ navigation }) => options(navigation, 'Termos de Uso')} />
             <Stack.Screen name="UpdatePassword" component={UpdatePassword} options={({ navigation }) => options(navigation, 'Mudar senha')} />
+            <Stack.Screen name="UpdateEmail" component={UpdateEmail} options={({ navigation }) => options(navigation, 'Mudar E-mail')} />
             <Stack.Screen name="Settings" component={Settings} options={({ navigation }) => options(navigation, 'Configurações')} />
             <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={({ navigation }) => options(navigation, 'Editar Perfil')} />
-
+            
             <Stack.Screen
               name="FeedInspect"
               component={FeedInspect}

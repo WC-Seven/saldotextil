@@ -11,6 +11,7 @@ const GeneralContext = React.createContext({
   currentUser: {},
   currentEmail: '',
   setAuthUser: () => {},
+  updateAuthEmail: () => {},
   updateAuthUser: () => {},
   destroyAuthUser: () => {}
 });
@@ -35,6 +36,11 @@ export const GeneralContextProvider = ({ children }) => {
   const updateAuthUser = async (user) => {
     await AsyncStorage.setItem('@USER', isJson(user) ? user : JSON.stringify(user));
     setCurrentUser(isJson(user) ? JSON.parse(user) : user);
+  }
+
+  const updateAuthEmail = async (email) => {
+    await AsyncStorage.setItem('@EMAIL', email);
+    setCurrentEmail(email);
   }
 
   const destroyAuthUser = async () => {
@@ -71,7 +77,7 @@ export const GeneralContextProvider = ({ children }) => {
 
   return (
     <GeneralContext.Provider value={{
-      nav, setNav, bsRef, isLogged, currentUser, currentEmail, setAuthUser, updateAuthUser, destroyAuthUser,
+      nav, setNav, bsRef, isLogged, currentUser, currentEmail, setAuthUser, updateAuthEmail, updateAuthUser, destroyAuthUser,
     }}>
       { children }
     </GeneralContext.Provider>

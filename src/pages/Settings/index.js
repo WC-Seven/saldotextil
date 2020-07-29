@@ -11,6 +11,11 @@ export default function Settings({ navigation }) {
   return (
     <Container>
       <ListItem
+        leftIcon="textbox"
+        title="Mudar e-mail"
+        action={() => navigation.navigate('UpdateEmail')}
+      />
+      <ListItem
         leftIcon="textbox-password"
         title="Mudar senha"
         action={() => navigation.navigate('UpdatePassword')}
