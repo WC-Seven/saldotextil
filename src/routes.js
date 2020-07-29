@@ -178,7 +178,7 @@ function ProfileStack () {
           headerTitle: '',
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-              <Icon name="settings-outline" type="material-community" />
+              <Icon name="settings-outline" type="material-community" size={29} />
             </TouchableOpacity>
           ),
           headerRightContainerStyle: {
