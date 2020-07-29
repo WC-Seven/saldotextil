@@ -15,8 +15,8 @@ export const Spinner = styled.ActivityIndicator.attrs({
   color: '#1f5da0',
 })``;
 
-export const Button = ({ title }) => (
-  <ButtonContainer>
+export const Button = ({ title, disabled }) => (
+  <ButtonContainer disabled={disabled}>
     <ButtonText>
       { title }
     </ButtonText>
@@ -46,16 +46,22 @@ export const Label = ({ title }) => (
 
 const LabelText = styled.Text`
   font-size: 14px;
-  margin: 4px 0px;
+  margin: 14px 0px 4px;
   text-transform: uppercase;
 `;
 
 const ButtonContainer = styled.View`
   align-items: center;
-  background-color: #2b7ed7;
+  background-color: ${ props => props.disabled ? '#666' : '#2b7ed7' };
   border-radius: 4px;
   height: 50px;
   justify-content: center;
+`;
+
+export const Description = styled.Text`
+  color: #aaa;
+  font-family: Poppins Medium;
+  margin-top: 5px;
 `;
 
 const ButtonText = styled.Text`

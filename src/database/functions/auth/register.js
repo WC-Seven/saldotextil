@@ -12,11 +12,10 @@ function showError(message) {
   );
 }
 
-export async function tryRegister(data, setAuthenticatedUser, onError) {
+async function createUser (data, setAuthenticatedUser, onError) {
   let proced = false;
   let createdUser;
 
-  // creating user
   await firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
     .then(({ user }) => {
       createdUser = {
@@ -30,6 +29,8 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
         showError('Sua senha é muito fraca')
       } else if (error.code === 'auth/email-already-in-use') {
         showError('Este e-mail já está vinculado à outra conta');
+      } else if (error.code === 'auth/invalid-email') {
+        showError('E-mail inválido');
       } else {
         console.log(error.code);
       }
@@ -60,7 +61,7 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
             type: data.type,
           };
           break;
-  
+
         default:
           console.log('Pessoa Física');
           newSignIn = {
@@ -77,7 +78,7 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
           };
           break;
       }
-  
+
       await firebase.database().ref(`users/${createdUser.id}`).set({ ...newSignIn, id: createdUser.id })
         .then(() => {
           setAuthenticatedUser({ ...newSignIn, id: createdUser.id }, data.email);
@@ -102,5 +103,86 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
         });
     }
   }
+}
+
+export async function tryRegister(data, setAuthenticatedUser, onError) {
+  if ( data.type.substring(0, 2) === 'pf' ) {
+    if (
+      data.name !== '' &&
+      data.email !== '' &&
+      data.password !== '' &&
+      data.passwordConfirm !== '' &&
+      data.phone !== '' &&
+      data.landline !== '' &&
+      data.andress.state !== '' &&
+      data.andress.city !== '' &&
+      data.andress.neighborhood !== '' &&
+      data.andress.street !== '' &&
+      data.andress.number !== '' &&
+      data.andress.cep !== ''
+    ) {
+      // Verificações específicas encadeadas
+      if (data.password.length >= 8) {
+        if (data.password === data.passwordConfirm) {
+          if (data.andress.state.length === 2) {
   
+            // Proceding to creating authentication
+            // creating user
+            console.log('lasdj')
+            await createUser(data, setAuthenticatedUser, onError);
+            
+          } else {
+            showError('A UF deve ter apenas dois caracteres');
+          }
+        } else {
+          showError('As senhas não coincidem');
+        }
+      } else {
+        showError('A senha deve conter pelo menos 8 digitos.');
+      }
+      
+
+    } else {
+      showError('Insira todos os campos obrigatórios.');
+    }
+  } else if (data.type.substring(0, 2) === 'pj') {
+    if (
+      data.name !== '',
+      data.fantasy !== '',
+      data.email !== '' &&
+      data.password !== '' &&
+      data.passwordConfirm !== '' &&
+      data.phone !== '' &&
+      data.landline !== '' &&
+      data.andress.state !== '' &&
+      data.andress.city !== '' &&
+      data.andress.neighborhood !== '' &&
+      data.andress.street !== '' &&
+      data.andress.number !== '' &&
+      data.andress.cep !== ''
+    ) {
+      if (data.password.length >= 8) {
+        if (data.password === data.passwordConfirm) {
+          if (data.state.length === 2) {
+  
+            // Proceding to creating authentication
+            // creating user
+            await createUser(data, setAuthenticatedUser, onError);
+            
+          } else {
+            showError('A UF deve ter apenas dois caracteres');
+          }
+        } else {
+          showError('As senhas não coincidem');
+        }
+      } else {
+        showError('Insira todos os campos obrigatórios.');
+      }
+      
+    } else {
+      showError('Insira todos os campos obrigatórios.');
+    }
+  } else {
+    showError('Selecione um tipo de registro')
+  }
 }

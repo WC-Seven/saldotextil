@@ -10,6 +10,7 @@
   "dependencies": {
     "@expo-google-fonts/inter": "^0.1.0",
     "@react-native-community/async-storage": "^1.11.0",
+    "@react-native-community/checkbox": "^0.4.2",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/picker": "^1.6.0",
     "@react-navigation/bottom-tabs": "^5.6.1",
@@ -17,6 +18,7 @@
     "@react-navigation/stack": "^5.6.2",
     "@use-expo/font": "^2.0.0",
     "base-64": "^0.1.0",
+    "cep-promise": "^3.0.9",
     "expo": "~38.0.8",
     "expo-blur": "^8.1.2",
     "expo-constants": "^9.1.1",
