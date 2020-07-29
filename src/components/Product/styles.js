@@ -4,6 +4,12 @@ import { Modal, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 
+function numberToReal(number) {
+  var number = number.toFixed(2).split('.');
+  number[0] = "R$ " + number[0].split(/(?=(?:...)*$)/).join('.');
+  return number.join(',');
+}
+
 // Configurations
 export const Item = ({ data, type, adstype }) => {
   const navigation = useNavigation();
@@ -12,7 +18,7 @@ export const Item = ({ data, type, adstype }) => {
 
   const noImage = 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fnoimageavailable.jpg?alt=media&token=1b7c718e-e6d6-49d0-a1c1-3eb7dae80c39';
   
-  const price = data.price.substring(0, data.price.indexOf('/')-1).replace('.', ',');
+  const price = parseFloat(data.price.substring(3, data.price.indexOf('/')-1));
   const measure = data.price.substring(data.price.indexOf('/'), data.price.length);
 
   return (
@@ -50,7 +56,7 @@ export const Item = ({ data, type, adstype }) => {
         <Subtitle>{ `${data.city} - ${data.state}` }</Subtitle>
 
         <Price>
-          { price } <Measure>{ measure }</Measure>
+          { numberToReal(price) } <Measure>{ measure }</Measure>
         </Price>
       </Top>
       <Bottom>

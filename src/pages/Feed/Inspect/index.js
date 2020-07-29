@@ -7,6 +7,12 @@ import { BuyButton, Container, Detail, ImageScrollView, InsideContainer, Options
 import GeneralContext from '../../../context';
 import { announcement } from '../../../database/functions';
 
+function numberBig(number, index) {
+  var number = number.toFixed(2).split('.');
+  number[0] = "R$ " + number[0].split(/(?=(?:...)*$)/).join('.');
+  return number[index];
+}
+
 export default function FeedInspect({ navigation, route }) {
   const { currentUser } = React.useContext(GeneralContext);
   React.useEffect(() => {
@@ -26,10 +32,8 @@ export default function FeedInspect({ navigation, route }) {
   const rbRef = React.createRef();
   const { item, type, adstype } = route.params;
 
-  const price = item.price.substring(0, item.price.indexOf('/')-1).replace('.', ',');
+  const price = parseFloat(item.price.substring(3, item.price.indexOf('/')-1));
   const measure = item.price.substring(item.price.indexOf('/'), item.price.length);
-  const priceBig = price.substring(0, price.indexOf(','));
-  const priceSmall = price.substring(price.indexOf(','), price.length);
 
   return (
     <Container>
@@ -107,7 +111,7 @@ export default function FeedInspect({ navigation, route }) {
         <Detail type={type} item={item} />
 
         <Quantity>{ item.quantity }</Quantity>
-        <Price>{ priceBig }<Cents>{ priceSmall }{ ' ' }{ measure }</Cents></Price>
+        <Price>{ numberBig(price, 0) }<Cents>{ `,${ numberBig(price, 1) } ${ measure }` }</Cents></Price>
 
         {
           item.user === currentUser.id ? (
