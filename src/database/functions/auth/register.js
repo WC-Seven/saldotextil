@@ -163,7 +163,7 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
     ) {
       if (data.password.length >= 8) {
         if (data.password === data.passwordConfirm) {
-          if (data.state.length === 2) {
+          if (data.andress.state.length === 2) {
   
             // Proceding to creating authentication
             // creating user
