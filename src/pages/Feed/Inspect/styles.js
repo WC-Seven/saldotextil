@@ -159,7 +159,6 @@ export const Detail = ({ type, item }) => (
             {
               item.category ? (
                 <Row>
-                  <Value bg="#f2f2f2"><Text>Categoria</Text></Value>
                   <Value bg="#f2f2f2"><Text>{ item.category }</Text></Value>
                 </Row>
               ) : <></>
@@ -167,7 +166,6 @@ export const Detail = ({ type, item }) => (
             {
               item.subcategory ? (
                 <Row>
-                  <Value bg="#fafafa"><Text>Subcategoria</Text></Value>
                   <Value bg="#fafafa"><Text>{ item.subcategory.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
                 </Row>
               ) : <></>
@@ -175,7 +173,6 @@ export const Detail = ({ type, item }) => (
             {
               item.colors ? (
                 <Row>
-                  <Value bg="#f2f2f2"><Text>Cores</Text></Value>
                   <Value bg="#f2f2f2"><Text>{ item.colors.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
                 </Row>
               ) : <></>
@@ -183,7 +180,6 @@ export const Detail = ({ type, item }) => (
             {
               item.sizes ? (
                 <Row>
-                  <Value bg="#fafafa"><Text>Cores</Text></Value>
                   <Value bg="#fafafa"><Text>{ item.sizes.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
                 </Row>
               ) : <></>
@@ -194,7 +190,6 @@ export const Detail = ({ type, item }) => (
             {
               item.article ? (
                 <Row>
-                  <Value bg="#f2f2f2"><Text>Artigo</Text></Value>
                   <Value bg="#f2f2f2"><Text>{ item.article }</Text></Value>
                 </Row>
               ) : <></>
@@ -202,7 +197,6 @@ export const Detail = ({ type, item }) => (
             {
               item.articletype ? (
                 <Row>
-                  <Value bg="#fafafa"><Text>Tipo de artigo</Text></Value>
                   <Value bg="#fafafa"><Text>{ item.articletype }</Text></Value>
                 </Row>
               ) : <></>
@@ -210,7 +204,6 @@ export const Detail = ({ type, item }) => (
             {
               item.composition ? (
                 <Row>
-                  <Value bg="#f2f2f2"><Text>Composição</Text></Value>
                   <Value bg="#f2f2f2"><Text>{ item.composition }</Text></Value>
                 </Row>
               ) : <></>
@@ -218,7 +211,6 @@ export const Detail = ({ type, item }) => (
             {
               item.producttype ? (
                 <Row>
-                  <Value bg="#fafafa"><Text>Tipo de produto</Text></Value>
                   <Value bg="#fafafa"><Text>{ item.producttype }</Text></Value>
                 </Row>
               ) : <></>
@@ -226,7 +218,6 @@ export const Detail = ({ type, item }) => (
             {
               item.stitchtype ? (
                 <Row>
-                  <Value bg="#f2f2f2"><Text>Tipo de malha</Text></Value>
                   <Value bg="#f2f2f2"><Text>{ item.stitchtype }</Text></Value>
                 </Row>
               ) : <></>
@@ -234,7 +225,6 @@ export const Detail = ({ type, item }) => (
             {
               item.string ? (
                 <Row>
-                  <Value bg="#fafafa"><Text>Fio</Text></Value>
                   <Value bg="#fafafa"><Text>{ item.string }</Text></Value>
                 </Row>
               ) : <></>
@@ -242,7 +232,6 @@ export const Detail = ({ type, item }) => (
             {
               item.stringtype ? (
                 <Row>
-                  <Value bg="#f2f2f2"><Text>Tipo de fio</Text></Value>
                   <Value bg="#f2f2f2"><Text>{ item.stringtype }</Text></Value>
                 </Row>
               ) : <></>
@@ -250,7 +239,6 @@ export const Detail = ({ type, item }) => (
             {
               item.colors ? (
                 <Row>
-                  <Value bg="#fafafa"><Text>Cores</Text></Value>
                   <Value bg="#fafafa"><Text>{ item.colors.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
                 </Row>
               ) : <></>
