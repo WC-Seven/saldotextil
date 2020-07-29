@@ -69,25 +69,33 @@ export const CloseButton = styled.TouchableOpacity`
   padding: 4px 10px;
 `;
 
+export const Description = styled.Text`
+  color: #aaa;
+  font-family: Poppins Medium;
+  margin-top: 15px;
+`;
+
 export const Horizontal = styled.View`
   flex-direction: row;
   margin: 0px -5px 10px;
 `;
 
-export const TextInput = ({ leftIcon, placeholder, vertical = false, filled = false, value, onChangeText, type }) => (
-  <TextInputContainer vertical={vertical} filled={filled}>
-    <LeftContainer>
-      <Icon name={ leftIcon ? leftIcon : 'home' } type="material-community" color="#bbb" />
-    </LeftContainer>
-    {
-      !type ? (
-        <SimpleTextInput value={value} onChangeText={onChangeText} placeholder={ placeholder || 'Digite aqui' } />
-      ) : (
-        <MaskedTextInput value={value} onChangeText={onChangeText} placeholder={ placeholder || 'Digite aqui' } type={type} />
-      )
-    }
-  </TextInputContainer>
-);
+export const TextInput = ({ leftIcon, placeholder, vertical = false, filled = false, value, onChangeText, type, options }) => {
+  return (
+    <TextInputContainer vertical={vertical} filled={filled}>
+      <LeftContainer>
+        <Icon name={ leftIcon ? leftIcon : 'home' } type="material-community" color="#bbb" />
+      </LeftContainer>
+      {
+        !type ? (
+          <SimpleTextInput value={value} onChangeText={onChangeText} placeholder={ placeholder || 'Digite aqui' } />
+        ) : (
+          <MaskedTextInput value={value} onChangeText={onChangeText} placeholder={ placeholder || 'Digite aqui' } type={type} options={options} />
+        )
+      }
+    </TextInputContainer>
+  )
+};
 
 const TextInputContainer = styled.View`
   align-items: center;

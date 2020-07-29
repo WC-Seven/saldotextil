@@ -1,12 +1,16 @@
 import React from 'react';
+import { Alert, Keyboard } from 'react-native';
+import cep from 'cep-promise';
 
-import { Container, Header, Horizontal, Save, SubTitle, TextInput, Title } from './styles';
-
+import { Container, Header, Horizontal, Save, SubTitle, TextInput, Title, Description } from './styles';
 import GeneralContext from '../../../context';
 import { user } from '../../../database/functions';
 
-export default function Update({ navigation }) {
+export default function Update() {
   const { currentUser, setAuthUser } = React.useContext(GeneralContext);
+
+  const [cnpjField, setCnpjField] = React.useState(null);
+  const [cpfField, setCpfField] = React.useState(null);
 
   const [newUser, setNewUser] = React.useState({
     andress: {
@@ -21,6 +25,7 @@ export default function Update({ navigation }) {
     createdAt: currentUser.createdAt,
     document: {
       cpf: currentUser.document.cpf,
+      cnpj: currentUser.document.cnpj,
     },
     id: currentUser.id,
     image: currentUser.image,
@@ -29,6 +34,28 @@ export default function Update({ navigation }) {
     premium: currentUser.premium,
     type: currentUser.type
   });
+
+  React.useEffect(() => {
+    if (newUser.andress.cep.length === 10) {
+      cep(newUser.andress.cep.replace('.', '').replace('-', ''))
+        .then((data) => {
+          setNewUser({
+            ...newUser,
+            andress: {
+              ...newUser.andress,
+              state: data.state || newUser.andress.state,
+              city: data.city || newUser.andress.city,
+              neighborhood: data.neighborhood || newUser.andress.neighborhood,
+              street: data.street || newUser.andress.street,
+            }
+          });
+          Keyboard.dismiss();
+        })
+        .catch(() => {
+          Alert.alert('Erro', 'O CEP informado é inválido', [{ text: 'Ok' }])
+        });
+    }
+  }, [newUser.andress.cep]);
 
   return (
     <Container>
@@ -42,13 +69,7 @@ export default function Update({ navigation }) {
         leftIcon="account-outline"
         placeholder="Nome de exibição"
       />
-      <TextInput
-        value={newUser.document.cpf}
-        onChangeText={(s) => setNewUser({ ...newUser, document: { ...newUser.document, cpf: s }})}
-        leftIcon="card-text-outline"
-        placeholder="CPF"
-        type="cpf"
-      />
+      
       <TextInput
         value={newUser.phone}
         onChangeText={(s) => setNewUser({ ...newUser, phone: s })}
@@ -60,6 +81,13 @@ export default function Update({ navigation }) {
       <SubTitle>
         Endereço
       </SubTitle>
+
+      <TextInput
+        value={newUser.andress.cep}
+        onChangeText={(s) => setNewUser({ ...newUser, andress: { ...newUser.andress, cep: s } })}
+        leftIcon="map-marker"
+        placeholder="CEP"
+      />
 
       <TextInput
         value={newUser.andress.street}
@@ -108,6 +136,10 @@ export default function Update({ navigation }) {
           vertical
         />
       </Horizontal>
+
+      <Description>
+        Se quiser modificar o tipo de registro, CPF, CNPJ, E-mail ou Senha, vá para configurações.
+      </Description>
 
       <Save onPress={() => user.update(newUser, () => status.set(false), setAuthUser) } />
     </Container>
