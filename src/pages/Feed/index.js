@@ -23,7 +23,6 @@ export default function Feed({ navigation }) {
   });
 
   React.useEffect(() => {
-    console.log('search')
     announcement.read(
       (response) => setResults({ ...results, announcements: response }),
       'primaryAnnouncements',
@@ -48,7 +47,6 @@ export default function Feed({ navigation }) {
 
   // Função scroll infinito
   const handleEndOfScroll = () => {
-    console.log('end')
     setResults({
       ...results, quantity: results.quantity + 5
     })
@@ -142,11 +140,11 @@ export default function Feed({ navigation }) {
                 <Filters
                   data={[
                     {
-                      title: 'Tipo de produto',
+                      title: `${results.adstype === '' ? 'Tipo de anúncio' : results.adstype === 'selling' ? 'Venda' : 'Compra'}${results.type === '' ? '' : results.type === 'confeccao' ? ' / Confecções' : results.type === 'malha' ? ' / Malhas' : ' / Outros'}`,
                       action: () => setModal({ ...modal, product: true })
                     },
                     {
-                      title: 'Localização',
+                      title: results.localization === '' ? 'Localização' : `Estado: ${results.localization}`,
                       action: () => setModal({ ...modal, localization: true })
                     }
                   ]}
