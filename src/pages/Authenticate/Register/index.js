@@ -125,7 +125,7 @@ export default function Register() {
 
         if (cnpjIsValid) {
           setDocumentIsValid(true);
-          Keyboard.dimiss();
+          Keyboard.dismiss();
         } else {
           Alert.alert(
             'Erro',
