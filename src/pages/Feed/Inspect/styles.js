@@ -122,9 +122,12 @@ export const BuyButton = ({ title, disabled = false, uid }) => {
     >
       {
         inspectUser ? (
+        <>
+          <Icon name="whatsapp" type="material-community" color="white" iconStyle={{ marginRight: 8 }} />
           <BuyButtonText>
             { title }
           </BuyButtonText>
+        </>
         ) : (
           <SpinnerWhite />
         )
@@ -369,6 +372,7 @@ const BuyButtonContainer = styled.TouchableOpacity`
   align-items: center;
   background-color: ${props => props.disabled ? '#CCC' : '#2B7ED7' };
   border-radius: 10px;
+  flex-direction: row;
   min-height: 60px;
   justify-content: center;
 `;
