@@ -128,7 +128,17 @@ export default function Profile({ navigation, route }) {
           <Avatar source={{ uri: route.params.owner ? currentUser.image || noImage : user.image || noImage }} />
         </TouchableOpacity>
         <BioDetails>
-          <Name>{ route.params.owner ? currentUser.name : user.name }</Name>
+          <Name>
+            { 
+              route.params.owner ? 
+                currentUser.type.substring(0,2) === 'pf' ? 
+                  currentUser.name 
+                : currentUser.fantasy
+              : user.type.substring(0,2) === 'pf' ?
+                user.name 
+                : user.fantasy  
+            }
+          </Name>
           <Andress>
             { route.params.owner ? currentUser.andress.city : user.andress.city }
             { ' - ' }

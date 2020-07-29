@@ -8,6 +8,7 @@ import { Icon } from 'react-native-elements';
 export const Item = ({ data, type, adstype }) => {
   const navigation = useNavigation();
   const [isImageModalActive, setIsImageModalActive] = React.useState(false);
+  const [imageModal, setImageModal] = React.useState([ '' ]);
 
   const noImage = 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fnoimageavailable.jpg?alt=media&token=1b7c718e-e6d6-49d0-a1c1-3eb7dae80c39';
   
@@ -26,7 +27,7 @@ export const Item = ({ data, type, adstype }) => {
 
             <ImageScrollView>
                 {
-                  data.images.map(item => (
+                  imageModal.map(item => (
                     <ImageBig source={{ uri: item }} />
                   ))
                 }
@@ -35,7 +36,12 @@ export const Item = ({ data, type, adstype }) => {
         </Modal>
       ) : <></>
     }
-    <Touchable onPress={data.images ? () => setIsImageModalActive(true) : () => {}}>
+    <Touchable onPress={() => {
+      if (data.images) {
+        setImageModal(data.images)
+        setIsImageModalActive(true);
+      };
+    }}>
       <Image source={{ uri: data.images ? data.images[0] : noImage }} />
     </Touchable>
     <Details>
@@ -48,7 +54,12 @@ export const Item = ({ data, type, adstype }) => {
         </Price>
       </Top>
       <Bottom>
-        <ProfileImage source={{ uri: data.userImage || noImage }} />
+        <Touchable onPress={() => {
+          setImageModal([ data.userImage || noImage ]);
+          setIsImageModalActive(true);
+        }}>
+          <ProfileImage source={{ uri: data.userImage || noImage }} />
+        </Touchable>
         <Button onPress={() => navigation.navigate('FeedInspect', { name: data.title, item: data, type, adstype })}>
           <ButtonText>
             Ver detalhes

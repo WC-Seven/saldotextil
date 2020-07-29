@@ -46,7 +46,13 @@ export const PublishInspect = ({ uid, image }) => {
   const [inspectUser, setInspectUser] = React.useState(null);
 
   React.useEffect(() => {
-    user.detail(uid, (response) => setInspectUser(response));
+    if (currentUser.id === uid) {
+      setInspectUser(currentUser);
+    } else {
+      user.detail(uid, (response) => setInspectUser(response));
+    }
+
+    console.log(inspectUser);
   }, []);
   
   return (
@@ -61,7 +67,7 @@ export const PublishInspect = ({ uid, image }) => {
             !inspectUser ? (
               <Spinner />
             ) : (
-              <PublishInpectName>{`${inspectUser.name}\n${inspectUser.andress.city} - ${inspectUser.andress.state}`}</PublishInpectName>
+              <PublishInpectName>{`${inspectUser.type.substring(0,2) === 'pf' ? inspectUser.name : inspectUser.fantasy}\n${inspectUser.andress.city} - ${inspectUser.andress.state}`}</PublishInpectName>
             )
           }
         </PIfirstElement>
