@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 
 import { Icon } from 'react-native-elements';
-import { Dimensions, Linking, Alert } from 'react-native';
+import { Dimensions, Linking, Alert, Modal, StatusBar, TouchableWithoutFeedback } from 'react-native';
 
 import GeneralContext from '../../../context';
 import { user } from '../../../database/functions';
@@ -27,17 +27,66 @@ export const RbSheetOption = ({ iconName, title, onPress }) => (
       { title }
     </RbSheetOptionText>
   </RbSheetOptionContainer>
-)
-
-export const ImageScrollView = ({ arr }) => (
-  <ImageScrollViewContainer>
-    {
-      arr.map(item => (
-        <ImageScrollViewImage key={item} source={{ uri: item }} />
-      ))
-    }
-  </ImageScrollViewContainer>
 );
+
+const DarkContainer = styled.View`
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.9);
+`;
+
+const ModalScrollView = styled.ScrollView.attrs({
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+})``;
+
+const ModalImage = styled.Image`
+  height: ${Dimensions.get('window').width}px;
+  width: ${Dimensions.get('window').width}px;
+
+  margin: auto 0px;
+`;
+
+const CloseButton = styled.TouchableOpacity`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1;
+`;
+
+export const ImageScrollView = ({ arr }) => {
+  const [isImageModalActive, setIsImageModalActive] = React.useState(false);
+
+  return (
+    <>
+      <Modal transparent animationType="fade" visible={!isImageModalActive}>
+        <DarkContainer>
+          <StatusBar backgroundColor="rgba(0,0,0,0.9)" barStyle="light-content" />
+          <CloseButton onPress={() => setIsImageModalActive(!isImageModalActive)}>
+            <Icon name="close" color="white" type="material-community" />
+          </CloseButton>
+          <ModalScrollView>
+            {
+              arr.map(item => (
+                <ModalImage key={item} source={{ uri: item }} />
+              ))
+            }
+          </ModalScrollView>
+        </DarkContainer>
+      </Modal>
+      <ImageScrollViewContainer
+        
+      >
+        {
+          arr.map(item => (
+            <TouchableWithoutFeedback onPress={() => setIsImageModalActive(!isImageModalActive)}>
+              <ImageScrollViewImage key={item} source={{ uri: item }} />
+            </TouchableWithoutFeedback>
+          ))
+        }
+      </ImageScrollViewContainer>
+    </>
+  )
+};
 
 export const PublishInspect = ({ uid, image }) => {
   const navigation = useNavigation();
@@ -261,7 +310,7 @@ export const ImageScrollViewContainer = styled.ScrollView.attrs({
 export const ImageScrollViewImage = styled.Image`
   background-color: #ddd;
   border-radius: 0px;
-  height: 300px;
+  height: 200px;
   width: ${Dimensions.get('window').width}px;
 `;
 
