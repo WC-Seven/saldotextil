@@ -63,7 +63,20 @@ export default function Profile({ navigation, route }) {
 
           <Window>
             <ListItem title="Tirar uma foto" onPress={() => getImage('camera')} />
-            <ListItem title="Importar da biblioteca" onPress={() => getImage('library')} last />
+            <ListItem title="Importar da biblioteca" onPress={() => getImage('library')}  />
+            {
+              currentUser.image === 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fprofile.jpg?alt=media&token=5262d2cf-531b-4f9c-858f-ad27598c72ad' ? (
+                <></>
+              ) : (
+                <ListItem
+                  title="Remover imagem atual"
+                  last
+                  onPress={() => {
+                    setImagePickerStatus(false);
+                    userFunctions.deleteImage(currentUser, setAuthUser, currentEmail);
+                  }} />
+              )
+            }
           </Window>
 
           <TouchableOpacity style={{ flex: 1 }} onPress={() => setImagePickerStatus(false)} />

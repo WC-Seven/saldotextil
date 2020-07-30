@@ -7,7 +7,7 @@ import { find } from './announcement/search';
 import { destroyUser } from './user/destroy';
 import { detailUser } from './user/detail';
 import { updateUser } from './user/update';
-import { updateImage } from './user/updateImage';
+import { updateImage, deleteImage } from './user/updateImage';
 import { updatePassword } from './user/updatePassword';
 import { updateEmail } from './user/updateEmail';
 
@@ -23,7 +23,8 @@ export const user = {
   destroy: destroyUser,
   detail: detailUser,
   update: updateUser,
-  updateImage,
+  updateImage, 
+  deleteImage,
   updatePassword,
   updateEmail
 };
