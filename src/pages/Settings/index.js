@@ -21,6 +21,11 @@ export default function Settings({ navigation }) {
         action={() => navigation.navigate('UpdatePassword')}
       />
       <ListItem
+        leftIcon="face"
+        title="Mudar tipo de registro"
+        action={() => navigation.navigate('UpdateType')}
+      />
+      <ListItem
         leftIcon="book-open-outline"
         title="Termos e política"
         action={() => navigation.navigate('UserAgreement')}

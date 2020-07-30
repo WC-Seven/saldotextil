@@ -29,6 +29,7 @@ import Settings from './pages/Settings';
 import UpdateProfile from './pages/Profile/Update';
 import UpdatePassword from './pages/Settings/UpdatePassword';
 import UpdateEmail from './pages/Settings/UpdateEmail';
+import UpdateType from './pages/Settings/UpdateType';
 import UserAgreement from './pages/UserAgreement';
 
 // Secondaries
@@ -120,6 +121,7 @@ export default function Routes () {
             <Stack.Screen name="UserAgreement" component={UserAgreement} options={({ navigation }) => options(navigation, 'Termos de Uso')} />
             <Stack.Screen name="UpdatePassword" component={UpdatePassword} options={({ navigation }) => options(navigation, 'Mudar senha')} />
             <Stack.Screen name="UpdateEmail" component={UpdateEmail} options={({ navigation }) => options(navigation, 'Mudar E-mail')} />
+            <Stack.Screen name="UpdateType" component={UpdateType} options={({ navigation }) => options(navigation, 'Mudar Tipo de Registro')} />
             <Stack.Screen name="Settings" component={Settings} options={({ navigation }) => options(navigation, 'Configurações')} />
             <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={({ navigation }) => options(navigation, 'Editar Perfil')} />
             
