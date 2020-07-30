@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 export const Background = styled.ScrollView`
   background-color: rgba(0, 0, 0, 0.6);
-  flex: 1;
-  padding: 0px 0px 0px;
+  flex: 0 1 auto;
 `;
 
 export const Window = ({ close, options }) => (
@@ -32,7 +31,7 @@ export const Window = ({ close, options }) => (
 const Container = styled.View`
   background-color: #fff;
 
-  margin: 100px 30px;
+  margin: 0px 30px;
   min-height: 100px;
   padding: 15px;
 `;

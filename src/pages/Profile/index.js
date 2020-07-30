@@ -1,9 +1,9 @@
 import React from 'react';
-import { Alert, Linking, Modal, TouchableOpacity, StatusBar } from 'react-native';
+import { Alert, Linking, Modal, TouchableOpacity, StatusBar, View } from 'react-native';
 
 import {
   Andress, Avatar, Bio, BioDetails, Container, EditButton, Name, MyAnnouncement, MyAds, SpacedView, Message, FilterBox,
-  DarkBackground, WindowWithOptions, Image, CloseButton, EditImageText, EditImageButton, Window, ListItem
+  DarkBackground, Image, EditImageButton, Window, ListItem
 } from './styles';
 
 import { pickImageFromCamera, pickImageFromLibrary } from '../../components/ImagePicker';
@@ -14,6 +14,7 @@ import Filters from '../../components/Filters';
 import GeneralContext from '../../context';
 import { announcement } from '../../database/functions';
 import { Icon } from 'react-native-elements';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export default function Profile({ navigation, route }) {
   const { currentUser, currentEmail, setAuthUser } = React.useContext(GeneralContext);
@@ -27,7 +28,6 @@ export default function Profile({ navigation, route }) {
   const { user } = route.params;
   const noImage = 'http://html-color.org/pt/EDE9EA.jpg';
 
-  const [modalOptions, setModalOptions] = React.useState(false);
   const [modalImage, setModalImage] = React.useState(false);
   const [imagePickerStatus, setImagePickerStatus] = React.useState(false);
 
@@ -57,42 +57,32 @@ export default function Profile({ navigation, route }) {
 
   return (
     <Container>
-      <Modal animationType="fade" transparent visible={imagePickerStatus}>
+      <Modal animationType="fade" transparent visible={imagePickerStatus} onRequestClose={() => setImagePickerStatus(false)}>
         <DarkBackground>
+          <TouchableOpacity style={{ flex: 1 }} onPress={() => setImagePickerStatus(false)} />
+
           <Window>
             <ListItem title="Tirar uma foto" onPress={() => getImage('camera')} />
-            <ListItem title="Importar da biblioteca" onPress={() => getImage('library')} />
-            <ListItem title="Cancelar" onPress={() => setImagePickerStatus(false)} last />
+            <ListItem title="Importar da biblioteca" onPress={() => getImage('library')} last />
           </Window>
+
+          <TouchableOpacity style={{ flex: 1 }} onPress={() => setImagePickerStatus(false)} />
         </DarkBackground>
       </Modal>
 
-      <Modal transparent visible={modalOptions} animationType="fade">
+      <Modal transparent visible={modalImage} animationType="fade" onRequestClose={() => setModalImage(false)}>
         <StatusBar backgroundColor="rgba(0,0,0,0.9)" barStyle="light-content" />
         <DarkBackground>
-          <Window>
-           <ListItem title="Ver imagem" onPress={() => { setModalOptions(false); setModalImage(true); }} />
-           {
-             route.params.owner ? (
-              <ListItem title="Mudar imagem" onPress={() => { setModalOptions(false); setImagePickerStatus(true); }} />
-             ) : <></>
-           }
-           <ListItem title="Cancelar" onPress={() => setModalOptions(false)} last />
-          </Window>
-        </DarkBackground>
-      </Modal>
+          
+          <View style={{ flex: 1 }} onPress={() => setModalImage(false)} />
 
-      <Modal transparent visible={modalImage} animationType="fade">
-        <DarkBackground>
-          <StatusBar backgroundColor="rgba(0,0,0,0.9)" barStyle="light-content" />
-          <CloseButton>
-            <Icon name="close" color="#fff" type="material-community" onPress={() => setModalImage(false)} />
-          </CloseButton>
           <Image source={{ uri: route.params.owner ? currentUser.image || noImage : user.image || noImage }} />
+          
+          <View style={{ flex: 1 }} />
           {
             route.params.owner ? (
               <EditImageButton onPress={() => { setModalImage(false); setImagePickerStatus(true)}}>
-                <EditImageText>Editar imagem</EditImageText>
+                <Icon name="pencil" type="material-community" color="white" />
               </EditImageButton>
             ) : <></>
           }
@@ -126,7 +116,7 @@ export default function Profile({ navigation, route }) {
       />
 
       <Bio>
-        <TouchableOpacity onPress={() => setModalOptions(true)}>
+        <TouchableOpacity onPress={() => { setModalImage(true); }}>
           <Avatar source={{ uri: route.params.owner ? currentUser.image || noImage : user.image || noImage }} />
         </TouchableOpacity>
         <BioDetails>

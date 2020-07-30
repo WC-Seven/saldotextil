@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export const DarkBackground = styled.View`
   flex: 1;
@@ -32,17 +33,23 @@ export const CloseButton = styled.TouchableOpacity`
 `;
 
 export const EditImageButton = styled.TouchableOpacity`
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 200px;
+  bottom: 10px;
+  height: 50px;
+  justify-content: center;
   margin: 0px 10px 10px 0px;
-  align-self: flex-end;
-  border-radius: 20px;
-  background-color: #000;
-  padding: 2px 15px;
+  position: absolute;
+  right: 10px;
+  width: 50px;
 `
 
 export const Window = styled.View`
   background-color: #fff;
   border-radius: 4px;
-  margin: auto 30px;
+  margin: 0px 30px;
+  flex: 0 1 auto;
 `;
 
 export const ListItem = ({ title, last, onPress }) => (
@@ -64,11 +71,8 @@ const ListItemContainer = styled.TouchableOpacity`
 `;
 
 export const Image = styled.Image`
-  margin: auto;
   height: ${Dimensions.get('window').width}px;
   width: ${Dimensions.get('window').width}px;
-  resizeMode: contain;
-  borderRadius: 50px;
 `;
 
 const WindowContainer = styled.View`

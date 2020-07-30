@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Modal, Dimensions, StatusBar } from 'react-native';
+import { Modal, Dimensions, StatusBar,ScrollView, View, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Icon } from 'react-native-elements';
 
 function numberToReal(number) {
   var number = number.toFixed(2).split('.');
@@ -13,6 +12,8 @@ function numberToReal(number) {
 // Configurations
 export const Item = ({ data, type, adstype }) => {
   const navigation = useNavigation();
+
+  const [actualPage, setActualPage] = React.useState(1)
   const [isImageModalActive, setIsImageModalActive] = React.useState(false);
   const [imageModal, setImageModal] = React.useState([ '' ]);
 
@@ -21,24 +22,39 @@ export const Item = ({ data, type, adstype }) => {
   const price = parseFloat(data.price.substring(3, data.price.indexOf('/')-1));
   const measure = data.price.substring(data.price.indexOf('/'), data.price.length);
 
+  const onScroll = (e) => {
+    let newPageNumber = Math.round(parseFloat(e.nativeEvent.contentOffset.x / Dimensions.get('window').width + 1));
+
+    newPageNumber !== actualPage && setActualPage(newPageNumber);
+  }
+
   return (
   <Container>
     {
       data.images ? (
-        <Modal visible={isImageModalActive} transparent animationType="fade">
+        <Modal
+          visible={isImageModalActive}
+          transparent
+          animationType="fade"
+          onRequestClose={() => setIsImageModalActive(false)}
+        >
           <DarkContainer>
-            <StatusBar backgroundColor="rgba(0,0,0,0.9)" barStyle="light-content" />
-            <CloseButtonHeader onPress={() => setIsImageModalActive(false)}>
-              <Icon name="close" type="material-community" color="#fff" />
-            </CloseButtonHeader>
-
-            <ImageScrollView>
-                {
-                  imageModal.map(item => (
-                    <ImageBig source={{ uri: item }} />
-                  ))
-                }
+            <StatusBar backgroundColor="rgba(0, 0, 0, 0.9)" barStyle="light-content" />
+            <Extrapolate onPress={() => setIsImageModalActive(false)} />
+            <ImageScrollView onScroll={(e) => onScroll(e)}>
+              {
+                imageModal.map(item => (
+                  <ImageBig source={{ uri: item}} key={item} />
+                ))
+              }
             </ImageScrollView>
+            <Extrapolate onPress={() => setIsImageModalActive(false)} />
+
+            <FloatingCounter>
+              <Counter>
+                { actualPage } / { imageModal.length }
+              </Counter>
+            </FloatingCounter>
           </DarkContainer>
         </Modal>
       ) : <></>
@@ -77,28 +93,49 @@ export const Item = ({ data, type, adstype }) => {
   </Container>
 )};
 
+const Counter = styled.Text`
+  color: white;
+`;
+
+const FloatingCounter = styled.View`
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  bottom: 10px;
+  height: 30px;
+  justify-content: center;
+  left: 10px;
+  position: absolute;
+  width: 60px;
+`;
+
 const ImageScrollView = styled.ScrollView.attrs({
-  horizontal: true
-})``;
+  horizontal: true,
+  pagingEnabled: true,
+  showsHorizontalScrollIndicator: false
+})`
+  flex: 0 1 auto;
+`;
 
 const DarkContainer = styled.View`
   background-color: rgba(0, 0, 0, 0.9);
   flex: 1;
-`;
+  `;
 
-const CloseButtonHeader = styled.TouchableOpacity`
-  position: absolute;
-  right: 15px;
-  top: 0px;
-  padding: 5px;
-  z-index: 1;
+export const Extrapolate = ({ onPress }) => (
+  <TouchableWithoutFeedback onPress={onPress}>
+    <FlexView />
+  </TouchableWithoutFeedback>
+);
+
+const FlexView = styled.View`
+  flex: 1;
 `;
 
 const ImageBig = styled.Image`
-  background-color: #ccc;
-  height: ${Dimensions.get('screen').width}px;
+  min-height: ${Dimensions.get('screen').width}px;
   width: ${Dimensions.get('screen').width}px;
-  margin: auto;
+  resize-mode: contain;
 `;
 
 // Components

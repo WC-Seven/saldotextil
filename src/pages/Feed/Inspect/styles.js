@@ -37,7 +37,10 @@ const DarkContainer = styled.View`
 const ModalScrollView = styled.ScrollView.attrs({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
-})``;
+  pagingEnabled: true,
+})`
+  flex: 0 1 auto;
+`;
 
 const ModalImage = styled.Image`
   height: ${Dimensions.get('window').width}px;
@@ -55,22 +58,32 @@ const CloseButton = styled.TouchableOpacity`
 
 export const ImageScrollView = ({ arr }) => {
   const [isImageModalActive, setIsImageModalActive] = React.useState(false);
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+  const onScroll = (e) => {
+    let newPageNumber = Math.round(parseFloat(e.nativeEvent.contentOffset.x / Dimensions.get('window').width + 1));
+    newPageNumber !== currentPage && setCurrentPage(newPageNumber);
+  }
 
   return (
     <>
-      <Modal transparent animationType="fade" visible={isImageModalActive}>
+      <Modal transparent animationType="fade" visible={isImageModalActive} onRequestClose={() => setIsImageModalActive(false)}>
         <DarkContainer>
           <StatusBar backgroundColor="rgba(0,0,0,0.9)" barStyle="light-content" />
-          <CloseButton onPress={() => setIsImageModalActive(!isImageModalActive)}>
-            <Icon name="close" color="white" type="material-community" />
-          </CloseButton>
-          <ModalScrollView>
+          <Extrapolate onPress={() => setIsImageModalActive(false)} />
+          <ModalScrollView onScroll={(e) => onScroll(e)}>
             {
               arr.map(item => (
                 <ModalImage key={item} source={{ uri: item }} />
               ))
             }
           </ModalScrollView>
+          <Extrapolate onPress={() => setIsImageModalActive(false)}/>
+          <FloatingCounter>
+            <Counter>
+              { currentPage } / { arr.length }
+            </Counter>
+          </FloatingCounter>
         </DarkContainer>
       </Modal>
       <ImageScrollViewContainer
@@ -78,8 +91,8 @@ export const ImageScrollView = ({ arr }) => {
       >
         {
           arr.map(item => (
-            <TouchableWithoutFeedback onPress={() => setIsImageModalActive(!isImageModalActive)}>
-              <ImageScrollViewImage key={item} source={{ uri: item }} />
+            <TouchableWithoutFeedback key={item} onPress={() => setIsImageModalActive(!isImageModalActive)}>
+              <ImageScrollViewImage source={{ uri: item }} />
             </TouchableWithoutFeedback>
           ))
         }
@@ -87,6 +100,32 @@ export const ImageScrollView = ({ arr }) => {
     </>
   )
 };
+
+const Counter = styled.Text`
+  color: white;
+`;
+
+const FloatingCounter = styled.View`
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  bottom: 10px;
+  height: 30px;
+  justify-content: center;
+  left: 10px;
+  position: absolute;
+  width: 60px;
+`;
+
+const Extrapolate = ({ onPress }) => (
+  <TouchableWithoutFeedback onPress={onPress}>
+    <FlexView />
+  </TouchableWithoutFeedback>
+);
+
+const FlexView = styled.View`
+  flex: 1;
+`;
 
 export const PublishInspect = ({ uid, image }) => {
   const navigation = useNavigation();
