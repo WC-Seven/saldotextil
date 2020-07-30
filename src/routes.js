@@ -31,6 +31,7 @@ import UpdatePassword from './pages/Settings/UpdatePassword';
 import UpdateEmail from './pages/Settings/UpdateEmail';
 import UpdateType from './pages/Settings/UpdateType';
 import UserAgreement from './pages/UserAgreement';
+import MyAnn from './pages/Feed/MyAnnouncements';
 
 // Secondaries
 import SecondaryCreate from './components/Secondaries/Create';
@@ -106,6 +107,7 @@ export default function Routes () {
         isLogged ? (
           <Stack.Navigator keyboardHandlingEnabled={false}>
             <Stack.Screen name="Main" component={BottomTabs} options={{ headerShown: false }} />
+            <Stack.Screen name="MyAnnouncements" component={MyAnn} options={({ navigation }) => options(navigation, 'Meus anúncios')} />
             <Stack.Screen name="Agents" component={Agents} options={({ navigation }) => optionsWithSearch(navigation, 'Representantes')} />
             <Stack.Screen name="Donations" component={Donations} options={({ navigation }) => optionsWithSearch(navigation, 'Doações')} />
             <Stack.Screen name="Jobs" component={Jobs} options={({ navigation }) => optionsWithSearch(navigation, 'Empregos')} />

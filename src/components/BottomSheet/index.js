@@ -19,6 +19,14 @@ function BottomSheet(props) {
       },
     },
     {
+      icon: 'newspaper',
+      name: 'Meus anúncios',
+      action: () => {
+        nav.navigate('MyAnnouncements');
+        bsRef.current.close();
+      }
+    },
+    {
       icon: 'briefcase-outline',
       name: 'Empregos',
       action: () => {
@@ -47,7 +55,7 @@ function BottomSheet(props) {
   return (
     <RBSheet
       animationType="fade"
-      height={300}
+      height={350}
       openDuration={250}
       closeDuration={100}
       closeOnDragDown
