@@ -31,6 +31,7 @@ export default function Update() {
     image: currentUser.image,
     name: currentUser.name,
     phone: currentUser.phone,
+    landline: currentUser.landline,
     premium: currentUser.premium,
     type: currentUser.type
   });
@@ -75,6 +76,14 @@ export default function Update() {
         onChangeText={(s) => setNewUser({ ...newUser, phone: s })}
         leftIcon="whatsapp"
         placeholder="Whatsapp"
+        type="cel-phone"
+      />
+      
+      <TextInput
+        value={newUser.landline}
+        onChangeText={(s) => setNewUser({ ...newUser, landline: s })}
+        leftIcon="phone"
+        placeholder="Telefone"
         type="cel-phone"
       />
 
