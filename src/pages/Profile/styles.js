@@ -147,6 +147,7 @@ export const EditButton = styled.TouchableOpacity`
   borderRadius: 30px;
   height: 40px;
   justify-content: center;
+  ${ props => props.big ? 'flex: 1; margin-right: 5px;' : 'min-width: 40px;'}
 `;
 
 export const MyAnnouncement = styled.View`

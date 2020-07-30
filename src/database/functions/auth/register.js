@@ -57,6 +57,7 @@ async function createUser (data, setAuthenticatedUser, onError) {
             name: data.name,
             fantasy: data.fantasy,
             phone: data.phone,
+            landline: data.landline,
             premium: false,
             type: data.type,
           };
@@ -73,6 +74,7 @@ async function createUser (data, setAuthenticatedUser, onError) {
             image: 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fprofile.jpg?alt=media&token=5262d2cf-531b-4f9c-858f-ad27598c72ad',
             name: data.name,
             phone: data.phone,
+            landline: data.landline,
             premium: false,
             type: data.type,
           };

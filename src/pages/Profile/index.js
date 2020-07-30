@@ -155,24 +155,44 @@ export default function Profile({ navigation, route }) {
                 <Name>Editar perfil</Name>
               </EditButton>
             ) : (
-              <EditButton onPress={
-                user.phone !== '' ? () => {
-                  let number = user.phone.replace('(', '').replace(')', '').replace(' ', '').replace('-', '').replace('+', '');
-                  if (number.substring(0, 2) !== '55') {
-                    number = `55${number}`;
+              <View style={{ flexDirection: 'row' }}>
+                <EditButton 
+                  onPress={
+                    user.landline !== '' ? () => {
+                      let number = user.landline.replace('(', '').replace(')', '').replace(' ', '').replace('-', '').replace('+', '');
+                      
+                      Linking.openURL(`tel:${number}`);
+                    } : () => {
+                      Alert.alert(
+                        'Impossível realizar a ligação',
+                        'Parece que esta pessoa não tem nenhum número vinculado a conta',
+                        [{ text: 'Ok' }]
+                      );
+                    }
                   }
-                  
-                  Linking.openURL(`https://wa.me/${number}`);
-                } : () => {
-                  Alert.alert(
-                    'Impossível enviar mensagem',
-                    'Parece que esta pessoa não tem nenhum número vinculado a conta',
-                    [{ text: 'Ok' }]
-                  );
-                }
-              } >
-                <Name>Mensagem</Name>
-              </EditButton>
+                  big
+                >
+                  <Name>Ligar</Name>
+                </EditButton>
+                <EditButton onPress={
+                  user.phone !== '' ? () => {
+                    let number = user.phone.replace('(', '').replace(')', '').replace(' ', '').replace('-', '').replace('+', '');
+                    if (number.substring(0, 2) !== '55') {
+                      number = `55${number}`;
+                    }
+                    
+                    Linking.openURL(`https://wa.me/${number}`);
+                  } : () => {
+                    Alert.alert(
+                      'Impossível enviar mensagem',
+                      'Parece que esta pessoa não tem nenhum número vinculado a conta',
+                      [{ text: 'Ok' }]
+                    );
+                  }
+                } >
+                  <Icon name="whatsapp" type="material-community" />
+                </EditButton>
+              </View>
             )
           }
         </BioDetails>
