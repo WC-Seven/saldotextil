@@ -1,46 +1,50 @@
 import React from 'react';
-import { Container, SpacedView, Loading, Message } from './styles';
+import { View } from 'react-native';
+import { Picker } from '@react-native-community/picker';
+
+import { Container, SpacedView, Interruptor, Message } from './styles';
 
 import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
 import FloatingButton from '../../components/FloatingButton';
 import MiniFloatingButton from '../../components/MiniFloatingButton';
-import Mini from '../../components/Secondaries/Mini';
+import MiniJob from './Mini';
+import CvMini from './CvMini';
 
 import { announcement } from '../../database/functions';
+import { getCitiesByState } from '../../utils/locals';
 
 export default function Jobs({ navigation }) {
   const [modal, setModal] = React.useState({ adstype: false, localization: false });
+  const [cities, setCities] = React.useState([]);
 
-  const [filters, setFilters] = React.useState({ adstype: 'ads', localization: '' });
+  const [filters, setFilters] = React.useState({ localization: '', adstype: 'ads', city: '' });
   const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
     setResults([]);
-    announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'jobs', filters.adstype, 'state', filters.localization, 10000);
-  }, [filters.adstype, filters.localization]);
+
+    if (filters.city === '') {
+      announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'jobs', filters.adstype, 'state', filters.localization, 10000);
+    } else {
+      announcement.read((arr) => setResults(arr), 'secondaryAnnouncements', 'jobs', filters.adstype, 'city', filters.city, 10000);
+    }
+  }, [filters.adstype, filters.localization, filters.city]);
+
+  React.useEffect(() => {
+    const get = async () => {
+      const response = await getCitiesByState(filters.localization);
+      setCities(response);
+    }
+    get();
+  }, [filters.localization]);
 
   return (
     <>
-      <FloatingButton iconName="pencil" action={() => navigation.navigate('Create', { name: 'Empregos' })} />
-      <MiniFloatingButton iconName="file-account" action={() => navigation.navigate('Publish', { name: 'Empregos' })} />
+      <FloatingButton iconName="pencil" action={() => navigation.navigate('CreateJob')} />
+      <MiniFloatingButton iconName="file-account" action={() => navigation.navigate('PublishJob')} />
       <Container>
         {/* Modais */}
-        <FiltersModal
-          status={{
-            value: modal.adstype,
-            set: (n) => setModal({ ...modal, adstype: n })
-          }}
-          options={[
-              {
-                title: 'Tipo de anúncio',
-                options: [
-                  { name: 'Anúncios', action: () => setFilters({ ...filters, adstype: 'ads' }), active: filters.adstype === 'ads' },
-                  { name: 'Currículos', action: () => setFilters({ ...filters, adstype: 'cv' }), active: filters.adstype === 'cv' },
-                ],
-              },
-            ]}
-        />
         <FiltersModal
           status={{
             value: modal.localization,
@@ -84,39 +88,72 @@ export default function Jobs({ navigation }) {
         />
 
         {/* Filtros */}
+        <Interruptor data={
+          [
+            {
+              title: 'Vagas disponíveis',
+              action: () => setFilters({...filters, adstype: 'ads'}),
+              selected: filters.adstype === 'ads'
+            },
+            {
+              title: 'Candidatos',
+              action: () => setFilters({...filters, adstype: 'cv'}),
+              selected: filters.adstype === 'cv'
+            },
+          ]
+        } />
         <Filters
           data={[
-            { title: 'Tipo de anúncio', action: () => setModal({...modal, adstype: true}) },
             { title: 'Localização', action: () => setModal({...modal, localization: true})}
           ]}
         />
+
+        <View style={{ backgroundColor: '#f2f2f2', marginHorizontal: 10, borderRadius: 4, marginTop: 5, paddingHorizontal: 10 }}>
+          <Picker
+            selectedValue={filters.city}
+            onValueChange={value => setFilters({...filters, city: value})}
+          >
+            <Picker.Item value="" label={filters.localization === '' ? "Selecione um estado" : cities[0] ? 'Cidade (selecione)' : 'Carregando...'  } />
+
+            {
+              cities.map((item) => (
+                <Picker.Item value={item.name} label={item.name} key={item.name} />
+              ))
+            }
+          
+          </Picker>
+        </View>
 
         {
           results[0] ? (
             <>
               {
-                results.map(item => (
-                  <Mini
-                    key={`${item.title}-${item.user}`}
-                    item={{
-                      title: item.title,
-                      image: item.images[0],
-                      enterprise: item.user,
-                      description: item.description,
-                      city: item.city,
-                      state: item.state,
-                      uid: item.uid
-                    }}
-                    type={filters.adstype}
-                    folder="jobs"
-                  />
-                ))
+                filters.adstype === 'ads' ? (
+                  <>
+                    {
+                      results.map((item) => (
+                        <MiniJob key={item.uid} item={item} navigation={navigation} />
+                      ))
+                    }
+                  </>
+                ) : (
+                  <>
+                    {
+                      results.map((item) => (
+                        <CvMini item={item} key={item.uid} />
+                      ))
+                    }
+                  </>
+                )
               }
+              
+                  
             </>
           ) : (
             <Message>Não há {filters.adstype === 'ads' ? 'empregos' : 'currículos'}</Message>
           )
         }
+
         
 
         <SpacedView />

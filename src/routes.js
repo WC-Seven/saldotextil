@@ -33,6 +33,14 @@ import UpdateType from './pages/Settings/UpdateType';
 import UserAgreement from './pages/UserAgreement';
 import MyAnn from './pages/Feed/MyAnnouncements';
 
+import CreateJob from './pages/Jobs/Create';
+import DetailJob from './pages/Jobs/Detail';
+import PublishJob from './pages/Jobs/Publish';
+
+import CreateAgent from './pages/Agents/Create';
+import DetailAgent from './pages/Agents/Detail';
+import PublishAgent from './pages/Agents/Publish';
+
 // Secondaries
 import SecondaryCreate from './components/Secondaries/Create';
 import SecondaryDetail from './components/Secondaries/Detail';
@@ -127,7 +135,16 @@ export default function Routes () {
             <Stack.Screen name="Settings" component={Settings} options={({ navigation }) => options(navigation, 'Configurações')} />
             <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={({ navigation }) => options(navigation, 'Editar Perfil')} />
             
-            <Stack.Screen
+            <Stack.Screen name="CreateJob" component={CreateJob} options={({ navigation }) => options(navigation, 'Criar anúncio - Emprego')} />
+            <Stack.Screen name="DetailJob" component={DetailJob} options={({ navigation }) => options(navigation, '')} />
+            <Stack.Screen name="PublishJob" component={PublishJob} options={({ navigation }) => options(navigation, 'Anunciar currículo')} />
+
+            <Stack.Screen name="CreateAgent" component={CreateAgent} options={({ navigation }) => options(navigation, 'Criar anúncio - Emprego')} />
+            <Stack.Screen name="DetailAgent" component={DetailAgent} options={({ navigation }) => options(navigation, '')} />
+            <Stack.Screen name="PublishAgent" component={PublishAgent} options={({ navigation }) => options(navigation, 'Anunciar currículo')} />
+
+
+            <Stack.Screen 
               name="FeedInspect"
               component={FeedInspect}
               options={({ route }) => ({

@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import styled from 'styled-components';
 
 export const Background = styled.ScrollView`
@@ -10,8 +11,8 @@ export const Window = ({ close, options }) => (
   <Container>
     {
       options.map(item => (
-        <>
-          <OptionHead key={item.title}>{ item.title }</OptionHead>
+        <View key={item.title}>
+          <OptionHead>{ item.title }</OptionHead>
           <Options>
             {
               item.options?.map((n) => (
@@ -19,7 +20,7 @@ export const Window = ({ close, options }) => (
               ))
             }
           </Options>
-        </>
+        </View>
       ))
     }
     <CloseButton onPress={() => close()}>

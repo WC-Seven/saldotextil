@@ -7,12 +7,12 @@ export function create(section, folder, subfolder, data, action, onError = () =>
   const annid = `${data.user}${Date.now()}`;
   const imagesurl = [];
 
-  if (data.images.length > 0) {
+  if (data.images?.length > 0) {
     data.images.map((item, index, array) => fetch(item.uri)
       .then((file) => file.blob(), () => console.log('Error in blob()'))
       .then((blob) => firebase.storage()
         .ref(`images/${annid}${index}${item.uri.substring(item.uri.lastIndexOf('.'), item.uri.length)}`)
-        .put(blob), (e) => onError())
+        .put(blob), (e) => onError(e))
       .then((snapshot) => snapshot.ref.getDownloadURL())
       .then((url) => imagesurl.push(url))
       .then(() => {
@@ -44,8 +44,8 @@ export function create(section, folder, subfolder, data, action, onError = () =>
             },
           ],
         );
-      }, () => {
-        onError()
+      }, (e) => {
+        onError(e)
         Alert.alert(
           'Erro',
           'Obtivemos um erro ao tentar veicular seu anúncio ao Saldo Têxtil.',
