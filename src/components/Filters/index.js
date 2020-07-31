@@ -6,7 +6,7 @@ export default function Filters({ data = [] }) {
     <Container>
       {
         data.map((item) => (
-          <Button title={item.title} onPress={item.action} />
+          <Button key={item.title} title={item.title} onPress={item.action} />
         ))
       }
     </Container>
