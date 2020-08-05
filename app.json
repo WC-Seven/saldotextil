@@ -11,7 +11,8 @@
     "notification": {
       "color": "#2B7ED7",
       "icon": "./assets/shell_notification_icon.png",
-      "androidMode": "default"
+      "androidMode": "default",
+      "iosDisplayInForeground": true
     },
     "androidStatusBar": {
       "barStyle": "light-content",
@@ -36,9 +37,12 @@
     },
     "android": {
       "package": "com.dmi.saldotextil",
+      "googleServicesFile": "./google-services.json",
+      "useNextNotificationsApi": true,
       "versionCode": 1,
       "permissions": [
-        "CAMERA", "VIBRATE"
+        "CAMERA",
+        "com.majeur.launcher.permission.UPDATE_BADGE"
       ],
       "icon": "./assets/icon.png",
       "adaptiveIcon": {

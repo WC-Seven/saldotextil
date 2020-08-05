@@ -18,7 +18,8 @@ export const tryLogin = (data, setAuthenticatedUser, onError) => {
   function authentication() {
     let authUser;
 
-    firebase.auth().signInWithEmailAndPassword(data.email, data.password)
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+      firebase.auth().signInWithEmailAndPassword(data.email, data.password)
       .then(({ user }) => {
         console.log('user logged')
         authUser = {
@@ -49,6 +50,7 @@ export const tryLogin = (data, setAuthenticatedUser, onError) => {
           showError(`Há algo de errado. ${errorCode}`);
         }
       });
+    });
   }
   authentication();
 }

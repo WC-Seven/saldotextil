@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, Platform } from 'react-native';
+import { StatusBar, Platform, Alert } from 'react-native';
 import { MenuProvider } from 'react-native-popup-menu';
 import { AppLoading } from 'expo';
 import { useFonts } from '@use-expo/font';
@@ -19,8 +19,6 @@ Notifications.setNotificationHandler({
   })
 });
 
-import { verifyAndUpdate } from './src/database/functions/tokens/verifyAndUpdate';
-
 export default function App() {
   const { isLogged, setAuthUser, currentUser } = React.useContext(GeneralContext);
   const [expoPushToken, setExpoPushToken] = React.useState('');
@@ -31,7 +29,6 @@ export default function App() {
   React.useEffect(() => {
     registerForPushNotificationsAsync().then(token => {
       setExpoPushToken(token)
-      verifyAndUpdate(token);
     });
 
     // This listener is fired whenever a notification is received while the app is foregrounded
@@ -81,33 +78,47 @@ export default function App() {
 async function registerForPushNotificationsAsync() {
   let token;
 
-  if (Constants.isDevice) {
-    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
-    let finalStatus = existingStatus;
-    
-    if (existingStatus !== 'granted') {
-      const { status } = await Permission.askAsync(Permission.NOTIFICATIONS);
-      finalStatus = status;
-    }
-
-    if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notifications!');
-      return;
-    }
-
-    token = (await Notifications.getExpoPushTokenAsync()).data;
-  } else {
-    alert('Must use physical device for Push Notifications');
+  const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+  let finalStatus = status;
+  
+  if (status !== 'granted') {
+    const { status } = await Permission.askAsync(Permission.NOTIFICATIONS);
+    finalStatus = status;
   }
+
+  if (finalStatus !== 'granted') { return; }
+
+  token = await Notifications.getExpoPushTokenAsync();
 
   if (Platform.OS === 'android') {
     Notifications.setNotificationChannelAsync('default', {
       name: 'default',
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#ff2b7ed7',
+      lightColor: '#FF2B7ED7',
     });
   }
+
+  fetch('https://push-services.herokuapp.com/subscribe', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      application: "1",
+      token: token.data,
+    })
+  }).then((response) => {
+    response.json().then((data) => {
+      switch(data.code) {
+        case 'success-subscribe': break;
+        case 'already-subscrived': break;
+        case 'error-subscribe': 
+          Alert.alert('Erro', 'Erro ao inscrever-se para notificações', [{ text: 'Ok' }]);
+          break;
+      }
+    });
+  });
 
   return token;
 }
