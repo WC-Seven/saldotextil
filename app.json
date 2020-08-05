@@ -40,10 +40,7 @@
       "googleServicesFile": "./google-services.json",
       "useNextNotificationsApi": true,
       "versionCode": 1,
-      "permissions": [
-        "CAMERA",
-        "com.majeur.launcher.permission.UPDATE_BADGE"
-      ],
+      "permissions": ["CAMERA", "CAMERA_ROLL"],
       "icon": "./assets/icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive_icon/foreground.png",
