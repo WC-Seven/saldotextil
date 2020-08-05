@@ -17,6 +17,7 @@
     "@react-navigation/native": "^5.6.1",
     "@react-navigation/stack": "^5.6.2",
     "@use-expo/font": "^2.0.0",
+    "array-sort-by": "^1.2.1",
     "base-64": "^0.1.0",
     "cep-promise": "^3.0.9",
     "expo": "~38.0.8",

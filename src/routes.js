@@ -41,6 +41,9 @@ import CreateAgent from './pages/Agents/Create';
 import DetailAgent from './pages/Agents/Detail';
 import PublishAgent from './pages/Agents/Publish';
 
+import CreateDonation from './pages/Donations/Create';
+import DetailDonation from './pages/Donations/Detail';
+
 // Secondaries
 import SecondaryCreate from './components/Secondaries/Create';
 import SecondaryDetail from './components/Secondaries/Detail';
@@ -143,6 +146,8 @@ export default function Routes () {
             <Stack.Screen name="DetailAgent" component={DetailAgent} options={({ navigation }) => options(navigation, '')} />
             <Stack.Screen name="PublishAgent" component={PublishAgent} options={({ navigation }) => options(navigation, 'Anunciar currículo')} />
 
+            <Stack.Screen name="CreateDonation" component={CreateDonation} options={({ navigation }) => options(navigation, 'Criar anúncio - Doação')} />
+            <Stack.Screen name="DetailDonation" component={DetailDonation} options={({ navigation }) => options(navigation, 'Detalhes')} />
 
             <Stack.Screen 
               name="FeedInspect"

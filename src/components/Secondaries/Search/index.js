@@ -5,6 +5,7 @@ import { announcement } from '../../../database/functions';
 import Mini from '../Mini';
 import MiniJob from '../../../pages/Jobs/Mini';
 import MiniAgents from '../../../pages/Agents/Mini';
+import MiniDonation from '../../../pages/Donations/Mini';
 
 export default function Search({ route, navigation }) {
   const [results, setResults] = React.useState([]);
@@ -37,7 +38,7 @@ export default function Search({ route, navigation }) {
                   {
                     results.map(item => (
                       <MiniJob
-                          key={item.title}
+                          key={item.uid}
                           navigation={navigation}
                           item={item}
                         />
@@ -52,7 +53,7 @@ export default function Search({ route, navigation }) {
                         {
                           results.map(item => (
                             <MiniAgents
-                                key={item.title}
+                                key={item.uid}
                                 navigation={navigation}
                                 item={item}
                               />
@@ -63,19 +64,10 @@ export default function Search({ route, navigation }) {
                       <>
                         {
                           results.map(item => (
-                            <Mini
-                                key={`${item.title}-${item.user}`}
-                                item={{
-                                  title: item.title,
-                                  image: item.images[0],
-                                  enterprise: item.user,
-                                  description: item.description,
-                                  city: item.city,
-                                  state: item.state,
-                                  uid: item.uid
-                                }}
-                                type='ads'
-                                folder={folder}
+                            <MiniDonation
+                                key={item.uid}
+                                navigation={navigation}
+                                item={item}
                               />
                           ))
                         }

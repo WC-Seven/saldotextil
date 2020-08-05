@@ -75,7 +75,7 @@ export const Miniature = ({ info }) => {
               info.id === currentUser.id ? (
                 <>
                   <MenuOption style={{ padding: 10 }} text="Editar" onSelect={() => {
-                    navigation.navigate('Update', { name: info.folder, item: info })
+                    navigation.navigate('CreateDonation', { name: info.folder, item: info })
                   }} />
                   <MenuOption style={{ padding: 10 }} text="Excluir" onSelect={() => {
                     Alert.alert(
@@ -117,7 +117,7 @@ export const Miniature = ({ info }) => {
       >
         <Image source={{ uri: info.image }} />
         <Title>
-          { info.title }
+          { info.product }
         </Title>
         <Description>
           { info.description }
