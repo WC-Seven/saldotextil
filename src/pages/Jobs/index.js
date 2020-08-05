@@ -2,23 +2,27 @@ import React from 'react';
 import { View } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 
-import { Container, SpacedView, Interruptor, Message } from './styles';
+import { BottomButton, Container, SpacedView, Interruptor, Message } from './styles';
 
 import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
-import FloatingButton from '../../components/FloatingButton';
-import MiniFloatingButton from '../../components/MiniFloatingButton';
 import MiniJob from './Mini';
 import CvMini from './CvMini';
 
+import GeneralContext from '../../context';
 import { announcement } from '../../database/functions';
 import { getCitiesByState } from '../../utils/locals';
 
 export default function Jobs({ navigation }) {
+  const { currentUser } = React.useContext(GeneralContext);
   const [modal, setModal] = React.useState({ adstype: false, localization: false });
   const [cities, setCities] = React.useState([]);
 
-  const [filters, setFilters] = React.useState({ localization: '', adstype: 'ads', city: '' });
+  const [filters, setFilters] = React.useState({
+    localization: currentUser.andress.state ?? 'SP',
+    adstype: 'ads', 
+    city: currentUser.andress.city ?? 'Adamantina'
+  });
   const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
@@ -41,8 +45,13 @@ export default function Jobs({ navigation }) {
 
   return (
     <>
-      <FloatingButton iconName="pencil" action={() => navigation.navigate('CreateJob')} />
-      <MiniFloatingButton iconName="file-account" action={() => navigation.navigate('PublishJob')} />
+      <BottomButton
+        title="Criar anúncio"
+        onPress={() => navigation.navigate('CreateJob')}
+        secondaryTitle="Anunciar currículo"
+        secondaryOnPress={() => navigation.navigate('PublishJob')}
+      />
+      {/* <SecondaryBottomButton /> */}
       <Container>
         {/* Modais */}
         <FiltersModal

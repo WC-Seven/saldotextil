@@ -17,37 +17,29 @@ export default function CreateAgent ({ navigation }) {
 
   const [agent, setAgent] = React.useState({
     assignments: '',
-    city: '',
+    city: currentUser.andress.city,
     contactMailAndress: '',
     contactWhatsapp: '',
     description: '',
     position: '',
     requirements: '',
     commission: '',
-    state: '',
+    state: currentUser.andress.state,
     title: '',
     user: currentUser.id,
     userImage: currentUser.image,
   });
 
   React.useEffect(() => {
-    const get = async () => {
-      await getStates().then((response) => {
-        setStates(response);
-      });
-    }
-
-    get();
+    getStates().then((response) => {
+      setStates(response);
+    });
   }, []);
 
   React.useEffect(() => {
-    const get = async () => {
-      await getCitiesByState(agent.state).then((response) => {
+    getCitiesByState(agent.state).then((response) => {
         setCities(response);
       });
-    }
-    
-    get();
   }, [agent.state]);
 
   const onLoading = () => {

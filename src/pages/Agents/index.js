@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 
-import { Container, SpacedView, Interruptor, Message } from './styles';
+import { BottomButton, SecondaryBottomButton, Container, SpacedView, Interruptor, Message } from './styles';
 
 import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
@@ -11,14 +11,20 @@ import MiniFloatingButton from '../../components/MiniFloatingButton';
 import MiniJob from './Mini';
 import CvMini from './CvMini';
 
+import GeneralContext from '../../context';
 import { announcement } from '../../database/functions';
 import { getCitiesByState } from '../../utils/locals';
 
 export default function Agents({ navigation }) {
+  const { currentUser } = React.useContext(GeneralContext);
   const [modal, setModal] = React.useState({ adstype: false, localization: false });
   const [cities, setCities] = React.useState([]);
 
-  const [filters, setFilters] = React.useState({ localization: '', adstype: 'ads', city: '' });
+  const [filters, setFilters] = React.useState({
+    localization: currentUser.andress.state,
+    adstype: 'ads',
+    city: currentUser.andress.city
+  });
   const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
@@ -41,8 +47,12 @@ export default function Agents({ navigation }) {
 
   return (
     <>
-      <FloatingButton iconName="pencil" action={() => navigation.navigate('CreateAgent')} />
-      <MiniFloatingButton iconName="file-account" action={() => navigation.navigate('PublishAgent')} />
+      <BottomButton
+        title="Criar anúncio de Representante"
+        onPress={() => navigation.navigate('CreateAgent')}
+        secondaryTitle="Anunciar currículo"
+        secondaryOnPress={() => navigation.navigate('PublishAgent')}
+      />
       <Container>
         {/* Modais */}
         <FiltersModal
@@ -104,7 +114,7 @@ export default function Agents({ navigation }) {
         } />
         <Filters
           data={[
-            { title: 'Localização', action: () => setModal({...modal, localization: true})}
+            { title: 'Estado', action: () => setModal({...modal, localization: true})}
           ]}
         />
 

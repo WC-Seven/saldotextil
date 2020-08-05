@@ -17,14 +17,14 @@ export default function CreateJob ({ navigation }) {
 
   const [job, setJob] = React.useState({
     assignments: '',
-    city: '',
+    city: currentUser.andress.city ?? 'Adamantina',
     contactMailAndress: '',
     contactWhatsapp: '',
     description: '',
     position: '',
     requirements: '',
     salary: '',
-    state: '',
+    state: currentUser.andress.state ?? 'SP',
     title: '',
     user: currentUser.id,
     userImage: currentUser.image,

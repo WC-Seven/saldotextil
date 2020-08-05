@@ -52,3 +52,45 @@ const ButtonText = styled.Text`
   padding-top: 3px;
   text-align: center;
 `;
+
+export const BottomButton = ({ title, secondaryTitle, onPress, secondaryOnPress }) => (
+  <FloatingView>
+    <FloatingButtonContainer bottom={20} onPress={onPress} style={{ marginRight: 5 }}>
+      <FloatingButtonText>
+        { title }
+      </FloatingButtonText>
+    </FloatingButtonContainer>
+    <FloatingButtonContainer bottom={20} onPress={secondaryOnPress} style={{ marginLeft: 5 }}>
+      <FloatingButtonText>
+        { secondaryTitle }
+      </FloatingButtonText>
+    </FloatingButtonContainer>
+  </FloatingView>
+);
+
+const FloatingView = styled.View`
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  left: 20px;
+  flex-direction: row;
+`;
+
+const FloatingButtonContainer = styled.TouchableOpacity`
+  align-items: center;
+  background-color: #fff;
+  border-radius: 30px;
+  elevation: 5;
+  flex: 1;
+  min-height: 60px;
+  justify-content: center;
+  z-index: 1;
+`;
+
+const FloatingButtonText = styled.Text`
+  color: #2b7ed7;
+  font-family: Poppins Medium;
+  font-size: 17px;
+  padding-top: 3px;
+  text-align: center;
+`;
