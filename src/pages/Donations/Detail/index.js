@@ -12,7 +12,7 @@ export default function DetailDonation({ navigation, route }) {
   const { item } = route.params;
 
   const [isModalActive, setIsModalActive] = React.useState(false);
-
+  const noImage = 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fnoimageavailable.jpg?alt=media&token=1b7c718e-e6d6-49d0-a1c1-3eb7dae80c39';
   return (
     <>
       <Modal
@@ -76,7 +76,7 @@ export default function DetailDonation({ navigation, route }) {
                   ) : (
                     <>
                       <MenuOption style={{ padding: 10 }} text="Reportar" onSelect={() => {
-                        navigation.navigate('Feedback', { announcement: { uid: item.uid, name: item.title, image: item.image || noImage } })
+                        navigation.navigate('Feedback', { announcement: { uid: item.uid, name: item.title, image: item.images[0] || noImage } })
                       }} />
                     </>
                   )

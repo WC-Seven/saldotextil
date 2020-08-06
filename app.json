@@ -40,7 +40,14 @@
       "googleServicesFile": "./google-services.json",
       "useNextNotificationsApi": true,
       "versionCode": 1,
-      "permissions": ["CAMERA", "CAMERA_ROLL"],
+      "permissions": [
+        "CAMERA",
+        "CAMERA_ROLL",
+        "READ_INTERNAL_STORAGE",
+        "WRITE_INTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
       "icon": "./assets/icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive_icon/foreground.png",
