@@ -46,9 +46,9 @@ export default function Jobs({ navigation }) {
   return (
     <>
       <BottomButton
-        title="Criar anúncio"
+        title="Criar anúncio de vaga"
         onPress={() => navigation.navigate('CreateJob')}
-        secondaryTitle="Anunciar currículo"
+        secondaryTitle="Anunciar o seu currículo"
         secondaryOnPress={() => navigation.navigate('PublishJob')}
       />
       {/* <SecondaryBottomButton /> */}
