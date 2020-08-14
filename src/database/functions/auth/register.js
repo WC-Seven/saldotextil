@@ -26,10 +26,13 @@ async function createUser (data, setAuthenticatedUser, onError) {
     .catch((error) => {
       // Handle errors here
       if (error.code === 'auth/weak-password') {
+        onError();
         showError('Sua senha é muito fraca')
       } else if (error.code === 'auth/email-already-in-use') {
+        onError();
         showError('Este e-mail já está vinculado à outra conta');
       } else if (error.code === 'auth/invalid-email') {
+        onError();
         showError('E-mail inválido');
       } else {
         console.log(error.code);
@@ -134,17 +137,21 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
             await createUser(data, setAuthenticatedUser, onError);
             
           } else {
+            onError();
             showError('A UF deve ter apenas dois caracteres');
           }
         } else {
+          onError();
           showError('As senhas não coincidem');
         }
       } else {
+        onError();
         showError('A senha deve conter pelo menos 8 digitos.');
       }
       
 
     } else {
+      onError();
       showError('Insira todos os campos obrigatórios.');
     }
   } else if (data.type.substring(0, 2) === 'pj') {
@@ -172,19 +179,23 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
             await createUser(data, setAuthenticatedUser, onError);
             
           } else {
+            onError();
             showError('A UF deve ter apenas dois caracteres');
           }
         } else {
+          onError();
           showError('As senhas não coincidem');
         }
       } else {
+        onError();
         showError('Insira todos os campos obrigatórios.');
       }
-      
     } else {
+      onError();
       showError('Insira todos os campos obrigatórios.');
     }
   } else {
+    onError();
     showError('Selecione um tipo de registro')
   }
 }
