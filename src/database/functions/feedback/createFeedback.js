@@ -11,8 +11,8 @@ export function createFeedBack(type, data, action) {
     .then(() => {
       action();
       Alert.alert(
-        'Sentimos muito por isso',
-        'Estamos trabalhando duro para ter um ambiente melhor à todos, sentimos muito pelo ocorrido e agradecemos pela sua contribuição! Quanto antes estaremos analisando seu feedback.'
+        'Feedback enviado com sucesso',
+        'Estamos trabalhando duro para ter um ambiente melhor à todos, sentimos muito pelo ocorrido e agradecemos pela sua contribuição! Quanto antes estaremos analisando seu feedback.',
         [
           { text: 'Ok' }
         ]
