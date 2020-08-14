@@ -62,8 +62,6 @@ export default function CreateJob ({ navigation }) {
   }
 
   const onError = (error) => {
-    console.log(error);
-
     setIsLoading(false);
     navigation.setOptions({
       headerShown: true,

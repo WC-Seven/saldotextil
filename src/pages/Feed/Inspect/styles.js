@@ -139,8 +139,6 @@ export const PublishInspect = ({ uid, image }) => {
     } else {
       user.detail(uid, (response) => setInspectUser(response));
     }
-
-    console.log(inspectUser);
   }, []);
   
   return (
@@ -186,7 +184,6 @@ export const BuyButton = ({ title, disabled = false, uid }) => {
       disabled={disabled}
       onPress={
         inspectUser ? () => {
-          console.log('enabled');
           if (inspectUser.phone !== '') {
             let number = inspectUser.phone.replace('(', '').replace(')', '').replace(' ', '').replace('-', '').replace('+', '');
             if (number.substring(0, 2) !== '55') {

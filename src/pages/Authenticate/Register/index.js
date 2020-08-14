@@ -389,8 +389,6 @@ export default function Register({ navigation }) {
                     }
                   } else if (!documentIsValid) {
                     Alert.alert('Erro', 'Número de documento inválido', [{ text: 'Ok' }]);
-                  } else {
-                    console.log('kajsdkjs')
                   }
                 }
               }}

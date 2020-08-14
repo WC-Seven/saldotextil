@@ -46,7 +46,6 @@ export default function UpdateEmail({ navigation  }) {
       setMessage('Endereço indisponível');
     } else {
       setMessage('Algo deu errado');
-      console.log(e.code);
     }
 
     setTimeout(() => {

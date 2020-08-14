@@ -21,7 +21,6 @@ export const tryLogin = (data, setAuthenticatedUser, onError) => {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
       firebase.auth().signInWithEmailAndPassword(data.email, data.password)
       .then(({ user }) => {
-        console.log('user logged')
         authUser = {
           id: user.uid,
           email: user.email,

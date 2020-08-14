@@ -56,8 +56,6 @@ export const Image = ({ index, source }) => {
         setIntensity(0);
       }, 2000);
     } else {
-      console.log(index);
-
       if (index !== undefined) {
         const tempArr = head.images;
         tempArr.splice(index, 1);

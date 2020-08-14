@@ -92,7 +92,6 @@ export default function FeedInspect({ navigation, route }) {
             <>
               <RbSheetOption iconName="flag" title="Reportar" onPress={() => {
                 rbRef.current.close();
-                console.log(item);
                 navigation.navigate('Feedback', { announcement: { uid: item.uid, name: item.title, image: item.images ? item.images[0] : noImage  } });
               }} />
               <RbSheetOption iconName="email" title="Mensagem para o vendendor" onPress={() => {}} />

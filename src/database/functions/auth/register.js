@@ -26,18 +26,12 @@ async function createUser (data, setAuthenticatedUser, onError) {
     .catch((error) => {
       // Handle errors here
       if (error.code === 'auth/weak-password') {
-        onError();
         showError('Sua senha é muito fraca')
       } else if (error.code === 'auth/email-already-in-use') {
-        onError();
         showError('Este e-mail já está vinculado à outra conta');
       } else if (error.code === 'auth/invalid-email') {
-        onError();
         showError('E-mail inválido');
-      } else {
-        console.log(error.code);
       }
-
       onError();
     });
 
@@ -45,11 +39,9 @@ async function createUser (data, setAuthenticatedUser, onError) {
   if (proced) {
     if (createdUser.id) {
       let newSignIn;
-      console.log(`Account type: ${data.type.substring(0, 2)}`);
       // Recebendo dados específicos de pessoa física ou jurídica
       switch (data.type.substring(0, 2)) {
         case 'pj':
-          console.log('Pessoa Jurídica');
           newSignIn = {
             andress: data.andress,
             createdAt: moment().format('L'),
@@ -67,7 +59,6 @@ async function createUser (data, setAuthenticatedUser, onError) {
           break;
 
         default:
-          console.log('Pessoa Física');
           newSignIn = {
             andress: data.andress,
             createdAt: moment().format('L'),
@@ -133,7 +124,6 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
   
             // Proceding to creating authentication
             // creating user
-            console.log('lasdj')
             await createUser(data, setAuthenticatedUser, onError);
             
           } else {

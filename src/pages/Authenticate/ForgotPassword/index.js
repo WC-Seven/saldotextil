@@ -43,7 +43,6 @@ export default function ForgotPassword({ navigation }) {
       setErrorMessage('Algo deu errado, tente novamente mais tarde');
     }
     setIsError(true);
-    console.log(e);
     setTimeout(() => {
       stopLoading();
     }, 1500)

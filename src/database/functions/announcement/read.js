@@ -5,7 +5,6 @@ export function read(action, section, folder, subfolder, child = '', value = '',
   let find;
 
   if (child !== '' && value !== '') {
-    console.log('filtering....')
     find = firebase.database().ref(`${section}/${folder}/${subfolder}`).orderByChild(child).equalTo(value);
   } else {
     find = firebase.database().ref(`${section}/${folder}/${subfolder}`).orderByChild('createdAt').limitToLast(quantity);

@@ -31,12 +31,9 @@ export default function Profile({ navigation, route }) {
   const [modalImage, setModalImage] = React.useState(false);
   const [imagePickerStatus, setImagePickerStatus] = React.useState(false);
 
-  console.log(route.params)
-
   React.useEffect(() => {
     setUserAnn([]);
     announcement.read((arr) => setUserAnn(arr), 'primaryAnnouncements', filters.adstype, filters.type, 'user', route.params.owner ? currentUser.id : user.id, 1000);
-    console.log(userAnn);
   }, [filters.adstype, filters.type]);
 
   async function getImage(type) {

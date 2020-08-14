@@ -9,7 +9,7 @@ export function create(section, folder, subfolder, data, action, onError = () =>
 
   if (data.images?.length > 0) {
     data.images.map((item, index, array) => fetch(item.uri)
-      .then((file) => file.blob(), () => console.log('Error in blob()'))
+      .then((file) => file.blob(), () => Alert.alert('Error', 'Error on blob', [{text: 'Ok'}]))
       .then((blob) => firebase.storage()
         .ref(`images/${annid}${index}${item.uri.substring(item.uri.lastIndexOf('.'), item.uri.length)}`)
         .put(blob), (e) => onError(e))
