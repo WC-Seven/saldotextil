@@ -48,7 +48,7 @@ export default function Agents({ navigation }) {
   return (
     <>
       <BottomButton
-        title="Criar anúncio de Representante"
+        title="Criar anúncio de vaga para representante"
         onPress={() => navigation.navigate('CreateAgent')}
         secondaryTitle="Anunciar currículo"
         secondaryOnPress={() => navigation.navigate('PublishAgent')}
@@ -114,7 +114,10 @@ export default function Agents({ navigation }) {
         } />
         <Filters
           data={[
-            { title: 'Estado', action: () => setModal({...modal, localization: true})}
+            {
+              title: modal.localization === '' ? 'Estado' : filters.localization,
+              action: () => setModal({...modal, localization: true})
+            }
           ]}
         />
 

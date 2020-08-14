@@ -8,7 +8,7 @@ import { getCitiesByState, getStates } from '../../../utils/locals';
 import { announcement } from '../../../database/functions';
 
 export default function CreateAgent ({ navigation }) {
-  const { currentUser } = React.useContext(GeneralContext);
+  const { currentUser , currentEmail} = React.useContext(GeneralContext);
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -18,8 +18,8 @@ export default function CreateAgent ({ navigation }) {
   const [agent, setAgent] = React.useState({
     assignments: '',
     city: currentUser.andress.city,
-    contactMailAndress: '',
-    contactWhatsapp: '',
+    contactMailAndress: currentEmail,
+    contactWhatsapp: currentUser.phone,
     description: '',
     position: '',
     requirements: '',
@@ -72,11 +72,11 @@ export default function CreateAgent ({ navigation }) {
       <Container>
         <Title title="Novo anúncio" />
         <Label title="Sobre a representação" />
-        <TextInput value={agent.title} onChangeText={value => setAgent({...agent, title: value})} placeholder="Represental qual produto" />
+        <TextInput value={agent.title} onChangeText={value => setAgent({...agent, title: value})} placeholder="Representa qual produto" />
         <TextInput value={agent.position} onChangeText={value => setAgent({...agent, position: value})} placeholder="Cargo" />
 
 
-        <Label title="Localização" />
+        <Label title="Área de atuação" />
         <View style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}>
           <Picker selectedValue={agent.state} onValueChange={value => setAgent({...agent, state: value})}>
             <Picker.Item value="" label="Estado (Selecione)" />
@@ -120,7 +120,7 @@ export default function CreateAgent ({ navigation }) {
           onChangeText={value => setAgent({...agent, description: value})}
           multiline
           numberOfLines={3}
-          placeholder="Descrição geral do produto"
+          placeholder="Descrição geral do produto a ser representado"
         />
 
         <Textarea
@@ -128,7 +128,7 @@ export default function CreateAgent ({ navigation }) {
           onChangeText={value => setAgent({...agent, requirements: value})}
           multiline
           numberOfLines={3}
-          placeholder="Requisitos"
+          placeholder="Requisitos necessários do representante"
         />
 
         <Textarea
@@ -136,7 +136,7 @@ export default function CreateAgent ({ navigation }) {
           onChangeText={value => setAgent({...agent, assignments: value})}
           multiline
           numberOfLines={3}
-          placeholder="Atribuições"
+          placeholder="Atribuições do representante"
         />
 
         <Textarea
@@ -144,7 +144,7 @@ export default function CreateAgent ({ navigation }) {
           onChangeText={value => setAgent({...agent, commission: value})}
           multiline
           numberOfLines={3}
-          placeholder="Comissão"
+          placeholder="Forma de pagamento da comissão"
         />
 
         <Button

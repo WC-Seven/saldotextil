@@ -142,7 +142,7 @@ export default function Routes () {
             <Stack.Screen name="DetailJob" component={DetailJob} options={({ navigation }) => options(navigation, '')} />
             <Stack.Screen name="PublishJob" component={PublishJob} options={({ navigation }) => options(navigation, 'Anunciar currículo')} />
 
-            <Stack.Screen name="CreateAgent" component={CreateAgent} options={({ navigation }) => options(navigation, 'Criar anúncio - Emprego')} />
+            <Stack.Screen name="CreateAgent" component={CreateAgent} options={({ navigation }) => options(navigation, 'Criar anúncio - Representantes')} />
             <Stack.Screen name="DetailAgent" component={DetailAgent} options={({ navigation }) => options(navigation, '')} />
             <Stack.Screen name="PublishAgent" component={PublishAgent} options={({ navigation }) => options(navigation, 'Anunciar currículo')} />
 
