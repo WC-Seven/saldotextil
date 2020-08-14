@@ -6,8 +6,8 @@ import { Container, Horizontal, Save, SubTitle, TextInput, Description } from '.
 import GeneralContext from '../../../context';
 import { user } from '../../../database/functions';
 
-export default function Update() {
-  const { currentUser, setAuthUser } = React.useContext(GeneralContext);
+export default function Update({ navigation }) {
+  const { currentUser, updateAuthUser } = React.useContext(GeneralContext);
 
   const [newUser, setNewUser] = React.useState({
     andress: {
@@ -147,7 +147,7 @@ export default function Update() {
         Se quiser modificar o tipo de registro, CPF, CNPJ, E-mail ou Senha, vá para configurações.
       </Description>
 
-      <Save onPress={() => user.update(newUser, () => status.set(false), setAuthUser) } />
+      <Save onPress={() => user.update(newUser, () => navigation.goBack(), (user) => updateAuthUser(user)) } />
     </Container>
   );
 }
