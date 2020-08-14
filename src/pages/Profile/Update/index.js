@@ -2,15 +2,12 @@ import React from 'react';
 import { Alert, Keyboard } from 'react-native';
 import cep from 'cep-promise';
 
-import { Container, Header, Horizontal, Save, SubTitle, TextInput, Title, Description } from './styles';
+import { Container, Horizontal, Save, SubTitle, TextInput, Description } from './styles';
 import GeneralContext from '../../../context';
 import { user } from '../../../database/functions';
 
 export default function Update() {
   const { currentUser, setAuthUser } = React.useContext(GeneralContext);
-
-  const [cnpjField, setCnpjField] = React.useState(null);
-  const [cpfField, setCpfField] = React.useState(null);
 
   const [newUser, setNewUser] = React.useState({
     andress: {
@@ -24,8 +21,8 @@ export default function Update() {
     },
     createdAt: currentUser.createdAt,
     document: {
-      cpf: currentUser.document.cpf,
-      cnpj: currentUser.document.cnpj,
+      cpf: currentUser.document.cpf ?? '',
+      cnpj: currentUser.document.cnpj ?? '',
     },
     id: currentUser.id,
     image: currentUser.image,

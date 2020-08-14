@@ -14,7 +14,8 @@ export async function updateUser(user, onSucess, updateAuthUser, onError = () =>
       );
       updateAuthUser(user);
     })
-    .catch(() => {
+    .catch((e) => {
+      console.log(e)
       onError();
       Alert.alert(
         'Erro',
