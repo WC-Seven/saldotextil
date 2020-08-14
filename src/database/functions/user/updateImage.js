@@ -1,7 +1,6 @@
 import firebase from '../../config';
 
 function updateAnnUserImageFromUid(uid, image, section, folder, subfolder) {
-  console.log('1');
   firebase.database().ref(`${section}/${folder}/${subfolder}`).orderByChild('user').equalTo(uid).on('child_added', snapshot => {
     snapshot.ref.update({ userImage: image });
   });
