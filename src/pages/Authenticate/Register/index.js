@@ -1,7 +1,7 @@
 import React from 'react';
 import cep from 'cep-promise';
 import CheckBox from '@react-native-community/checkbox';
-import { TouchableOpacity, StatusBar, Alert, Keyboard, Platform, ToastAndroid } from 'react-native';
+import { TouchableOpacity, StatusBar, Alert, Keyboard, Platform, ToastAndroid, Text } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 
 import {
@@ -12,7 +12,7 @@ import {
 import GeneralContext from '../../../context';
 import { auth } from '../../../database/functions';
 
-export default function Register() {
+export default function Register({ navigation }) {
   const { setAuthUser } = React.useContext(GeneralContext);
 
   const [isLoading, setIsLoading] = React.useState(false);
@@ -360,7 +360,7 @@ export default function Register() {
                 onTintColor="#2b7ed7"
               />
               <Description>
-                Você concorda com os termos de uso
+                Você concorda com os <Text onPress={() => navigation.navigate('UserAgreement')} style={{ color: '#2b7ed7' }}>termos de uso</Text>
               </Description>
             </InlineForm>
             

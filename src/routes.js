@@ -184,6 +184,7 @@ export default function Routes () {
             <Stack.Screen name="Authenticate" component={Authenticate} options={{ headerShown: false }} />
             <Stack.Screen name="Register" component={Register} options={({ navigation }) => options(navigation, 'Registre-se')} />
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={({ navigation }) => options(navigation, 'Redefinir senha')} />
+            <Stack.Screen name="UserAgreement" component={UserAgreement} options={({ navigation }) => options(navigation, 'Termos de Uso')} />
           </Stack.Navigator>
         )
       }
