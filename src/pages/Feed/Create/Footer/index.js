@@ -25,7 +25,7 @@ export default function Footer({ navigation, item }) {
       }
     } else {
       setExibPrice(value);
-      const price = value.substring(3, value.length);
+      const price = value.substring(3, value.length).replace(',', '.');
       setHead({ ...head, price });
     }
   }
