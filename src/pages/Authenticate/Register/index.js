@@ -165,7 +165,9 @@ export default function Register() {
               <Picker.Item disabled value="" label="Tipo de Registro (selecione)" />
               <Picker.Item value="pf-aut" label="Autônomo" />
               <Picker.Item value="pj-com" label="Comércio" />
+              <Picker.Item value="pj-ent" label="Entidade Filantrópica" />
               <Picker.Item value="pj-ind" label="Indústria" />
+              <Picker.Item value="pj-ong" label="ONG" />
               <Picker.Item value="pf" label="Pessoa física" />
               <Picker.Item value="pj" label="Pessoa jurídica" />
               <Picker.Item value="pf-pre" label="Prestador de serviços" />
