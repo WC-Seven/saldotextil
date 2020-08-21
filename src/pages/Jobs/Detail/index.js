@@ -4,14 +4,20 @@ import { Image, View, TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 import { Icon } from 'react-native-elements';
 
+import moment from 'moment-timezone';
+import 'moment/locale/pt-br';
+
 export default function DetailJob ({ route }) {
   const { announcement } = route.params;
   const { user } = announcement;
 
+  const date = moment().tz('America/Sao_Paulo').fromNow();
+  console.log(date);
   return (
     <Container>
 
       <Text bold size={20}>{ announcement.title }</Text>
+      <Text muted>{ date }</Text>
       <Text>{ `${announcement.city} - ${announcement.state}` }</Text>
       <Text>{ `Tipo de contrato: ${announcement.position}` }</Text>
       <Text>{ `Salário: ${announcement.salary}` }</Text>

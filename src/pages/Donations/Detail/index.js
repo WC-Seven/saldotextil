@@ -7,9 +7,14 @@ import { Container, DarkContainer, DetailBlade, FullImage, Image, Text } from '.
 import GeneralContext from '../../../context';
 import { announcement } from '../../../database/functions';
 
+import moment from 'moment';
+import 'moment/locale/pt-br';
+
 export default function DetailDonation({ navigation, route }) {
   const { currentUser } = React.useContext(GeneralContext);
   const { item } = route.params;
+
+  const date = moment(item.createdAt).fromNow();
 
   const [isModalActive, setIsModalActive] = React.useState(false);
   const noImage = 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fnoimageavailable.jpg?alt=media&token=1b7c718e-e6d6-49d0-a1c1-3eb7dae80c39';
@@ -45,6 +50,7 @@ export default function DetailDonation({ navigation, route }) {
             <View style={{ flex: 1 }}>
               <Text weight="SemiBold" size={21}>{ item.title }</Text>
               <Text>{ item.productDescription }</Text>
+              <Text muted>{ date }</Text>
             </View>
             <Menu>
               <MenuTrigger>

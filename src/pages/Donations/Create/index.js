@@ -33,7 +33,7 @@ export default function CreateDonation({ navigation, route }) {
 
     user: currentUser.id,
     userImage: currentUser.image,
-    createdAt: moment().format('L'),
+    createdAt: moment(),
   });
 
 

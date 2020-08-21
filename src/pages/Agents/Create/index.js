@@ -28,7 +28,7 @@ export default function CreateAgent ({ navigation }) {
     title: '',
     user: currentUser.id,
     userImage: currentUser.image,
-    createdAt: moment().format('L'),
+    createdAt: moment(),
   });
 
   React.useEffect(() => {

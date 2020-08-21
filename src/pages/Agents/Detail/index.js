@@ -4,16 +4,22 @@ import { Image, View, TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 import { Icon } from 'react-native-elements';
 
+import moment from 'moment';
+import 'moment/locale/pt-br';
+
 export default function DetailAgent ({ route }) {
   const { announcement } = route.params;
   const { user } = announcement;
 
+
+  const date = moment(announcement.createdAt).fromNow();
   return (
     <Container>
 
       <Text bold size={20}>{ announcement.title }</Text>
       <Text>{ `${announcement.city} - ${announcement.state}` }</Text>
       <Text>{ `Cargo: ${announcement.position}` }</Text>
+      <Text muted>{ date }</Text>
 
       <View style={{
         marginTop: 20,

@@ -24,7 +24,7 @@ export const FullImage = styled.Image`
 `;
 
 export const Text = styled.Text`
-  color: #333;
+  color: ${props => props.muted ? '#aaa' : '#333'};
   font-family: Poppins ${props => props.weight ?? 'Regular'};
   font-size: ${props => props.size ?? 14}px;
   margin-top: ${props => props.top ?? 0}px;

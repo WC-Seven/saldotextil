@@ -7,7 +7,7 @@ export const Container = styled.ScrollView`
 `;
 
 export const Text = styled.Text`
-  color: #333;
+  color: ${props=> props.muted ? '#aaa' : '#333'};
   font-family: Poppins ${props => props.bold ? 'SemiBold' : 'Regular'};
   font-size: ${props => props.size ?? 16}px;
 `;
