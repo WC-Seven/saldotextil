@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Modal, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Alert, Modal, TouchableOpacity, TouchableWithoutFeedback, View, Linking } from 'react-native';
 import { Icon, Avatar } from 'react-native-elements';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import { Container, DarkContainer, DetailBlade, FullImage, Image, Text } from './styles';
@@ -116,6 +116,10 @@ export default function DetailDonation({ navigation, route }) {
       <View style={{ backgroundColor: '#fff', padding: 15 }}>
         <TouchableOpacity
           style={{ borderRadius: 10, height: 50, alignItems: 'center', justifyContent: 'center', backgroundColor: '#2b7ed7' }}
+          onPress={() => {
+            const phone = "55" + item.user.phone.replace('(', '').replace(')', '').replace('-', '');
+            Linking.openURL(`https://wa.me/${phone}`)
+          }}
         >
           <Text style={{ color: '#fff', paddingTop: 5 }}>Whatsapp</Text>
         </TouchableOpacity>
