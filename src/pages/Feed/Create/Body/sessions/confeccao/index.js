@@ -25,7 +25,7 @@ export default function Confeccao({ item }) {
       setBody({
         gender: item.gender ? item.gender : 'feminino',
         category: item.category ? item.category : 'Blusas',
-        subcategory: item.subcategory ? item.subcategory : '',
+        subcategory: item.subcategory ? item.subcategory : [],
         colors: item.colors ? item.colors : [],
         sizes: item.sizes ? item.sizes : [],
         quantity: item.quantity ? item.quantity.substring(0, item.quantity.indexOf(' ')) : '',
