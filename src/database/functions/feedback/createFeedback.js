@@ -12,7 +12,7 @@ export function createFeedBack(type, data, action) {
       action();
       Alert.alert(
         'Feedback enviado com sucesso',
-        'Estamos trabalhando duro para ter um ambiente melhor à todos, sentimos muito pelo ocorrido e agradecemos pela sua contribuição! Quanto antes estaremos analisando seu feedback.',
+        'Obrigado pelo seu feedback. Vamos analisar e responderemos o mais rápido possível.',
         [
           { text: 'Ok' }
         ]
