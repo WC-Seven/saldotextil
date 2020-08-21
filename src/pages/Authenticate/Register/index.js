@@ -245,7 +245,7 @@ export default function Register({ navigation }) {
               }}
               value={register.landline}
               onChangeText={value => setRegister({ ...register, landline: value })}
-              placeholder="Telefone Fixo *"
+              placeholder="Telefone Fixo"
             />
 
             <TextInput

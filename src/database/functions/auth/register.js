@@ -109,7 +109,6 @@ export async function tryRegister(data, setAuthenticatedUser, onError) {
       data.password !== '' &&
       data.passwordConfirm !== '' &&
       data.phone !== '' &&
-      data.landline !== '' &&
       data.andress.state !== '' &&
       data.andress.city !== '' &&
       data.andress.neighborhood !== '' &&
