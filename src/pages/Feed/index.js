@@ -155,7 +155,7 @@ export default function Feed({ navigation }) {
           renderItem={item => <Product item={item} adstype={results.adstype} type={results.type} />}
           ListFooterComponent={() => <Footer />}
           contentContainerStyle={{ paddingTop: headerMaxHeight-50 }}
-          scrollEventThrottle={1}
+          scrollEventThrottle={16}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { y: scrollYAnimatedValue } }}], { useNativeDriver: false }
           )}
