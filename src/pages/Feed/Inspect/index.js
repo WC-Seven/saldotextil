@@ -39,7 +39,7 @@ export default function FeedInspect({ navigation, route }) {
   const measure = item.price.substring(item.price.indexOf('/'), item.price.length);
 
   
-  const date = moment(item.createdAt, "MM/DD/YYYY").tz('America/Sao_Paulo').fromNow();
+  const date = moment(item.createdAt).tz('America/Sao_Paulo').fromNow();
 
   return (
     <Container>

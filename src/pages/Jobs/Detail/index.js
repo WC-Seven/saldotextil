@@ -5,14 +5,12 @@ import { Linking } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import moment from 'moment-timezone';
-import 'moment/locale/pt-br';
 
 export default function DetailJob ({ route }) {
   const { announcement } = route.params;
   const { user } = announcement;
 
-  const date = moment().tz('America/Sao_Paulo').fromNow();
-  console.log(date);
+  const date = moment(announcement.createdAt).fromNow();
   return (
     <Container>
 
