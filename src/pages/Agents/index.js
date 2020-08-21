@@ -126,7 +126,7 @@ export default function Agents({ navigation }) {
             selectedValue={filters.city}
             onValueChange={value => setFilters({...filters, city: value})}
           >
-            <Picker.Item value="" label={filters.localization === '' ? "Selecione um estado" : cities[0] ? 'Cidade (selecione)' : 'Carregando...'  } />
+            <Picker.Item value="" label={filters.localization === '' ? "Selecione um estado" : cities[0] ? 'Cidade (todas)' : 'Carregando...'  } />
 
             {
               cities.map((item) => (

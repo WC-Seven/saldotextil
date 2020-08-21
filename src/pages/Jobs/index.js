@@ -113,7 +113,7 @@ export default function Jobs({ navigation }) {
         } />
         <Filters
           data={[
-            { title: 'Localização', action: () => setModal({...modal, localization: true})}
+            { title: filters.localization !== '' ? filters.localization : 'Localização', action: () => setModal({...modal, localization: true})}
           ]}
         />
 
@@ -122,7 +122,7 @@ export default function Jobs({ navigation }) {
             selectedValue={filters.city}
             onValueChange={value => setFilters({...filters, city: value})}
           >
-            <Picker.Item value="" label={filters.localization === '' ? "Selecione um estado" : cities[0] ? 'Cidade (selecione)' : 'Carregando...'  } />
+            <Picker.Item value="" label={filters.localization === '' ? "Selecione um estado" : cities[0] ? 'Cidade (todas)' : 'Carregando...'  } />
 
             {
               cities.map((item) => (

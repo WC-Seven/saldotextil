@@ -55,7 +55,7 @@ export default function Donations({ navigation }) {
 
         <View style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}>
           <Picker selectedValue={filters.city} onValueChange={value => setFilters({...filters, city: value})}>
-            <Picker.Item value="" label={filters.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (selecione)" : "Carregando..."} />
+            <Picker.Item value="" label={filters.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (todas)" : "Carregando..."} />
             {
               cities.map((item) => (
                 <Picker.Item value={item.name} label={item.name} key={item.id} />
