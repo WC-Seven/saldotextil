@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Platform, ToastAndroid, Alert, StatusBar } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { Container, MaskedInput, LoadingContainer, Textarea, TextInput, Button, Label, Title } from './styles';
-
+import moment from 'moment';
 import GeneralContext from '../../../context';
 import { getCitiesByState, getStates } from '../../../utils/locals';
 import { announcement } from '../../../database/functions';
@@ -28,6 +28,7 @@ export default function CreateAgent ({ navigation }) {
     title: '',
     user: currentUser.id,
     userImage: currentUser.image,
+    createdAt: moment().format('L'),
   });
 
   React.useEffect(() => {

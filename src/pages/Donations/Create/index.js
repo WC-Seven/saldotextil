@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Text, TouchableOpacity, View, StatusBar, Alert, ScrollView, Platform, ToastAndroid } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import CheckBox from '@react-native-community/checkbox'
+import moment from 'moment';
 import { 
   Button, Container, ImagePicker, DarkContainer, Window, ListItem, Label, Textarea, TextInput, LoadingContainer,
 } from './styles';
@@ -31,7 +32,8 @@ export default function CreateDonation({ navigation, route }) {
     state: route.params ? route.params.item.state : currentUser.andress.state ?? 'SP',
 
     user: currentUser.id,
-    userImage: currentUser.image
+    userImage: currentUser.image,
+    createdAt: moment().format('L'),
   });
 
 
