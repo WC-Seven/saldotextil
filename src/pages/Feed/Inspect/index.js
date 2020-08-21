@@ -1,6 +1,9 @@
 import React from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { StatusBar, Alert } from 'react-native';
+import { StatusBar, Alert, View, Text } from 'react-native';
+
+import moment from 'moment-timezone';
+import 'moment/locale/pt-br';
 
 import { BuyButton, Container, Detail, ImageScrollView, InsideContainer, OptionsButton, RbSheetOption, Quantity, Price, Cents, PublishInspect, Title } from './styles';
 
@@ -34,6 +37,9 @@ export default function FeedInspect({ navigation, route }) {
 
   const price = parseFloat(item.price.substring(3, item.price.indexOf('/')-1));
   const measure = item.price.substring(item.price.indexOf('/'), item.price.length);
+
+  
+  const date = moment(item.createdAt, "MM/DD/YYYY").tz('America/Sao_Paulo').fromNow();
 
   return (
     <Container>
@@ -104,8 +110,13 @@ export default function FeedInspect({ navigation, route }) {
       <ImageScrollView arr={item.images || []} />
       <InsideContainer>
         <Title>{ route.params.name }</Title>
-        
+        <View style={{ marginBottom: 30 }}>
+          <Text>
+            Publicado { date }
+          </Text>
+        </View>
         <PublishInspect uid={item.user} image={item.userImage} />
+        
 
         <Detail type={type} item={item} />
 
