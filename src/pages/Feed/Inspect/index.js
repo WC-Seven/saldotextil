@@ -121,7 +121,7 @@ export default function FeedInspect({ navigation, route }) {
         <Detail type={type} item={item} />
 
         <Quantity>{ item.quantity }</Quantity>
-        <Price>{ numberBig(price, 0) }<Cents>{ `,${ numberBig(price, 1) } ${ measure }` }</Cents></Price>
+        <Quantity style={{ marginTop: 0 }}>{ numberBig(price, 0) }{ `,${ numberBig(price, 1) } ${ measure }` }</Quantity>
 
         {
           item.user === currentUser.id ? (
