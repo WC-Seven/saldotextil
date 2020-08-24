@@ -73,7 +73,7 @@ export default function CreateAgent ({ navigation }) {
       <Container>
         <Title title="Novo anúncio" />
         <Label title="Sobre a representação" />
-        <TextInput value={agent.title} onChangeText={value => setAgent({...agent, title: value})} placeholder="Representa qual produto" />
+        <TextInput value={agent.title} onChangeText={value => setAgent({...agent, title: value})} placeholder="Representar qual produto" />
         <TextInput value={agent.position} onChangeText={value => setAgent({...agent, position: value})} placeholder="Cargo" />
 
 

@@ -458,6 +458,7 @@ const BuyButtonContainer = styled.TouchableOpacity`
   background-color: ${props => props.disabled ? '#CCC' : '#2B7ED7' };
   border-radius: 10px;
   flex-direction: row;
+  margin-top: 15px;
   min-height: 60px;
   justify-content: center;
 `;

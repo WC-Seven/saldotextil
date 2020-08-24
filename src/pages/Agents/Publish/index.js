@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, View, Platform, ToastAndroid, StatusBar } from 'react-native';
+import { Alert, View, Platform, ToastAndroid, StatusBar, Text } from 'react-native';
 import { Button, Container, LoadingContainer, TextInput } from './styles';
 
 import * as DocumentPicker from 'expo-document-picker';
@@ -20,7 +20,8 @@ export default function PublicAgent({ navigation }) {
     product: '',
     experience: '',
     productExperience: '',
-    commission: ''
+    commission: '',
+    observations: ''
   });
 
   const pickDocument = () => {
@@ -100,6 +101,16 @@ export default function PublicAgent({ navigation }) {
                 value={cv.commission}
                 onChangeText={value => setCv({...cv, commission: value})}
               />
+
+              <TextInput
+                style={{height: 100, textAlignVertical: 'top'}}
+                multiline
+                placeholder="Observações"
+                value={cv.observations}
+                onChangeText={value => setCv({...cv, observations: value})}
+              />
+              <Text>Estados e cidades que pretende atuar, e demais informações.</Text>
+
               <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <Button
                   onPress={() => {

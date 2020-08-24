@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 
 import { user } from '../../../database/functions';
 
@@ -42,9 +42,7 @@ export default function MiniJob ({ item, navigation }) {
               source={{ uri: announcement.userImage }}
               style={{ height: 40, width: 40, borderRadius: 4, marginTop: 8 }}
             />
-            <TouchableWithoutFeedback
-              onPress={() => navigation.navigate('DetailAgent', { name: announcement.title, announcement })}
-            >
+            <TouchableWithoutFeedback>
               <View style={{ marginLeft: 10, flex: 1 }}>
                 <Text
                   style={{ fontSize: 18, fontFamily: 'Poppins Medium', paddingTop: 2, flex: 1 }}
@@ -57,6 +55,21 @@ export default function MiniJob ({ item, navigation }) {
                 <Text style={{ fontFamily: 'Poppins Medium' }}>
                   { `${announcement.city} - ${announcement.state}` }
                 </Text>
+
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate('DetailAgent', { name: announcement.title, announcement })}
+                  style={{
+                    alignItems: 'center',
+                    backgroundColor: '#A5C8EE',
+                    borderRadius: 4,
+                    height: 40,
+                    justifyContent: 'center',
+                    marginTop: 10,
+                  }}
+                >
+                  <Text style={{ color: '#fff', fontFamily: 'Poppins Regular', marginTop: 3 }}
+                  >Ver detalhes</Text>
+                </TouchableOpacity>
                 <View style={{ borderBottomColor: '#ccc', borderBottomWidth: 0.3, height: 10 }} />
               </View>
             </TouchableWithoutFeedback>

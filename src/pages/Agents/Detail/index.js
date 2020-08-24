@@ -62,18 +62,19 @@ export default function DetailAgent ({ route }) {
         </View>
       </View>
 
-      <Text style={{ marginTop: 20 }} bold size={20}>Descrição do Produto</Text>
-      <Text>{ announcement.description }</Text>
+      <View style={{ padding: 15, backgroundColor: '#f2f2f2', marginTop: 15, borderRadius: 15 }}>
+        <Text bold size={20}>Descrição do Produto</Text>
+        <Text>{ announcement.description }</Text>
 
-      <Text style={{ marginTop: 20 }} bold size={20}>Requisitos</Text>
-      <Text>{ announcement.requirements }</Text>
+        <Text style={{ marginTop: 20 }} bold size={20}>Requisitos</Text>
+        <Text>{ announcement.requirements }</Text>
 
-      <Text style={{ marginTop: 20 }} bold size={20}>Atribuições</Text>
-      <Text>{ announcement.assignments }</Text>
+        <Text style={{ marginTop: 20 }} bold size={20}>Atribuições</Text>
+        <Text>{ announcement.assignments }</Text>
 
-      <Text style={{ marginTop: 20 }} bold size={20}>Comissão</Text>
-      <Text>{ announcement.commission }</Text>
-
+        <Text style={{ marginTop: 20 }} bold size={20}>Comissão</Text>
+        <Text>{ announcement.commission }</Text>
+      </View>
     </Container>
   );
 }

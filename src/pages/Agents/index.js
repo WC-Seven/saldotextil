@@ -6,8 +6,6 @@ import { BottomButton, SecondaryBottomButton, Container, SpacedView, Interruptor
 
 import Filters from '../../components/Filters';
 import FiltersModal from '../../components/Modal';
-import FloatingButton from '../../components/FloatingButton';
-import MiniFloatingButton from '../../components/MiniFloatingButton';
 import MiniJob from './Mini';
 import CvMini from './CvMini';
 
