@@ -28,7 +28,7 @@ export const AnnouncementContextProvider = ({ children }) => {
     description: '',
     status: true,
     price: '',
-    createdAt: moment(),
+    createdAt: moment().format(),
   });
   const [body, setBody] = React.useState({});
 

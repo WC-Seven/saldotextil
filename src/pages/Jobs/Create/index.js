@@ -30,7 +30,7 @@ export default function CreateJob ({ navigation }) {
     title: '',
     user: currentUser.id,
     userImage: currentUser.image,
-    createdAt: moment(),
+    createdAt: moment().format(),
   });
 
   React.useEffect(() => {

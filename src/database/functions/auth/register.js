@@ -44,7 +44,7 @@ async function createUser (data, setAuthenticatedUser, onError) {
         case 'pj':
           newSignIn = {
             andress: data.andress,
-            createdAt: moment().format('L'),
+            createdAt: moment().format(),
             document: {
               cnpj: data.document.cnpj,
             },
@@ -61,7 +61,7 @@ async function createUser (data, setAuthenticatedUser, onError) {
         default:
           newSignIn = {
             andress: data.andress,
-            createdAt: moment().format('L'),
+            createdAt: moment().format(),
             document: {
               cpf: data.document.cpf,
             },
