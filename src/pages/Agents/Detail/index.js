@@ -1,22 +1,50 @@
 import React from 'react';
 import { Container, Text } from './styles';
-import { Image, View, TouchableOpacity } from 'react-native';
+import { Alert, Image, View, TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-export default function DetailAgent ({ route }) {
+import GeneralContext from '../../../context';
+import { announcement as Actions } from '../../../database/functions';
+
+export default function DetailAgent ({ navigation, route }) {
+  const { currentUser } = React.useContext(GeneralContext);
   const { announcement } = route.params;
   const { user } = announcement;
+
+  React.useEffect(() => {
+    if (currentUser.id === announcement.user.id) {
+      navigation.setOptions({
+        headerRight: () => (
+          <TouchableOpacity
+            style={{ backgroundColor: '#f2f2f2', borderRadius: 4, alignItems: 'center', padding: 5, marginRight: 15, flexDirection: 'row' }}
+            onPress={() => {
+              Alert.alert(
+                'Tem certeza disso?',
+                'Essa é uma ação irreversível',
+                [
+                  { text: 'Cancelar' },
+                  { text: 'Sim, tenho certeza', onPress: () => Actions.destroy('secondaryAnnouncements', 'agents', 'ads', [], announcement.uid, () => navigation.goBack())}
+                ]
+              )
+            }}            
+          >
+            <Text style={{ marginHorizontal: 5, paddingTop: 2 }}>Excluir</Text>
+            <Icon name="delete" type="material-community" />
+          </TouchableOpacity>
+        )
+      });
+    }
+  }, []);
 
 
   const date = moment(announcement.createdAt).fromNow();
   return (
     <Container>
 
-      <Text bold size={20}>{ announcement.title }</Text>
       <Text>{ `${announcement.city} - ${announcement.state}` }</Text>
       <Text>{ `Cargo: ${announcement.position}` }</Text>
       <Text muted>{ date }</Text>

@@ -14,6 +14,7 @@ export default function PublicAgent({ navigation }) {
   const [cv, setCv] = React.useState({
     user: currentUser.id,
     userImage: currentUser.image,
+    city: currentUser.andress.city,
     state: currentUser.andress.state,
     images: [],
 
@@ -109,7 +110,7 @@ export default function PublicAgent({ navigation }) {
                 value={cv.observations}
                 onChangeText={value => setCv({...cv, observations: value})}
               />
-              <Text>Estados e cidades que pretende atuar, e demais informações.</Text>
+              <Text>Estados e cidades que pretende atuar e demais informações devem ser detalhadas no currículo.</Text>
 
               <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <Button

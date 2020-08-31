@@ -82,7 +82,7 @@ async function registerForPushNotificationsAsync() {
   let finalStatus = status;
   
   if (status !== 'granted') {
-    const { status } = await Permission.askAsync(Permission.NOTIFICATIONS);
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
     finalStatus = status;
   }
 
@@ -107,6 +107,7 @@ async function registerForPushNotificationsAsync() {
     body: JSON.stringify({
       application: "1",
       token: token.data,
+      platform: Platform.OS === 'android' ? 'android' : 'ios'
     })
   }).then((response) => {
     response.json().then((data) => {
@@ -115,6 +116,7 @@ async function registerForPushNotificationsAsync() {
         case 'already-subscrived': break;
         case 'error-subscribe': 
           Alert.alert('Erro', 'Erro ao inscrever-se para notificações', [{ text: 'Ok' }]);
+          console.log(data);
           break;
       }
     });

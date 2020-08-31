@@ -47,11 +47,13 @@ export default function CvMini ({ item }) {
 
                     <View style={{ marginLeft: 10}}>
                       <Text style={{ fontSize: 16, fontFamily: 'Poppins SemiBold' }}>{ announcement.user.name }</Text>
-                      <Text style={{ fontSize: 16, fontFamily: 'Poppins Medium' }}>{ `${announcement.user.andress.city} - ${announcement.user.andress.state}` }</Text>
+                      <Text style={{ fontSize: 16, fontFamily: 'Poppins Medium' }}>{ `${announcement.city} - ${announcement.state}` }</Text>
                     </View>
                   </View>
 
                   <View style={{ marginTop: 10 }}>
+                    <Text style={{ fontFamily: 'Poppins Regular' }}>{ `Produto pretendido - ${announcement.product}` }</Text>
+
                     <Text style={{ fontFamily: 'Poppins Regular' }}>{ `Experiência - ${announcement.experience}` }</Text>
                     <Text style={{ fontFamily: 'Poppins Regular' }}>{ `Produtos já representado - ${announcement.productExperience}` }</Text>
                     <Text style={{ fontFamily: 'Poppins Regular' }}>{ `Comissão pretendida - ${announcement.commission}` }</Text>

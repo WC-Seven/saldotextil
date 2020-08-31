@@ -156,6 +156,7 @@ export default function Jobs({ navigation }) {
                 )
               }
               
+              <View style={{ height: 100 }} />
                   
             </>
           ) : (

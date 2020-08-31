@@ -66,11 +66,14 @@ export default function Donations({ navigation }) {
 
         {
           results[0] ? (
-            <>{
-            results.map((item) => (
-              <MiniDonation key={item.uid} item={item} navigation={navigation} />
-            ))
-            }</>
+            <>
+              {
+                results.map((item) => (
+                  <MiniDonation key={item.uid} item={item} navigation={navigation} />
+                ))
+              }
+              <View style={{ height: 100 }} />
+            </>
           ) : (
             <Message>Não há items</Message>
           )

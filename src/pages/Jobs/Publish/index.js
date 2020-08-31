@@ -14,6 +14,7 @@ export default function PublicJob({ navigation }) {
   const [cv, setCv] = React.useState({
     user: currentUser.id,
     userImage: currentUser.image,
+    city: currentUser.andress.city,
     state: currentUser.andress.state,
     images: [],
 

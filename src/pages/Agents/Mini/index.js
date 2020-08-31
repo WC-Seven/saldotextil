@@ -56,6 +56,10 @@ export default function MiniJob ({ item, navigation }) {
                   { `${announcement.city} - ${announcement.state}` }
                 </Text>
 
+                <Text style={{ fontFamily: 'Poppins Regular', color: "#666" }}>
+                  { `${announcement.description}` }
+                </Text>
+
                 <TouchableOpacity 
                   onPress={() => navigation.navigate('DetailAgent', { name: announcement.title, announcement })}
                   style={{

@@ -157,7 +157,7 @@ export default function Agents({ navigation }) {
                   </>
                 )
               }
-              
+              <View style={{ height: 100 }} />
                   
             </>
           ) : (
