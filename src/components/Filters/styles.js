@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import styled from 'styled-components';
 
@@ -10,7 +11,7 @@ export const Container = styled.View`
 
 export const Button = ({ title, onPress }) => (
   <ButtonContainer onPress={onPress}>
-    <Icon name="close" color="transparent" type="material-community" />
+    <Text></Text>
     <ButtonText>{ title }</ButtonText>
     <Icon name="menu-down" color="#aaa" type="material-community" />
   </ButtonContainer>
