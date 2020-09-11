@@ -5,7 +5,7 @@ export function read(action, section, folder, subfolder, child = '', value = '',
   let find;
 
   if (child !== '' && value !== '') {
-    find = firebase.database().ref(`${section}/${folder}/${subfolder}`).orderByChild(child).equalTo(value);
+    find = firebase.database().ref(`${section}/${folder}/${subfolder}`).orderByChild('title').limitToLast(2);
   } else {
     find = firebase.database().ref(`${section}/${folder}/${subfolder}`).orderByChild('createdAt').limitToLast(quantity);
   }
@@ -14,6 +14,7 @@ export function read(action, section, folder, subfolder, child = '', value = '',
     if (snapshot.val()) {
       const keys = Object.keys(snapshot.val());
       response = Object.values(snapshot.val()).map((item, ind) => ({ ...item, uid: keys[ind] }));
+      
       action(response.reverse());
     } else action([]);
   });
