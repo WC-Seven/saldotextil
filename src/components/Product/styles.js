@@ -71,10 +71,24 @@ export const Item = ({ data, type, adstype }) => {
       <Top>
         <Title>{ data.title }</Title>
         <Subtitle>{ `${data.city} - ${data.state}` }</Subtitle>
-
-        <Price>
-          { numberToReal(price) } <Measure>{ measure }</Measure>
-        </Price>
+        {
+          type === 'confeccao' ? (
+            <>
+              <Measure>{ data.category } - { data.gender }</Measure>
+            </>
+          ) : type === 'malha' ? (
+            <>
+              <Measure> Artigo: { data.article }</Measure>
+              <Measure> Tipo de artigo: { data.articletype }</Measure>
+              <Measure> Composição: { data.composition }</Measure>
+            </>
+          ) : (
+            <>
+              <Measure>{ data.description }</Measure>
+            </>
+          )
+        }
+        <Measure>{ data.quantity }{' '}{ measure }</Measure>
       </Top>
       <Bottom>
         <Touchable onPress={() => {
@@ -219,4 +233,5 @@ export const Price = styled.Text`
 
 export const Measure = styled.Text`
   font-size: 13px;
+  font-family: Poppins Regular;
 `;
