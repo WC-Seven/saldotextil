@@ -1,6 +1,6 @@
 import React from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { StatusBar, Alert, View, Text } from 'react-native';
+import { StatusBar, Alert, View, Text, Linking } from 'react-native';
 
 import moment from 'moment-timezone';
 import 'moment/locale/pt-br';
@@ -118,9 +118,7 @@ export default function FeedInspect({ navigation, route }) {
                         number = `55${number}`;
                       }
                       
-                      if (!disabled) {
-                        Linking.openURL(`https://wa.me/${number}`);
-                      }
+                      Linking.openURL(`https://wa.me/${number}`);
                       } else {
                       Alert.alert(
                         'Erro',
