@@ -56,7 +56,6 @@ export default function CvMini ({ item }) {
 
                     <Text style={{ fontFamily: 'Poppins Regular' }}>{ `Experiência - ${announcement.experience}` }</Text>
                     <Text style={{ fontFamily: 'Poppins Regular' }}>{ `Produtos já representado - ${announcement.productExperience}` }</Text>
-                    <Text style={{ fontFamily: 'Poppins Regular' }}>{ `Comissão pretendida - ${announcement.commission}` }</Text>
 
                     <View style={{ marginTop: 5, backgroundColor: '#f2f2f2', padding: 15, borderRadius: 10 }}>
                       <Text style={{ fontFamily: 'Poppins Regular', marginTop: 3 }} >

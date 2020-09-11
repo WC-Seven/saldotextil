@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, View, Platform, ToastAndroid, StatusBar } from 'react-native';
+import { Alert, View, Platform, ToastAndroid, StatusBar, Text } from 'react-native';
 import { Button, Container, LoadingContainer, TextInput } from './styles';
 
 import * as DocumentPicker from 'expo-document-picker';
@@ -101,6 +101,10 @@ export default function PublicJob({ navigation }) {
                 value={cv.intendedSalary}
                 onChangeText={value => setCv({...cv, intendedSalary: value})}
               />
+
+              <Text>
+                Demais detalhes informar no currículo
+              </Text>
               <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <Button
                   onPress={() => {

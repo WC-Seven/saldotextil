@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 
 export function createFeedBack(type, data, action) {
   // Feedback type: default, user, announcement
-  const id = `${data.sentBy.id}-${Date.now()}`;
+  const id = `${Date.now()}-${data.sentBy.id}`;
   firebase
     .database()
     .ref(`feedback/${type}/${id}`)

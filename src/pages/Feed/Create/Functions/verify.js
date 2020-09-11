@@ -157,11 +157,17 @@ export async function verify(data, navigation, setIsLoading, updateUid = "") {
       {
         text: 'Sim, tenho certeza',
         onPress: async () => {
-          setIsLoading(false);
+          setIsLoading(true);
           if (updateUid === '') {
-            announcement.create('primaryAnnouncements', data.adstype, data.type, ann, () => navigation.navigate('Feed'));
+            announcement.create('primaryAnnouncements', data.adstype, data.type, ann, () => navigation.navigate('Feed'), () => {
+              setIsLoading(false);
+              showError("Algo de errado aconteceu, tente novamente.");
+            });
           } else {
-            announcement.update('primaryAnnouncements', data.adstype, data.type, ann, () => navigation.navigate('Feed'), () => {}, updateUid);
+            announcement.update('primaryAnnouncements', data.adstype, data.type, ann, () => navigation.navigate('Feed'), () => {
+              setIsLoading(false);
+              showError("Algo de errado aconteceu, tente novamente.");
+            }, updateUid);
           }
         },
       },

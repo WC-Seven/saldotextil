@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from 'react-native-elements';
 import styled from 'styled-components';
 
 export const Container = styled.View`
@@ -18,6 +19,7 @@ export const Search = styled.TextInput`
 
 export const Bagde = ({ title, action }) => (
   <BadgeContainer onPress={action}>
+    <Icon name="refresh" type="material-community" color="#F0F6FC" size={20} />
     <BadgeText>{ title }</BadgeText>
   </BadgeContainer>
 );
@@ -32,11 +34,13 @@ const BadgeContainer = styled.TouchableOpacity`
   border-radius: 20px;
   padding: 6px 15px 3px;
   margin-right: 5px;
+  flex-direction: row;
 `;
 
 const BadgeText = styled.Text`
   color: #F0F6FC;
   font-family: Poppins Medium;
+  margin-left: 5px;
 `;
 
 export const Message = styled.Text`

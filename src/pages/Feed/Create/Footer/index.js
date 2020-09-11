@@ -50,7 +50,7 @@ export default function Footer({ navigation, item }) {
       </Text>
 
       <Button
-        title={ item ? "Editar" : "Publicar"}
+        title={ item ? "Salvar alterações" : "Publicar"}
         onPress={item ? () => {
           verify({
             ...head,

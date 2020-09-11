@@ -161,7 +161,7 @@ export const MyAds = ({ item, adstype, type }) => {
   const noImage = 'https://firebasestorage.googleapis.com/v0/b/saldo-textil-ef063.appspot.com/o/defaults%2Fnoimageavailable.jpg?alt=media&token=1b7c718e-e6d6-49d0-a1c1-3eb7dae80c39';
   const navigation = useNavigation();
   return (
-    <MyAdsContainer onPress={() => navigation.navigate('FeedInspect', { name: item.title, item: item, type, adstype })}>
+    <MyAdsContainer onPress={() => navigation.push('FeedInspect', { name: item.title, item: item, type, adstype })}>
       <MyAdsImage source={{ uri: item.images ? item.images[0] : noImage }}  />
       <MyAdsTitle>{ item.title }</MyAdsTitle>
     </MyAdsContainer>
