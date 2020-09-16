@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { useNavigation } from '@react-navigation/native';
+import { Link, useNavigation } from '@react-navigation/native';
 
 import { Icon } from 'react-native-elements';
 import { Dimensions, Linking, Alert, Modal, StatusBar, TouchableWithoutFeedback } from 'react-native';
@@ -143,11 +143,10 @@ export const PublishInspect = ({ uid, image }) => {
   
   return (
     <PublishInspectContainer>
-      <PublishInpectHeader
-        onPress={inspectUser ?
+      <PublishInpectHeader>
+        <PIfirstElement onPress={inspectUser ?
           () => navigation.navigate('User', { owner: currentUser.id === uid, user: inspectUser })
           : () => {}}>
-        <PIfirstElement>
           <PublishInspectAvatar source={{ uri: image }} />
           {
             !inspectUser ? (
@@ -157,7 +156,14 @@ export const PublishInspect = ({ uid, image }) => {
             )
           }
         </PIfirstElement>
-        <PIsecondElement>
+        <PIsecondElement onPress={() => {
+          const phone = inspectUser.phone
+            .replace('(', '')
+            .replace(')', '')
+            .replace('-', '');
+
+          Linking.openURL(`https://wa.me/55${phone}`)
+        }}>
           <Icon name="phone" type="material-community" color="#333" iconStyle={{ marginLeft: 5}} />
           <Icon name="whatsapp" type="material-community" color="#333" iconStyle={{ marginLeft: 5}} />
         </PIsecondElement>
@@ -428,16 +434,16 @@ const RbSheetOptionText = styled.Text`
 `;
 
 const PublishInspectContainer = styled.View``;
-const PublishInpectHeader = styled.TouchableOpacity`
+const PublishInpectHeader = styled.View`
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
   padding: 6px 0px 4px;
 `;
-const PIfirstElement = styled.View`
+const PIfirstElement = styled.TouchableOpacity`
   flex-direction: row;
 `;
-const PIsecondElement = styled.View`
+const PIsecondElement = styled.TouchableOpacity`
   flex-direction: row;
 `;
 const PublishInspectAvatar = styled.Image`

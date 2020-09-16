@@ -133,7 +133,7 @@ export async function verify(data, navigation, setIsLoading, updateUid = "") {
   if (data.description === '') {
     showError('Diga mais sobre seu anúncio com uma descrição.');
     return true;
-  } if (data.price === '') {
+  } if (data.adstype === 'selling' && data.price === '') {
     showError('Insira o valor do seu produto');
     return true;
   } if (!data.user || data.user === '') {

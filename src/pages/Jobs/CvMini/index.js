@@ -48,6 +48,17 @@ export default function CvMini ({ item }) {
                     <View style={{ marginLeft: 10}}>
                       <Text style={{ fontSize: 16, fontFamily: 'Poppins SemiBold' }}>{ announcement.user.name }</Text>
                       <Text style={{ fontSize: 16, fontFamily: 'Poppins Medium' }}>{ `${announcement.user.andress.city} - ${announcement.user.andress.state}` }</Text>
+                      
+                      <TouchableOpacity onPress={() => {
+                        const phone = announcement.user.phone
+                          .replace('(', '')
+                          .replace(')', '')
+                          .replace('-', '');
+
+                        Linking.openURL(`https://wa.me/55${phone}`)
+                      }}>
+                        <Text style={{ fontSize: 16, fontFamily: 'Poppins Medium' }}>{ `${announcement.user.phone}` }</Text>
+                      </TouchableOpacity>
                     </View>
                   </View>
 

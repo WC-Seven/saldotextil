@@ -33,6 +33,7 @@ export default function Footer({ navigation, item }) {
   return (
     <Container>
       <Label title="Preço unitário" />
+      <Text style={{ fontSize: 11, textTransform: 'uppercase' }}>Não é obrigatório em anúncios de compra</Text>
       <Price
         value={exibPrice}
         onChangeText={value => handlePriceChange(value)}
