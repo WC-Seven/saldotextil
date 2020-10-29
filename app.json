@@ -33,7 +33,7 @@
       "supportsTablet": false,
       "bundleIdentifier": "dmi.saldotextil",
       "buildNumber": "1.0.0",
-      "icon": "./assets/icon.png"
+      "icon": "./assets/notransparency_icon.png"
     },
     "android": {
       "package": "com.dmi.saldotextil",
@@ -48,10 +48,20 @@
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
       ],
-      "icon": "./assets/icon.png",
+      "icon": "./assets/notransparency_icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive_icon/foreground.png",
         "backgroundColor": "#2B7ED7"
+      },
+      "allowBackup": false,
+      "splash": {
+        "backgroundColor": "#2B7ED7",
+        "resizeMode": "contain",
+        "mdpi": "./assets/splash/mdpi.png",
+        "hdpi": "./assets/splash/hdpi.png",
+        "xhdpi": "./assets/splash/xhdpi.png",
+        "xxhdpi": "./assets/splash/xxhdpi.png",
+        "xxxhdpi": "./assets/splash/xxxhdpi.png"
       }
     }
   }

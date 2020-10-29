@@ -20,7 +20,7 @@ const UseAgreement = () => (
     </Text>
     <Text style={{ marginLeft: 10 }}>a) os usuários ofereçam seus próprios produtos;</Text>
     <Text style={{ marginLeft: 10 }}>
-      b) os usuários interessados possam acessar as informções
+      b) os usuários interessados possam acessar as informações
       por meio de informações e ferramentas disponibilizada pelo site e aplicativo.
     </Text>
 
