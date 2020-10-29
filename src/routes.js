@@ -32,6 +32,7 @@ import UpdateEmail from './pages/Settings/UpdateEmail';
 import UpdateType from './pages/Settings/UpdateType';
 import UserAgreement from './pages/UserAgreement';
 import MyAnn from './pages/Feed/MyAnnouncements';
+import Developer from './pages/Developer';
 
 import CreateJob from './pages/Jobs/Create';
 import DetailJob from './pages/Jobs/Detail';
@@ -137,6 +138,7 @@ export default function Routes () {
             <Stack.Screen name="UpdateType" component={UpdateType} options={({ navigation }) => options(navigation, 'Mudar Tipo de Registro')} />
             <Stack.Screen name="Settings" component={Settings} options={({ navigation }) => options(navigation, 'Configurações')} />
             <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={({ navigation }) => options(navigation, 'Editar Perfil')} />
+            <Stack.Screen name="Developer" component={Developer} options={({ navigation }) => options(navigation, 'Desenvolvedor')} />
             
             <Stack.Screen name="CreateJob" component={CreateJob} options={({ navigation }) => options(navigation, 'Criar anúncio - Emprego')} />
             <Stack.Screen name="DetailJob" component={DetailJob} options={({ navigation }) => options(navigation, '')} />

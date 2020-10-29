@@ -26,6 +26,16 @@ export default function Settings({ navigation }) {
         action={() => navigation.navigate('UpdateType')}
       />
       <ListItem
+        leftIcon="message-alert-outline"
+        title="Relatar um problema"
+        action={() => navigation.navigate('Feedback')}
+      />
+      <ListItem
+        leftIcon="cellphone-link"
+        title="Desenvolvedor"
+        action={() => navigation.navigate('Developer')}
+      />
+      <ListItem
         leftIcon="book-open-outline"
         title="Termos e política"
         action={() => navigation.navigate('UserAgreement')}
@@ -38,11 +48,6 @@ export default function Settings({ navigation }) {
             20
           )
         }}
-      />
-      <ListItem
-        leftIcon="message-alert-outline"
-        title="Relatar um problema"
-        action={() => navigation.navigate('Feedback')}
       />
       <ListItem
         leftIcon="exit-to-app"
