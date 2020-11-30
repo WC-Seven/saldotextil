@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export const DarkBackground = styled.View`
   flex: 1;
@@ -106,6 +105,7 @@ export const FilterBox = styled.View`
 export const Container = styled.ScrollView`
   background-color: #fff;
   flex: 1;
+  padding-top: 20px;
 `;
 
 export const Avatar = styled.Image`
@@ -142,9 +142,9 @@ export const Andress = styled.Text`
 
 export const EditButton = styled.TouchableOpacity`
   align-items: center;
-  borderColor: #666;
-  borderWidth: 1px;
-  borderRadius: 30px;
+  border-color: #666;
+  border-width: 1px;
+  border-radius: 30px;
   height: 40px;
   justify-content: center;
   ${ props => props.big ? 'flex: 1; margin-right: 5px;' : 'min-width: 40px;'}

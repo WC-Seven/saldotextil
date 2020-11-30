@@ -111,9 +111,11 @@ export default function UpdateType({ navigation }) {
               mode="dropdown"
               selectedValue={update.type}
               onValueChange={value => setUpdate({ ...update, type: value })}
-              style={{
-                backgroundColor: '#f4f4f4', height: 50, color: '#333', paddingLeft: 10, marginBottom: 10
-              }}
+              style={
+                Platform.OS === 'android'
+                ? { backgroundColor: '#f4f4f4', height: 50, color: '#333', paddingLeft: 10, marginBottom: 10 }
+                : { color: '#333', paddingLeft: 10, marginBottom: 10 }
+              }
             >
               <Picker.Item value="pf-aut" label="Autônomo" />
               <Picker.Item value="pj-com" label="Comércio" />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { BottomButton, Container, Message } from './styles';
 
@@ -42,7 +42,11 @@ export default function Donations({ navigation }) {
       <BottomButton title="Fazer doação" onPress={() => navigation.navigate('CreateDonation')} />
 
       <Container>
-        <View style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}>
+        <View style={
+            Platform.OS === 'ios'
+            ? { height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }
+            : { marginBottom: 10, paddingHorizontal: 8 }
+          }>
           <Picker selectedValue={filters.state} onValueChange={value => setFilters({...filters, state: value})}>
             <Picker.Item value="" label="Estado (Selecione)" />
             {

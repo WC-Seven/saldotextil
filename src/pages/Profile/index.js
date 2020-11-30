@@ -14,7 +14,6 @@ import Filters from '../../components/Filters';
 import GeneralContext from '../../context';
 import { announcement } from '../../database/functions';
 import { Icon } from 'react-native-elements';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export default function Profile({ navigation, route }) {
   const { currentUser, currentEmail, setAuthUser } = React.useContext(GeneralContext);

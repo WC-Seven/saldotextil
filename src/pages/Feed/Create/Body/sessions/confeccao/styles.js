@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Picker } from '@react-native-community/picker';
+import { Platform } from 'react-native';
 
 export const Title = ({ title }) => (
   <TitleText>
@@ -87,7 +88,7 @@ const LabelText = styled.Text`
 `;
 
 export const PickerBg = styled.View`
-  background-color: #f2f2f2;
+  background-color: ${Platform.OS === 'android' ? '#f2f2f2' : '#ffffff00'};
   border-radius: 4px;
   flex: 1;
 `;
