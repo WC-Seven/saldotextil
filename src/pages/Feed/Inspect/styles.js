@@ -251,91 +251,105 @@ export const Detail = ({ type, item }) => (
         ) : type === 'confeccao' ? (
           <Table>
             {
-              item.category ? (
+              item.description && (
+                <Row>
+                  <Value bg="#fafafa"><Text>{ item.description }</Text></Value>
+                </Row>
+              )
+            }
+            {
+              item.category && (
                 <Row>
                   <Value bg="#f2f2f2"><Text>{ item.category }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
             {
-              item.subcategory ? (
+              item.subcategory && (
                 <Row>
                   <Value bg="#fafafa"><Text>{ item.subcategory.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
             {
-              item.colors ? (
+              item.colors && (
                 <Row>
                   <Value bg="#f2f2f2"><Text>{ item.colors.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
             {
-              item.sizes ? (
+              item.sizes && (
                 <Row>
                   <Value bg="#fafafa"><Text>{ item.sizes.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
           </Table>
         ) : (
           <Table>
             {
-              item.article ? (
+              item.description && (
+                <Row>
+                  <Value bg="#fafafa"><Text>{ item.description }</Text></Value>
+                </Row>
+              )
+            }
+            {
+              item.article && (
                 <Row>
                   <Value bg="#f2f2f2"><Text>{ item.article }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
             {
-              item.articletype ? (
+              item.articletype && (
                 <Row>
                   <Value bg="#fafafa"><Text>{ item.articletype }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
             {
-              item.composition ? (
+              item.composition && (
                 <Row>
                   <Value bg="#f2f2f2"><Text>{ item.composition }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
             {
-              item.producttype ? (
+              item.producttype && (
                 <Row>
                   <Value bg="#fafafa"><Text>{ item.producttype }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
             {
-              item.stitchtype ? (
+              item.stitchtype && (
                 <Row>
                   <Value bg="#f2f2f2"><Text>{ item.stitchtype }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
             {
-              item.string ? (
+              item.string && (
                 <Row>
                   <Value bg="#fafafa"><Text>{ item.string }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
             {
-              item.stringtype ? (
+              item.stringtype && (
                 <Row>
                   <Value bg="#f2f2f2"><Text>{ item.stringtype }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
             {
-              item.colors ? (
+              item.colors && (
                 <Row>
                   <Value bg="#fafafa"><Text>{ item.colors.map((item, index) => index === 0 ? item : `, ${item}`) }</Text></Value>
                 </Row>
-              ) : <></>
+              )
             }
           </Table>
         )
