@@ -20,10 +20,13 @@ const Spinner = styled.ActivityIndicator.attrs({
   color: '2b7ed7',
 })``;
 
-export const Container = styled.ScrollView`
+export const Container = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    padding: 20
+  }
+})`
   background-color: #fff;
   flex: 1;
-  padding: 20px;
 `;
 
 export const FlexView = styled.View`

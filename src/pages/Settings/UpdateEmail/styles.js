@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    padding: 15
+  }
+})`
   flex: 1;
   background-color: #fff;
-  padding: 15px;
 `;
 
 export const LoadingContainer = ({ message }) => (

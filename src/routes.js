@@ -118,7 +118,7 @@ export default function Routes () {
       {
         isLogged ? (
           <Stack.Navigator keyboardHandlingEnabled={false}>
-            <Stack.Screen name="Main" component={BottomTabs} options={{ headerShown: false }} />
+            <Stack.Screen name="Main" component={BottomTabs} options={{ headerShown: false, title: 'Principal' }} />
             <Stack.Screen name="MyAnnouncements" component={MyAnn} options={({ navigation }) => options(navigation, 'Meus anúncios')} />
             <Stack.Screen name="Agents" component={Agents} options={({ navigation }) => optionsWithSearch(navigation, 'Representantes')} />
             <Stack.Screen name="Donations" component={Donations} options={({ navigation }) => optionsWithSearch(navigation, 'Doações')} />

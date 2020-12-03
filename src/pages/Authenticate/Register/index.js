@@ -15,6 +15,20 @@ import { auth } from '../../../database/functions';
 export default function Register({ navigation }) {
   const { setAuthUser } = React.useContext(GeneralContext);
 
+  const accountTypes = [
+    { value: "", label: "Tipo de Registro (selecione)" },
+    { value: "pf-aut", label: "Autônomo" },
+    { value: "pj-com", label: "Comércio" },
+    { value: "pj-ent", label: "Entidade Filantrópica" },
+    { value: "pj-ind", label: "Indústria" },
+    { value: "pj-ong", label: "ONG" },
+    { value: "pf", label: "Pessoa física" },
+    { value: "pj", label: "Pessoa jurídica" },
+    { value: "pf-pre", label: "Prestador de serviços" },
+    { value: "pf-rep", label: "Representante" },
+    { value: "pf-out", label: "Outros" }
+  ]
+
   const [isLoading, setIsLoading] = React.useState(false);
 
   const [cnpjField, setCnpjField] = React.useState(null);
@@ -156,7 +170,7 @@ export default function Register({ navigation }) {
             <StatusBar barStyle="dark-content" backgroundColor="white" />
             <Label title="Informações de cadastro" />
             <Picker
-              value={register.type}
+              value={accountTypes.find(item => item.value === register.type).label}
               onValueChange={value => setRegister({ ...register, type: value })}
               style={{
                 backgroundColor: '#f2f2f2', height: 40, color: '#666', marginBottom: 10,

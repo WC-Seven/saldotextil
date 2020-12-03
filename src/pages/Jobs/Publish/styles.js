@@ -19,10 +19,13 @@ const Spinner = styled.ActivityIndicator.attrs({
   size: 'large'
 })``;
 
-export const Container = styled.View`
+export const Container = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    padding: 15
+  }
+})`
   background-color: #fff;
   flex: 1;
-  padding: 15px;
 `;
 
 export const TextInput = styled.TextInput`

@@ -73,7 +73,9 @@ const FloatingView = styled.View`
   bottom: 30px;
   right: 20px;
   left: 20px;
+  min-height: 60px;
   flex-direction: row;
+  z-index: 1;
 `;
 
 const FloatingButtonContainer = styled.TouchableOpacity`

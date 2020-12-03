@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const Container = styled.ScrollView`
+export const Container = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    padding: 15
+  }
+})`
   background-color: #fff;
   flex: 1;
-  padding: 15px;
 `;
 
 export const Title = styled.Text`

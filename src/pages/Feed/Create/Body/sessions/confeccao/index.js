@@ -117,7 +117,7 @@ export default function Confeccao({ item }) {
               selectText="(Selecione mais de uma)"
               textColor="#222"
 
-              searchInputPlaceholderText="Buscar cores..."
+              searchInputPlaceholderText="Buscar subcategorias..."
               searchInputStyle={{ height: 40 }}
 
               uniqueKey="value"
