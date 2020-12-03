@@ -19,7 +19,7 @@
       "backgroundColor": "#2B7ED7"
     },
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash/hdpi.png",
       "resizeMode": "contain",
       "backgroundColor": "#2B7ED7"
     },
