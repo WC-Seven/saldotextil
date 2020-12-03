@@ -24,6 +24,7 @@ export const Button = ({ title, disabled }) => (
 );
 
 export const InlineForm = styled.View`
+  align-items: center;
   flex-direction: row;
 `;
 

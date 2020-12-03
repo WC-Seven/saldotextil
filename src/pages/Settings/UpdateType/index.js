@@ -1,6 +1,6 @@
 import React from 'react';
 import { Keyboard, Platform, ToastAndroid, Alert, StatusBar } from 'react-native';
-import { Picker } from '@react-native-community/picker';
+import Picker, { PickerItem } from '../../../components/Picker';
 
 import { Button, Container, Label, MaskInput, TextInput, LoadingContainer } from './styles';
 import GeneralContext from '../../../context';
@@ -13,6 +13,19 @@ export default function UpdateType({ navigation }) {
   
   const [cpfField, setCpfField] = React.useState(null);
   const [cnpjField, setCnpjField] = React.useState(null);
+
+  const accountTypes = [
+    { value: "pf-aut", label: "Autônomo" },
+    { value: "pj-com", label: "Comércio" },
+    { value: "pj-ent", label: "Entidade Filantrópica" },
+    { value: "pj-ind", label: "Indústria" },
+    { value: "pj-ong", label: "ONG" },
+    { value: "pf", label: "Pessoa física" },
+    { value: "pj", label: "Pessoa jurídica" },
+    { value: "pf-pre", label: "Prestador de serviços" },
+    { value: "pf-rep", label: "Representante" },
+    { value: "pf-out", label: "Outros" }
+  ]
 
   const [update, setUpdate] = React.useState({
     type: currentUser.type || 'pf',
@@ -108,25 +121,15 @@ export default function UpdateType({ navigation }) {
           <Container>
             <Label>Tipo de registro</Label>
             <Picker
-              mode="dropdown"
-              selectedValue={update.type}
+              value={accountTypes.find(item  => item.value === update.type).label}
               onValueChange={value => setUpdate({ ...update, type: value })}
-              style={
-                Platform.OS === 'android'
-                ? { backgroundColor: '#f4f4f4', height: 50, color: '#333', paddingLeft: 10, marginBottom: 10 }
-                : { color: '#333', paddingLeft: 10, marginBottom: 10 }
-              }
+              style={{ backgroundColor: '#f4f4f4', height: 50, color: '#333', paddingLeft: 10, marginBottom: 10 }}
             >
-              <Picker.Item value="pf-aut" label="Autônomo" />
-              <Picker.Item value="pj-com" label="Comércio" />
-              <Picker.Item value="pj-ent" label="Entidade Filantrópica" />
-              <Picker.Item value="pj-ind" label="Indústria" />
-              <Picker.Item value="pj-ong" label="ONG" />
-              <Picker.Item value="pf" label="Pessoa física" />
-              <Picker.Item value="pj" label="Pessoa jurídica" />
-              <Picker.Item value="pf-pre" label="Prestador de serviços" />
-              <Picker.Item value="pf-rep" label="Representante" />
-              <Picker.Item value="pf-out" label="Outros" />
+              {
+                accountTypes.map(({ value, label }) => (
+                  <PickerItem key={value} value={value} label={label} />
+                ))
+              }
             </Picker>
           
             <Label>Nome</Label>

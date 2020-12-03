@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Platform } from 'react-native';
-import { Picker } from '@react-native-community/picker';
+import Picker, { PickerItem } from '../../components/Picker';
 import { BottomButton, Container, Message } from './styles';
 
 import MiniDonation from './Mini';
@@ -42,31 +42,31 @@ export default function Donations({ navigation }) {
       <BottomButton title="Fazer doação" onPress={() => navigation.navigate('CreateDonation')} />
 
       <Container>
-        <View style={
-            Platform.OS === 'ios'
-            ? { height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }
-            : { marginBottom: 10, paddingHorizontal: 8 }
-          }>
-          <Picker selectedValue={filters.state} onValueChange={value => setFilters({...filters, state: value})}>
-            <Picker.Item value="" label="Estado (Selecione)" />
-            {
-              states.map((item) => (
-                <Picker.Item value={item.uf} label={item.name} key={item.id} />
-              ))
-            }
-          </Picker>
-        </View>
+        <Picker
+          style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}
+          value={filters.state}
+          onValueChange={value => setFilters({...filters, state: value})}
+        >
+          <PickerItem value="" label="Estado (Selecione)" />
+          {
+            states.map((item) => (
+              <PickerItem value={item.uf} label={item.name} key={item.id} />
+            ))
+          }
+        </Picker>
 
-        <View style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}>
-          <Picker selectedValue={filters.city} onValueChange={value => setFilters({...filters, city: value})}>
-            <Picker.Item value="" label={filters.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (todas)" : "Carregando..."} />
-            {
-              cities.map((item) => (
-                <Picker.Item value={item.name} label={item.name} key={item.id} />
-              ))
-            }
-          </Picker>
-        </View>
+        <Picker
+          style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}
+          value={filters.city}
+          onValueChange={value => setFilters({...filters, city: value})}
+        >
+          <PickerItem value="" label={filters.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (todas)" : "Carregando..."} />
+          {
+            cities.map((item) => (
+              <PickerItem value={item.name} label={item.name} key={item.id} />
+            ))
+          }
+        </Picker>
 
         {
           results[0] ? (

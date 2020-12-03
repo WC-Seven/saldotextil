@@ -39,6 +39,7 @@
     "react-native-gesture-handler": "~1.6.0",
     "react-native-masked-text": "^1.13.0",
     "react-native-multiple-select": "^0.5.5",
+    "react-native-paper": "^4.4.1",
     "react-native-popup-menu": "^0.15.9",
     "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-reanimated": "~1.9.0",

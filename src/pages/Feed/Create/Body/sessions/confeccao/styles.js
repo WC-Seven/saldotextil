@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
-import { Picker } from '@react-native-community/picker';
+import Picker, { PickerItem } from '../../../../../../components/Picker';
 import { Platform } from 'react-native';
 
 export const Title = ({ title }) => (
@@ -64,19 +64,17 @@ export const Select = ({
     <LabelText>
       { title }
     </LabelText>
-    <PickerBg>
-      <Picker
-        selectedValue={selectedValue}
-        onValueChange={onValueChange}
-        style={{ height: 40 }}
-      >
-        {
-          items.map(item => (
-            <Picker.Item key={item.value} value={item.value} label={item.label} />
-          ))
-        }
-      </Picker>
-    </PickerBg>
+    <Picker
+      style={{ backgroundColor: Platform.OS === 'android' ? '#f2f2f2' : '#ffffff00', borderRadius: 4, flex: 1 }}
+      value={selectedValue}
+      onValueChange={onValueChange}
+    >
+      {
+        items.map(item => (
+          <PickerItem key={item.value} value={item.value} label={item.label} />
+        ))
+      }
+    </Picker>
   </>
 );
 

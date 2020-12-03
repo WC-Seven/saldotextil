@@ -1,8 +1,8 @@
 import React from 'react';
 import cep from 'cep-promise';
-import CheckBox from '@react-native-community/checkbox';
+import { Checkbox } from 'react-native-paper';
 import { TouchableOpacity, StatusBar, Alert, Keyboard, Platform, ToastAndroid, Text } from 'react-native';
-import { Picker } from '@react-native-community/picker';
+import Picker, { PickerItem } from '../../../components/Picker';
 
 import {
   CenterContainer, Spinner, Container, TextInput, TextInputFormat,
@@ -156,23 +156,23 @@ export default function Register({ navigation }) {
             <StatusBar barStyle="dark-content" backgroundColor="white" />
             <Label title="Informações de cadastro" />
             <Picker
-              selectedValue={register.type}
+              value={register.type}
               onValueChange={value => setRegister({ ...register, type: value })}
               style={{
                 backgroundColor: '#f2f2f2', height: 40, color: '#666', marginBottom: 10,
               }}
             >
-              <Picker.Item disabled value="" label="Tipo de Registro (selecione)" />
-              <Picker.Item value="pf-aut" label="Autônomo" />
-              <Picker.Item value="pj-com" label="Comércio" />
-              <Picker.Item value="pj-ent" label="Entidade Filantrópica" />
-              <Picker.Item value="pj-ind" label="Indústria" />
-              <Picker.Item value="pj-ong" label="ONG" />
-              <Picker.Item value="pf" label="Pessoa física" />
-              <Picker.Item value="pj" label="Pessoa jurídica" />
-              <Picker.Item value="pf-pre" label="Prestador de serviços" />
-              <Picker.Item value="pf-rep" label="Representante" />
-              <Picker.Item value="pf-out" label="Outros" />
+              <PickerItem disabled value="" label="Tipo de Registro (selecione)" />
+              <PickerItem value="pf-aut" label="Autônomo" />
+              <PickerItem value="pj-com" label="Comércio" />
+              <PickerItem value="pj-ent" label="Entidade Filantrópica" />
+              <PickerItem value="pj-ind" label="Indústria" />
+              <PickerItem value="pj-ong" label="ONG" />
+              <PickerItem value="pf" label="Pessoa física" />
+              <PickerItem value="pj" label="Pessoa jurídica" />
+              <PickerItem value="pf-pre" label="Prestador de serviços" />
+              <PickerItem value="pf-rep" label="Representante" />
+              <PickerItem value="pf-out" label="Outros" />
             </Picker>
             {
               register.type.substring(0, 2) === '' || register.type.substring(0, 2) === 'pf' ? (
@@ -349,15 +349,11 @@ export default function Register({ navigation }) {
             </InlineForm>
 
             <InlineForm>
-              <CheckBox
+              <Checkbox
+                color="#2b7ed7"
                 disabled={false}
-                value={agree}
-                onValueChange={() => setAgree(!agree)}
-                tintColors={{
-                  true: '#2b7ed7'
-                }}
-                onCheckColor="#2b7ed7"
-                onTintColor="#2b7ed7"
+                status={agree ? 'checked' : 'unchecked'}
+                onPress={() => setAgree(!agree)}
               />
               <Description>
                 Você concorda com os <Text onPress={() => navigation.navigate('UserAgreement')} style={{ color: '#2b7ed7' }}>termos de uso</Text>

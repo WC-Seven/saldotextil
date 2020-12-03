@@ -30,7 +30,7 @@ const Spinner = styled.ActivityIndicator.attrs({
 export const TopContainer = styled.View`
   align-items: center;
   background-color: #2B7ED7;
-  height: 30%;
+  height: 40%;
   justify-content: center;
 `;
 
@@ -39,9 +39,11 @@ export const Image = styled.Image`
   width: 60%;
 `;
 
-export const BottomContainer = styled.View`
-  height: 70%;
+export const BottomContainer = styled.TouchableOpacity.attrs({
+  activeOpacity: 1
+})`
   background-color: #fff;
+  flex: 1;
   padding: 15px;
   justify-content: center;
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Platform, ToastAndroid, Alert, StatusBar, SegmentedControlIOSComponent} from 'react-native';
-import { Picker } from '@react-native-community/picker';
+import Picker, { PickerItem } from '../../../components/Picker';
 import { Container, MaskedInput, LoadingContainer, Textarea, TextInput, Button, Label, Title } from './styles';
 
 import moment from 'moment';
@@ -88,27 +88,27 @@ export default function CreateJob ({ navigation }) {
 
 
         <Label title="Localização" />
-        <View style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}>
-          <Picker selectedValue={job.state} onValueChange={value => setJob({...job, state: value})}>
-            <Picker.Item value="" label="Estado (Selecione)" />
-            {
-              states.map((item) => (
-                <Picker.Item value={item.uf} label={item.name} key={item.id} />
-              ))
-            }
-          </Picker>
-        </View>
+        <Picker
+          style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}
+          value={job.state}
+          onValueChange={value => setJob({...job, state: value})}
+        >
+          <PickerItem value="" label="Estado (Selecione)" />
+          {
+            states.map((item) => (
+              <PickerItem value={item.uf} label={item.name} key={item.id} />
+            ))
+          }
+        </Picker>
 
-        <View style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}>
-          <Picker selectedValue={job.city} onValueChange={value => setJob({...job, city: value})}>
-            <Picker.Item value="" label={job.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (selecione)" : "Carregando..."} />
-            {
-              cities.map((item) => (
-                <Picker.Item value={item.name} label={item.name} key={item.id} />
-              ))
-            }
-          </Picker>
-        </View>
+        <Picker style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }} value={job.city} onValueChange={value => setJob({...job, city: value})}>
+          <PickerItem value="" label={job.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (selecione)" : "Carregando..."} />
+          {
+            cities.map((item) => (
+              <PickerItem value={item.name} label={item.name} key={item.id} />
+            ))
+          }
+        </Picker>
 
         <Label title="Contato" />
         <TextInput value={job.contactMailAndress} onChangeText={value => setJob({...job, contactMailAndress: value})}  placeholder="E-mail (contato)" />

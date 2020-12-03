@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Picker } from '@react-native-community/picker';
+import Picker, { PickerItem } from '../../components/Picker';
 
 import { BottomButton, SecondaryBottomButton, Container, SpacedView, Interruptor, Message } from './styles';
 
@@ -119,21 +119,20 @@ export default function Agents({ navigation }) {
           ]}
         />
 
-        <View style={{ backgroundColor: '#f2f2f2', marginHorizontal: 10, borderRadius: 4, marginTop: 5, paddingHorizontal: 10 }}>
-          <Picker
-            selectedValue={filters.city}
-            onValueChange={value => setFilters({...filters, city: value})}
-          >
-            <Picker.Item value="" label={filters.localization === '' ? "Selecione um estado" : cities[0] ? 'Cidade (todas)' : 'Carregando...'  } />
+        <Picker
+          style={{ backgroundColor: '#f2f2f2', marginHorizontal: 10, borderRadius: 4, marginTop: 5, paddingHorizontal: 10 }}
+          value={filters.city}
+          onValueChange={value => setFilters({...filters, city: value})}
+        >
+          <PickerItem value="" label={filters.localization === '' ? "Selecione um estado" : cities[0] ? 'Cidade (todas)' : 'Carregando...'  } />
 
-            {
-              cities.map((item) => (
-                <Picker.Item value={item.name} label={item.name} key={item.name} />
-              ))
-            }
-          
-          </Picker>
-        </View>
+          {
+            cities.map((item) => (
+              <PickerItem value={item.name} label={item.name} key={item.name} />
+            ))
+          }
+        
+        </Picker>
 
         {
           results[0] ? (

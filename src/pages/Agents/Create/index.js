@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Platform, ToastAndroid, Alert, StatusBar } from 'react-native';
-import { Picker } from '@react-native-community/picker';
+import Picker, { PickerItem } from '../../../components/Picker';
 import { Container, MaskedInput, LoadingContainer, Textarea, TextInput, Button, Label, Title } from './styles';
-import moment from 'moment';
 import GeneralContext from '../../../context';
 import { getCitiesByState, getStates } from '../../../utils/locals';
 import { announcement } from '../../../database/functions';
@@ -78,27 +77,31 @@ export default function CreateAgent ({ navigation }) {
 
 
         <Label title="Área de atuação" />
-        <View style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}>
-          <Picker selectedValue={agent.state} onValueChange={value => setAgent({...agent, state: value})}>
-            <Picker.Item value="" label="Estado (Selecione)" />
-            {
-              states.map((item) => (
-                <Picker.Item value={item.uf} label={item.name} key={item.id} />
-              ))
-            }
-          </Picker>
-        </View>
+        <Picker
+          style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}
+          value={agent.state}
+          onValueChange={value => setAgent({...agent, state: value})}
+        >
+          <PickerItem value="" label="Estado (Selecione)" />
+          {
+            states.map((item) => (
+              <PickerItem value={item.uf} label={item.name} key={item.id} />
+            ))
+          }
+        </Picker>
 
-        <View style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}>
-          <Picker selectedValue={agent.city} onValueChange={value => setAgent({...agent, city: value})}>
-            <Picker.Item value="" label={agent.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (selecione)" : "Carregando..."} />
-            {
-              cities.map((item) => (
-                <Picker.Item value={item.name} label={item.name} key={item.id} />
-              ))
-            }
-          </Picker>
-        </View>
+        <Picker
+          style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}
+          value={agent.city}
+          onValueChange={value => setAgent({...agent, city: value})}
+        >
+          <PickerItem value="" label={agent.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (selecione)" : "Carregando..."} />
+          {
+            cities.map((item) => (
+              <PickerItem value={item.name} label={item.name} key={item.id} />
+            ))
+          }
+        </Picker>
 
         <Label title="Contato" />
         <TextInput value={agent.contactMailAndress} onChangeText={value => setAgent({...agent, contactMailAndress: value})}  placeholder="E-mail (contato)" />

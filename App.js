@@ -6,8 +6,7 @@ import { useFonts } from '@use-expo/font';
 import Routes from './src/routes';
 import BottomSheet from './src/components/BottomSheet'
 import GeneralContext, { GeneralContextProvider } from './src/context';
-
-import Constants from 'expo-constants';
+import { Provider as PaperProvider } from 'react-native-paper';
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
 
@@ -65,8 +64,10 @@ export default function App() {
           <MenuProvider>
             <StatusBar barStyle="dark-content" backgroundColor="#fff" />
             <GeneralContextProvider>
-              <BottomSheet />
-              <Routes />
+              <PaperProvider>
+                <BottomSheet />
+                <Routes />
+              </PaperProvider>
             </GeneralContextProvider>
           </MenuProvider>
         )

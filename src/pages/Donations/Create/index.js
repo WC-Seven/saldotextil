@@ -1,8 +1,7 @@
 import React from 'react';
 import { Modal, Text, TouchableOpacity, View, StatusBar, Alert, ScrollView, Platform, ToastAndroid } from 'react-native';
-import { Picker } from '@react-native-community/picker';
-import CheckBox from '@react-native-community/checkbox'
-import moment from 'moment';
+import Picker, { PickerItem } from '../../../components/Picker';
+import { Checkbox } from 'react-native-paper';
 import { 
   Button, Container, ImagePicker, DarkContainer, Window, ListItem, Label, Textarea, TextInput, LoadingContainer,
 } from './styles';
@@ -121,37 +120,40 @@ export default function CreateDonation({ navigation, route }) {
         <Textarea value={donation.observation} onChangeText={value => setDonation({...donation, observation: value })} placeholder="Observação" numberOfLines={2} />
 
         <Label title="Localização *" />
-          <View style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}>
-            <Picker selectedValue={donation.state} onValueChange={value => setDonation({...donation, state: value})}>
-              <Picker.Item value="" label="Estado (Selecione)" />
-              {
-                states.map((item) => (
-                  <Picker.Item value={item.uf} label={item.name} key={item.id} />
-                ))
-              }
-            </Picker>
-          </View>
+          <Picker
+            style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}
+            value={donation.state} 
+            onValueChange={value => setDonation({...donation, state: value})}
+          >
+            <PickerItem value="" label="Estado (Selecione)" />
+            {
+              states.map((item) => (
+                <PickerItem value={item.uf} label={item.name} key={item.id} />
+              ))
+            }
+          </Picker>
 
-          <View style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}>
-            <Picker selectedValue={donation.city} onValueChange={value => setDonation({...donation, city: value})}>
-              <Picker.Item value="" label={donation.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (selecione)" : "Carregando..."} />
-              {
-                cities.map((item) => (
-                  <Picker.Item value={item.name} label={item.name} key={item.id} />
-                ))
-              }
-            </Picker>
-          </View>
+          <Picker
+            style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}
+            value={donation.city}
+            onValueChange={value => setDonation({...donation, city: value})}
+          >
+            <PickerItem value="" label={donation.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (selecione)" : "Carregando..."} />
+            {
+              cities.map((item) => (
+                <PickerItem value={item.name} label={item.name} key={item.id} />
+              ))
+            }
+          </Picker>
 
           <Label title="Retirada no local?" />
           <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-            <CheckBox
-              disabled={false}
-              tintColors={{ true: '#2b7ed7', false: '#ccc' }}
-              value={!donation.deliveryOn}
-              onValueChange={(newValue) => setDonation({...donation, deliveryOn: !newValue})}
+            <Checkbox
+              color="#2b7ed7"
+              status={!donation.deliveryOn ? 'checked' : 'unchecked'}
+              onPress={() => setDonation({...donation, deliveryOn: !donation.deliveryOn})}
             />
-            <Text style={{marginLeft: 5}}>
+            <Text onPress={() => setDonation({...donation, deliveryOn: !donation.deliveryOn})} style={{marginLeft: 5}}>
               É necessário retirar no local
             </Text>
           </View>

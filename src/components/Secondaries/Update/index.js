@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Alert } from 'react-native';
-import { Picker } from '@react-native-community/picker';
+import Picker, { PickerItem } from '../../../components/Picker';
 import { LoadingContainer, Button, Container, Description, FlexView, SpacedView, Label, PickImage, TextInput, DarkContainer, Window, ListItem, ImagePicked } from './styles';
 
 import { pickImageFromCamera, pickImageFromLibrary } from '../../ImagePicker';
@@ -105,36 +105,36 @@ export default function Create({ navigation, route }) {
               <Label>Estado</Label>
               <Picker
                 style={{ backgroundColor: '#f2f2f2', paddingHorizontal: 10 }}
-                selectedValue={ads.state}
+                value={ads.state}
                 onValueChange={(v) => setAds({ ...ads, state: v })}
               >
-                <Picker.Item value="AC" label="Acre" />
-                <Picker.Item value="AL" label="Alagoas" />
-                <Picker.Item value="AP" label="Amapá" />
-                <Picker.Item value="AM" label="Amazonas" />
-                <Picker.Item value="BA" label="Bahia" />
-                <Picker.Item value="CE" label="Ceará" />
-                <Picker.Item value="DF" label="Distrito Federal" />
-                <Picker.Item value="ES" label="Espirito Santo" />
-                <Picker.Item value="GO" label="Goiás" />
-                <Picker.Item value="MA" label="Maranhão" />
-                <Picker.Item value="MT" label="Mato Grosso" />
-                <Picker.Item value="MS" label="Mato Grosso do Sul" />
-                <Picker.Item value="MG" label="Minas Gerais" />
-                <Picker.Item value="PA" label="Pará" />
-                <Picker.Item value="PB" label="Paraíba" />
-                <Picker.Item value="PR" label="Paraná" />
-                <Picker.Item value="PE" label="Pernambuco" />
-                <Picker.Item value="PI" label="Piauí" />
-                <Picker.Item value="RJ" label="Rio de Janeiro" />
-                <Picker.Item value="RN" label="Rio Grande do Norte" />
-                <Picker.Item value="RS" label="Rio Grande do Sul" />
-                <Picker.Item value="RO" label="Rondônia" />
-                <Picker.Item value="RR" label="Roraima" />
-                <Picker.Item value="SC" label="Santa Catarina" />
-                <Picker.Item value="SP" label="São Paulo" />
-                <Picker.Item value="SE" label="Sergipe" />
-                <Picker.Item value="TO" label="Tocantins" />
+                <PickerItem value="AC" label="Acre" />
+                <PickerItem value="AL" label="Alagoas" />
+                <PickerItem value="AP" label="Amapá" />
+                <PickerItem value="AM" label="Amazonas" />
+                <PickerItem value="BA" label="Bahia" />
+                <PickerItem value="CE" label="Ceará" />
+                <PickerItem value="DF" label="Distrito Federal" />
+                <PickerItem value="ES" label="Espirito Santo" />
+                <PickerItem value="GO" label="Goiás" />
+                <PickerItem value="MA" label="Maranhão" />
+                <PickerItem value="MT" label="Mato Grosso" />
+                <PickerItem value="MS" label="Mato Grosso do Sul" />
+                <PickerItem value="MG" label="Minas Gerais" />
+                <PickerItem value="PA" label="Pará" />
+                <PickerItem value="PB" label="Paraíba" />
+                <PickerItem value="PR" label="Paraná" />
+                <PickerItem value="PE" label="Pernambuco" />
+                <PickerItem value="PI" label="Piauí" />
+                <PickerItem value="RJ" label="Rio de Janeiro" />
+                <PickerItem value="RN" label="Rio Grande do Norte" />
+                <PickerItem value="RS" label="Rio Grande do Sul" />
+                <PickerItem value="RO" label="Rondônia" />
+                <PickerItem value="RR" label="Roraima" />
+                <PickerItem value="SC" label="Santa Catarina" />
+                <PickerItem value="SP" label="São Paulo" />
+                <PickerItem value="SE" label="Sergipe" />
+                <PickerItem value="TO" label="Tocantins" />
               </Picker>
       
               <Label>Descrição</Label>
