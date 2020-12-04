@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:794757747072:android:1d355a08dbec0dac23f165",
+        "android_client_info": {
+          "package_name": "br.com.saldotextil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794757747072-boc462t1g6c2brmimmigu65cq4ull866.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB64bzq_hLFMRhUw_m9m31hBJlBAH-P_Dc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794757747072-boc462t1g6c2brmimmigu65cq4ull866.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:794757747072:android:5a2943df32942d9523f165",
         "android_client_info": {
           "package_name": "com.dmi.saldotextil"
