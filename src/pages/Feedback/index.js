@@ -3,7 +3,7 @@ import { Button, Container, Description, Title, UserDetail, AnnDetail } from './
 
 import GeneralContext from '../../context';
 import { createFeedBack } from '../../database/functions/feedback/createFeedback';
-import { Alert } from 'react-native';
+import { Alert, Text } from 'react-native';
 
 import { user } from '../../database/functions';
 
@@ -16,8 +16,8 @@ export default function Feedback({ navigation, route }) {
   const [type, setType] = React.useState('default');
   const [feedback, setFeedback] = React.useState({
     sentBy: {
-      id: currentUser.id,
-      name: currentUser.name,
+      id: currentUser.id ?? 'temp',
+      name: currentUser.name ?? 'temp-name',
     },
     description: {
       user: '',

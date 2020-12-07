@@ -8,6 +8,8 @@ const GeneralContext = React.createContext({
   setNav: () => {},
   bsRef: null,
   isLogged: false,
+  isLogging: null,
+  setIsLogging: () => {},
   currentUser: {},
   currentEmail: '',
   setAuthUser: () => {},
@@ -18,6 +20,7 @@ const GeneralContext = React.createContext({
 
 export const GeneralContextProvider = ({ children }) => {
   const [isLogged, setIsLogged] = React.useState(false);
+  const [isLogging, setIsLogging] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [currentEmail, setCurrentEmail] = React.useState('');
 
@@ -77,7 +80,7 @@ export const GeneralContextProvider = ({ children }) => {
 
   return (
     <GeneralContext.Provider value={{
-      nav, setNav, bsRef, isLogged, currentUser, currentEmail, setAuthUser, updateAuthEmail, updateAuthUser, destroyAuthUser,
+      nav, setNav, bsRef, isLogged, isLogging, setIsLogging, currentUser, currentEmail, setAuthUser, updateAuthEmail, updateAuthUser, destroyAuthUser,
     }}>
       { children }
     </GeneralContext.Provider>

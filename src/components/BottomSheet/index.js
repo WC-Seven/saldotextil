@@ -7,7 +7,7 @@ import { Container, ListContainer, ListItem, ListLabel } from './styles';
 import { StatusBar } from 'react-native';
 
 function BottomSheet(props) {
-  const { nav, bsRef } = React.useContext(GeneralContext);
+  const { nav, bsRef, isLogged } = React.useContext(GeneralContext);
 
   const items = [
     {

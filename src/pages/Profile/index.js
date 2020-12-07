@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Linking, Modal, TouchableOpacity, StatusBar, View } from 'react-native';
+import { Alert, Linking, Modal, TouchableOpacity, StatusBar, View, Text } from 'react-native';
 
 import {
   Andress, Avatar, Bio, BioDetails, Container, EditButton, Name, MyAnnouncement, MyAds, SpacedView, Message, FilterBox,
@@ -16,7 +16,7 @@ import { announcement } from '../../database/functions';
 import { Icon } from 'react-native-elements';
 
 export default function Profile({ navigation, route }) {
-  const { currentUser, currentEmail, setAuthUser } = React.useContext(GeneralContext);
+  const { currentUser, currentEmail, setAuthUser, isLogged, setIsLogging } = React.useContext(GeneralContext);
   const [userAnn, setUserAnn] = React.useState([]);
   const [modal, setModal] = React.useState(false);
   const [filters, setFilters] = React.useState({
@@ -49,6 +49,48 @@ export default function Profile({ navigation, route }) {
         userFunctions.updateImage(currentUser, response.uri, setAuthUser, currentEmail);
       }
     }
+  }
+
+  if (!isLogged && !user) {
+    return (
+      <View style={{
+        alignItems: 'center',
+        backgroundColor: 'white', 
+        flex: 1,
+        justifyContent: 'center'
+      }}>
+        <Text
+          style={{
+            color: '#666',
+            fontFamily: 'Poppins Medium',
+            marginBottom: 10,
+            textAlign: 'center',
+            width: '80%',
+          }}
+        >
+          Publique anúncios, vagas de empregos, vagas para representantes, currículos e doações com uma conta no Saldo Têxtil.
+        </Text>
+        
+        <TouchableOpacity
+          activeOpacity={0.6}
+          onPress={() => setIsLogging(true)}
+          style={{
+            backgroundColor: '#2b7ed7',
+            borderRadius: 100,
+            paddingHorizontal: 30,
+            paddingVertical: 10
+          }}
+        >
+          <Text
+            style={{
+              color: 'white',
+              fontFamily: 'Poppins Regular',
+              marginBottom: -3
+            }}
+          >Entre ou cadastre-se</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
   return (

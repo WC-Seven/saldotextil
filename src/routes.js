@@ -60,11 +60,11 @@ const Tabs = createBottomTabNavigator();
 function options(navigation, title) {
   return ({
     headerLeftContainerStyle: { marginLeft: 15 },
-    headerLeft: () => (
+    headerLeft: ({ tintColor, onPress }) => (
       <TouchableOpacity
-        onPress={() => navigation.goBack()}
+        onPress={onPress}
       >
-        <Icon name="arrow-left" type="material-community" />
+        <Icon name="arrow-left" type="material-community" color={tintColor} />
       </TouchableOpacity>
     ),
     headerTitle: title,
@@ -111,12 +111,19 @@ function optionsWithSearch(navigation, title) {
 }
 
 export default function Routes () {
-  const { isLogged } = React.useContext(GeneralContext);
+  const { isLogging, isLogged } = React.useContext(GeneralContext);
 
   return (
     <NavigationContainer>
       {
-        isLogged ? (
+        isLogging && !isLogged ? (
+          <Stack.Navigator>
+            <Stack.Screen name="Authenticate" component={Authenticate} options={{ headerShown: false }} />
+            <Stack.Screen name="Register" component={Register} options={({ navigation }) => options(navigation, 'Registre-se')} />
+            <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={({ navigation }) => options(navigation, 'Redefinir senha')} />
+            <Stack.Screen name="UserAgreement" component={UserAgreement} options={({ navigation }) => options(navigation, 'Termos de Uso')} />
+          </Stack.Navigator>
+        ) : (
           <Stack.Navigator keyboardHandlingEnabled={false}>
             <Stack.Screen name="Main" component={BottomTabs} options={{ headerShown: false, title: 'Principal' }} />
             <Stack.Screen name="MyAnnouncements" component={MyAnn} options={({ navigation }) => options(navigation, 'Meus anúncios')} />
@@ -180,13 +187,6 @@ export default function Routes () {
                 }
               })}
             />
-          </Stack.Navigator>
-        ) : (
-          <Stack.Navigator>
-            <Stack.Screen name="Authenticate" component={Authenticate} options={{ headerShown: false }} />
-            <Stack.Screen name="Register" component={Register} options={({ navigation }) => options(navigation, 'Registre-se')} />
-            <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={({ navigation }) => options(navigation, 'Redefinir senha')} />
-            <Stack.Screen name="UserAgreement" component={UserAgreement} options={({ navigation }) => options(navigation, 'Termos de Uso')} />
           </Stack.Navigator>
         )
       }

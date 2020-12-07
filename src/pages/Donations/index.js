@@ -10,15 +10,15 @@ import { getCitiesByState, getStates } from '../../utils/locals';
 import { announcement } from '../../database/functions';
 
 export default function Donations({ navigation }) {
-  const { currentUser } = React.useContext(GeneralContext);
+  const { currentUser, isLogged } = React.useContext(GeneralContext);
 
   const [results, setResults] = React.useState([]);
   const [states, setStates] = React.useState([]);
   const [cities, setCities] = React.useState([]);
 
   const [filters, setFilters] = React.useState({
-    state: currentUser.andress.state ?? 'SP',
-    city: currentUser.andress.city ?? 'Adamantina'
+    state: '',
+    city: ''
   });
 
   React.useEffect(() => {
@@ -39,13 +39,23 @@ export default function Donations({ navigation }) {
 
   return (
     <>
-      <BottomButton title="Fazer doação" onPress={() => navigation.navigate('CreateDonation')} />
+      {
+        isLogged && (
+          <BottomButton title="Fazer doação" onPress={() => navigation.navigate('CreateDonation')} />
+        )
+      }
 
       <Container>
         <Picker
           style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}
-          value={filters.state}
-          onValueChange={value => setFilters({...filters, state: value})}
+          value={
+            filters.state === ''
+              ? 'Estado (Selecione)'
+              : states.find(item => item.uf === filters.state).name
+          }
+          onValueChange={value => {
+            setFilters({...filters, state: value, city: '' });
+          }}
         >
           <PickerItem value="" label="Estado (Selecione)" />
           {
@@ -57,7 +67,15 @@ export default function Donations({ navigation }) {
 
         <Picker
           style={{ height: 50, backgroundColor: '#f2f2f2', marginBottom: 10, borderRadius: 8, paddingHorizontal: 8 }}
-          value={filters.city}
+          value={
+            filters.state === ''
+              ? 'Selecione um estado'
+              : !cities[0]
+                ? 'Carregando'
+                : filters.city === ''
+                  ? 'Cidades (todas)'
+                  : filters.city
+            }
           onValueChange={value => setFilters({...filters, city: value})}
         >
           <PickerItem value="" label={filters.state === '' ? "Selecione um estado" : cities[0] ? "Cidades (todas)" : "Carregando..."} />

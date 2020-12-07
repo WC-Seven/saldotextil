@@ -7,7 +7,7 @@ import GeneralContext from '../../context';
 import { auth } from '../../database/functions';
 
 export default function Authenticate({ navigation }) {
-  const { setAuthUser } = React.useContext(GeneralContext);
+  const { setAuthUser, setIsLogging } = React.useContext(GeneralContext);
   const [isKeyboardShown, setIsKeyboardShown] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const [login, setLogin] = React.useState({ email: '', password: '' });
@@ -79,6 +79,7 @@ export default function Authenticate({ navigation }) {
           } } />
         <ButtonReverse title="Não tem uma conta? Cadastre-se" onPress={() => navigation.navigate('Register')} />
         <ButtonReverse title="Esqueci minha senha" onPress={() => navigation.navigate('ForgotPassword')} />
+        <ButtonReverse title="Voltar" onPress={() => setIsLogging(false)} />
       </BottomContainer>
     </KeyboardAvoidingView>
   );
