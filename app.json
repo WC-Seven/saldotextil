@@ -31,7 +31,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "br.com.saldotextil",
-      "buildNumber": "1.0.0",
+      "buildNumber": "2",
       "icon": "./assets/notransparency_icon.png"
     },
     "android": {
