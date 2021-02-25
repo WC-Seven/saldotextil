@@ -29,6 +29,7 @@
       "**/*"
     ],
     "ios": {
+      "usesIcloudStorage": true,
       "supportsTablet": false,
       "bundleIdentifier": "br.com.saldotextil",
       "buildNumber": "2",

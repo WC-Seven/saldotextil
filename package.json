@@ -20,7 +20,7 @@
     "array-sort-by": "^1.2.1",
     "base-64": "^0.1.0",
     "cep-promise": "^3.0.9",
-    "expo": "~38.0.8",
+    "expo": "^40.0.1",
     "expo-blur": "^8.1.2",
     "expo-constants": "^9.1.1",
     "expo-document-picker": "^8.2.1",
